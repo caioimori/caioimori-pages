@@ -163,6 +163,16 @@ body {
   color: var(--accent-hover);
 }
 
+.guide a.guide-cta,
+.guide a.guide-cta:hover {
+  color: #ffffff;
+}
+
+.guide a.guide-cta-secondary,
+.guide a.guide-cta-secondary:hover {
+  color: var(--accent);
+}
+
 /* --- Divider --- */
 .guide-divider {
   border: none;
