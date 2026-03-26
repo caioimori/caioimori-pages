@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Como instalar Claude Code Channels no Telegram e Discord — Caio Imori</title>
+  <meta name="description" content="Guia passo a passo para configurar o Claude Code Channels no Telegram e no Discord. Converse com a IA direto do celular.">
+  <link rel="stylesheet" href="../assets/css/guide.css">
+</head>
+<body>
+  <article class="guide">
+
+    <!-- Hero -->
+    <header class="guide-section fade-in">
+      <span class="guide-badge">Guia Passo a Passo</span>
+      <h1 class="guide-hero-title">Claude Code Channels:<br>Telegram & Discord</h1>
+      <p class="guide-subtitle">Conecte o Claude Code ao seu Telegram ou Discord e converse com a IA direto do celular — enquanto ela trabalha nos seus arquivos reais.</p>
+    </header>
+
+    <!-- O que são Channels -->
+    <section class="guide-section fade-in fade-in-d1">
+      <h2 class="guide-section-title">O que são Channels?</h2>
+      <p>Channels são uma forma de <strong>empurrar mensagens para dentro de uma sessão do Claude Code que já está rodando</strong> no seu computador.</p>
+      <p>Na prática: você abre o Claude Code no terminal, conecta um canal (Telegram ou Discord) e passa a conversar com o Claude de qualquer lugar — do celular, do trabalho, de onde quiser. A IA lê sua mensagem, executa o que for preciso nos seus arquivos locais e responde direto na conversa.</p>
+
+      <div class="guide-callout">
+        <div class="guide-callout-title">Por que isso importa</div>
+        <p>Diferente de usar o Claude na web, aqui a IA tem acesso ao seu projeto real. Ela lê, edita e roda comandos no seu código — e você acompanha tudo pelo chat.</p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Pré-requisitos -->
+    <section class="guide-section fade-in fade-in-d2">
+      <h2 class="guide-section-title">Antes de começar</h2>
+      <p>Confira se você tem tudo pronto:</p>
+
+      <ol class="guide-steps">
+        <li>
+          <strong>Claude Code v2.1.80+</strong>
+          Abra o terminal e rode <code>claude --version</code>. Se estiver abaixo, atualize com <code>npm install -g @anthropic-ai/claude-code@latest</code>
+        </li>
+        <li>
+          <strong>Login via claude.ai</strong>
+          Channels só funcionam com login pelo claude.ai. API keys e Console <strong>não</strong> são suportados.
+        </li>
+        <li>
+          <strong>Bun instalado</strong>
+          Os plugins de canal rodam com Bun. Rode <code>bun --version</code> para verificar. Se não tiver, instale em <a href="https://bun.sh" target="_blank" rel="noopener">bun.sh</a>
+        </li>
+        <li>
+          <strong>Plano Pro ou Max</strong>
+          Se você usa plano pessoal (Pro/Max), channels já estão disponíveis. Planos Team/Enterprise precisam de liberação do admin.
+        </li>
+      </ol>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- TELEGRAM -->
+    <section class="guide-section fade-in fade-in-d2">
+      <div class="guide-badge mb-24">Telegram</div>
+      <h2 class="guide-section-title">Setup no Telegram</h2>
+      <p>Você vai criar um bot no Telegram e conectá-lo ao Claude Code. O bot é seu — só você vai usar.</p>
+
+      <ol class="guide-steps">
+        <li>
+          <strong>Crie o bot no BotFather</strong>
+          Abra o Telegram e procure por <a href="https://t.me/BotFather" target="_blank" rel="noopener">@BotFather</a>. Envie o comando <code>/newbot</code>. Escolha um nome de exibição e um username que termine com <code>bot</code> (ex: <code>meuclaude_bot</code>). O BotFather vai devolver um <strong>token</strong> — copie ele.
+        </li>
+        <li>
+          <strong>Instale o plugin no Claude Code</strong>
+          No terminal com o Claude Code aberto, rode:
+          <div class="guide-code-block mt-24">
+            <code>/plugin install telegram@claude-plugins-official</code>
+          </div>
+          <p class="mt-24">Depois rode <code>/reload-plugins</code> para ativar o comando de configuração.</p>
+        </li>
+        <li>
+          <strong>Configure o token do bot</strong>
+          Rode o comando abaixo substituindo pelo seu token:
+          <div class="guide-code-block mt-24">
+            <code>/telegram:configure SEU_TOKEN_AQUI</code>
+          </div>
+          <p class="mt-24">Isso salva o token em <code>~/.claude/channels/telegram/.env</code></p>
+        </li>
+        <li>
+          <strong>Reinicie com channels ativado</strong>
+          Saia do Claude Code e abra de novo com a flag <code>--channels</code>:
+          <div class="guide-code-block mt-24">
+            <code>claude --channels plugin:telegram@claude-plugins-official</code>
+          </div>
+        </li>
+        <li>
+          <strong>Pareie sua conta</strong>
+          Vá no Telegram e mande qualquer mensagem pro seu bot. Ele vai responder com um <strong>código de pareamento</strong>. Volte pro Claude Code e rode:
+          <div class="guide-code-block mt-24">
+            <code>/telegram:access pair CÓDIGO</code>
+          </div>
+        </li>
+        <li>
+          <strong>Bloqueie o acesso</strong>
+          Para que só você possa enviar mensagens pro bot:
+          <div class="guide-code-block mt-24">
+            <code>/telegram:access policy allowlist</code>
+          </div>
+        </li>
+      </ol>
+
+      <div class="guide-callout">
+        <div class="guide-callout-title">Pronto</div>
+        <p>Agora é só mandar mensagem pro bot no Telegram. O Claude lê, executa no seu projeto e responde na conversa.</p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- DISCORD -->
+    <section class="guide-section fade-in fade-in-d2">
+      <div class="guide-badge mb-24">Discord</div>
+      <h2 class="guide-section-title">Setup no Discord</h2>
+      <p>No Discord, você cria um bot pelo Developer Portal, adiciona num servidor e conecta ao Claude Code.</p>
+
+      <ol class="guide-steps">
+        <li>
+          <strong>Crie o bot no Developer Portal</strong>
+          Acesse o <a href="https://discord.com/developers/applications" target="_blank" rel="noopener">Discord Developer Portal</a>. Clique em <strong>New Application</strong> e dê um nome. Na seção <strong>Bot</strong>, crie um username, clique em <strong>Reset Token</strong> e copie o token.
+        </li>
+        <li>
+          <strong>Ative o Message Content Intent</strong>
+          Ainda nas configurações do bot, vá em <strong>Privileged Gateway Intents</strong> e ative o <strong>Message Content Intent</strong>. Sem isso, o bot não consegue ler suas mensagens.
+        </li>
+        <li>
+          <strong>Convide o bot pro servidor</strong>
+          Vá em <strong>OAuth2 → URL Generator</strong>. Marque o scope <code>bot</code> e ative estas permissões:
+
+          <ul class="guide-list mt-24">
+            <li>View Channels</li>
+            <li>Send Messages</li>
+            <li>Send Messages in Threads</li>
+            <li>Read Message History</li>
+            <li>Attach Files</li>
+            <li>Add Reactions</li>
+          </ul>
+
+          <p class="mt-24">Abra a URL gerada e adicione o bot ao seu servidor.</p>
+        </li>
+        <li>
+          <strong>Instale o plugin no Claude Code</strong>
+          No terminal com o Claude Code aberto, rode:
+          <div class="guide-code-block mt-24">
+            <code>/plugin install discord@claude-plugins-official</code>
+          </div>
+          <p class="mt-24">Depois rode <code>/reload-plugins</code> para ativar o comando de configuração.</p>
+        </li>
+        <li>
+          <strong>Configure o token do bot</strong>
+          Rode o comando abaixo com o token que você copiou:
+          <div class="guide-code-block mt-24">
+            <code>/discord:configure SEU_TOKEN_AQUI</code>
+          </div>
+        </li>
+        <li>
+          <strong>Reinicie com channels ativado</strong>
+          Saia do Claude Code e abra de novo:
+          <div class="guide-code-block mt-24">
+            <code>claude --channels plugin:discord@claude-plugins-official</code>
+          </div>
+        </li>
+        <li>
+          <strong>Pareie sua conta</strong>
+          Mande uma DM pro bot no Discord. Ele responde com um <strong>código de pareamento</strong>. No Claude Code, rode:
+          <div class="guide-code-block mt-24">
+            <code>/discord:access pair CÓDIGO</code>
+          </div>
+        </li>
+        <li>
+          <strong>Bloqueie o acesso</strong>
+          Para garantir que só você usa o bot:
+          <div class="guide-code-block mt-24">
+            <code>/discord:access policy allowlist</code>
+          </div>
+        </li>
+      </ol>
+
+      <div class="guide-callout">
+        <div class="guide-callout-title">Pronto</div>
+        <p>Mande uma DM pro bot no Discord e o Claude vai responder enquanto trabalha nos seus arquivos locais.</p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Troubleshooting -->
+    <section class="guide-section fade-in fade-in-d3">
+      <h2 class="guide-section-title">Se algo der errado</h2>
+
+      <div class="guide-grid">
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">"Plugin not found"</h3>
+          <p>Rode estes dois comandos e tente instalar de novo:</p>
+          <div class="guide-code-block mt-24">
+            <code>/plugin marketplace add anthropics/claude-plugins-official</code>
+          </div>
+          <div class="guide-code-block" style="margin-top: 8px;">
+            <code>/plugin marketplace update claude-plugins-official</code>
+          </div>
+        </div>
+
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Bot não responde</h3>
+          <p>O bot só funciona enquanto o Claude Code está rodando com <code>--channels</code>. Confirme que você reiniciou com a flag correta.</p>
+        </div>
+
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Bun não encontrado</h3>
+          <p>Os plugins precisam do Bun. Instale com:</p>
+          <div class="guide-code-block mt-24">
+            <code>curl -fsSL https://bun.sh/install | bash</code>
+          </div>
+        </div>
+
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Plano Team/Enterprise</h3>
+          <p>O admin precisa ativar channels em <strong>claude.ai → Admin settings → Claude Code → Channels</strong> antes de qualquer membro usar.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Dicas -->
+    <section class="guide-section fade-in fade-in-d3">
+      <h2 class="guide-section-title">Dicas de uso</h2>
+
+      <ul class="guide-list">
+        <li><strong>Sessão precisa estar aberta.</strong> Channels não rodam em background por padrão. Mantenha o terminal com Claude Code aberto — ou rode em um terminal persistente (tmux, screen).</li>
+        <li><strong>Múltiplos canais ao mesmo tempo.</strong> Você pode conectar Telegram e Discord na mesma sessão separando por espaço: <code>claude --channels plugin:telegram@claude-plugins-official plugin:discord@claude-plugins-official</code></li>
+        <li><strong>Respostas aparecem no chat, não no terminal.</strong> Quando o Claude responde pelo channel, o terminal mostra o tool call e "sent" — a resposta real aparece no Telegram/Discord.</li>
+        <li><strong>Permissões no terminal.</strong> Se o Claude precisar de aprovação para alguma ação e você não estiver no terminal, a sessão pausa até você voltar.</li>
+      </ul>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Resumo visual -->
+    <section class="guide-section fade-in fade-in-d4">
+      <h2 class="guide-section-title">Resumo rápido</h2>
+
+      <div class="guide-card" style="background: var(--bg-glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9375rem;">
+          <thead>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <th style="text-align: left; padding: 12px 8px; color: var(--text-muted); font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Etapa</th>
+              <th style="text-align: left; padding: 12px 8px; color: var(--text-muted); font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Telegram</th>
+              <th style="text-align: left; padding: 12px 8px; color: var(--text-muted); font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Discord</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-secondary);">Criar bot</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">@BotFather → /newbot</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">Developer Portal</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-secondary);">Instalar plugin</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);" colspan="2">/plugin install {plataforma}@claude-plugins-official</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-secondary);">Configurar</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);" colspan="2">/{plataforma}:configure TOKEN</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-secondary);">Iniciar</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);" colspan="2">claude --channels plugin:{plataforma}@claude-plugins-official</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 8px; color: var(--text-secondary);">Parear</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);" colspan="2">Mande msg → copie código → /{plataforma}:access pair CÓDIGO</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="guide-footer fade-in fade-in-d4">
+      <p>Criado por <span class="guide-author">Caio Imori</span></p>
+      <p style="margin-top: 8px;">Channels é um recurso em research preview do Claude Code v2.1.80+</p>
+    </footer>
+
+  </article>
+</body>
+</html>
