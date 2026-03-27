@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto-Fix no Claude Code — Caio Imori</title>
+  <meta name="description" content="Como instalar e configurar o auto-fix do Claude Code usando hooks. Setup completo com ESLint, Prettier, TypeScript, Python e mais.">
+  <link rel="stylesheet" href="../assets/css/guide.css">
+  <style>
+    body {
+      background-image:
+        linear-gradient(rgba(0,0,0,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.018) 1px, transparent 1px);
+      background-size: 48px 48px;
+      background-position: center center;
+    }
+  </style>
+</head>
+<body>
+  <article class="guide">
+
+    <!-- Hero -->
+    <header class="guide-section fade-in">
+      <span class="guide-badge">Guia Prático</span>
+      <h1 class="guide-hero-title">Auto-Fix no Claude Code</h1>
+      <p class="guide-subtitle">Configure hooks que formatam, lintam e verificam seu código automaticamente toda vez que o Claude edita um arquivo. Zero intervenção manual.</p>
+    </header>
+
+    <!-- CTA SINAPSE - Topo (sutil) -->
+    <div class="fade-in fade-in-d1" style="margin-bottom: 48px;">
+      <a href="https://sinapse.club" target="_blank" rel="noopener" style="display: block; text-decoration: none; padding: 14px 20px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; transition: border-color 0.2s ease;">
+        <p style="margin: 0; font-size: 0.875rem; color: var(--text-muted);">Este guia é um conteúdo <strong style="color: var(--text-primary);">SINAPSE</strong> — <span style="color: var(--text-secondary);">aprenda IA aplicada com clareza e execução &rarr;</span></p>
+      </a>
+    </div>
+
+    <!-- O que é -->
+    <section class="guide-section fade-in fade-in-d1">
+      <h2 class="guide-section-title">O que é o auto-fix?</h2>
+      <p>O Claude Code tem um sistema de <strong>hooks</strong> — comandos que rodam automaticamente em momentos específicos do ciclo de vida. Você configura uma vez e, a partir daí, toda vez que o Claude edita um arquivo, o hook roda o formatter e o linter <strong>sem você precisar pedir</strong>.</p>
+
+      <div class="guide-callout">
+        <div class="guide-callout-title">O ciclo</div>
+        <p>Claude edita arquivo → hook roda Prettier/ESLint → se tiver erro, Claude vê e corrige → hook roda de novo → até passar tudo. É um <strong>loop auto-corretivo</strong>.</p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Instalação -->
+    <section class="guide-section fade-in fade-in-d1">
+      <h2 class="guide-section-title">1. Instalar o Claude Code</h2>
+      <p>Se você ainda não tem o Claude Code instalado:</p>
+
+      <div class="guide-code-block">
+        <code>
+<span style="color: var(--text-muted);"># macOS / Linux / WSL</span><br>
+curl -fsSL https://claude.ai/install.sh | bash<br><br>
+<span style="color: var(--text-muted);"># Windows (PowerShell)</span><br>
+irm https://claude.ai/install.ps1 | iex
+        </code>
+      </div>
+
+      <p>Verifique a instalação:</p>
+
+      <div class="guide-code-block">
+        <code>claude --version<br>claude doctor</code>
+      </div>
+
+      <div class="guide-callout">
+        <div class="guide-callout-title">Pré-requisitos</div>
+        <p>Windows precisa do <a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener" style="color: var(--text-primary);">Git for Windows</a>. Qualquer OS precisa de 4GB+ de RAM e um terminal com Bash, Zsh ou PowerShell.</p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Como hooks funcionam -->
+    <section class="guide-section fade-in fade-in-d2">
+      <h2 class="guide-section-title">2. Como os hooks funcionam</h2>
+      <p>Hooks são <strong>comandos de shell determinísticos</strong> que rodam em momentos específicos. Não dependem da IA decidir rodar — eles disparam automaticamente quando a condição é atendida.</p>
+
+      <div class="guide-grid">
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">PostToolUse</h3>
+          <p>Roda <strong>depois</strong> que o Claude edita/cria um arquivo. É aqui que você coloca formatters e linters.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">PreToolUse</h3>
+          <p>Roda <strong>antes</strong> de uma ação. Pode <strong>bloquear</strong> a execução (exit code 2). Útil pra proteger arquivos.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Stop</h3>
+          <p>Roda quando o Claude <strong>termina</strong> de responder. Se falhar, o Claude continua trabalhando até resolver.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Matcher</h3>
+          <p>Filtra <strong>qual ferramenta</strong> dispara o hook. <code>Edit|Write</code> = só quando editar ou criar arquivo.</p>
+        </div>
+      </div>
+
+      <div class="guide-card" style="background: var(--bg-secondary); margin-top: 24px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9375rem;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--border);">
+              <th style="padding: 12px 8px; text-align: left; color: var(--text-muted); font-weight: 600;">Exit Code</th>
+              <th style="padding: 12px 8px; text-align: left; color: var(--text-muted); font-weight: 600;">Significado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-primary);"><code>0</code></td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">Sucesso — ação permitida</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-primary);"><code>2</code></td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">Bloqueio — ação impedida (PreToolUse)</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 8px; color: var(--text-primary);"><code>outro</code></td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">Erro — Claude vê o stderr e tenta corrigir</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Onde configurar -->
+    <section class="guide-section fade-in fade-in-d2">
+      <h2 class="guide-section-title">3. Onde configurar</h2>
+      <p>Hooks ficam no arquivo <code>settings.json</code>. Existem três escopos:</p>
+
+      <div class="guide-card" style="background: var(--bg-secondary);">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9375rem;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--border);">
+              <th style="padding: 12px 8px; text-align: left; color: var(--text-muted); font-weight: 600;">Escopo</th>
+              <th style="padding: 12px 8px; text-align: left; color: var(--text-muted); font-weight: 600;">Caminho</th>
+              <th style="padding: 12px 8px; text-align: left; color: var(--text-muted); font-weight: 600;">Compartilhável</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-primary); font-weight: 500;">Global</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);"><code>~/.claude/settings.json</code></td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">Não — só seu</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-primary); font-weight: 500;">Projeto</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);"><code>.claude/settings.json</code></td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">Sim — commita no git</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 8px; color: var(--text-primary); font-weight: 500;">Local</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);"><code>.claude/settings.local.json</code></td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">Não — gitignored</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top: 16px;">Para auto-fix que vale pro time inteiro, use o <strong>escopo de projeto</strong> (<code>.claude/settings.json</code>) e commite no repositório.</p>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Setup básico -->
+    <section class="guide-section fade-in fade-in-d3">
+      <h2 class="guide-section-title">4. Setup básico — Prettier + ESLint</h2>
+      <p>O caso de uso mais comum: formatar e lintar automaticamente depois de cada edição. Crie ou edite o arquivo <code>.claude/settings.json</code> no seu projeto:</p>
+
+      <div class="guide-code-block">
+        <code>
+{<br>
+&nbsp;&nbsp;"hooks": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"PostToolUse": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"matcher": "Edit|Write",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"hooks": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "command",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"command": "bash -c 'FILE=$(jq -r \".tool_input.file_path\") && npx prettier --write \"$FILE\" && npx eslint --fix \"$FILE\"'",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"timeout": 120<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+&nbsp;&nbsp;}<br>
+}
+        </code>
+      </div>
+
+      <p><strong>O que acontece:</strong></p>
+      <ol class="guide-steps">
+        <li>Claude edita ou cria um arquivo (dispara <code>PostToolUse</code>)</li>
+        <li>O hook recebe o path do arquivo via JSON no stdin</li>
+        <li><code>jq</code> extrai o <code>file_path</code> do JSON</li>
+        <li>Prettier formata o arquivo in-place</li>
+        <li>ESLint corrige o que conseguir automaticamente</li>
+      </ol>
+
+      <div class="guide-callout">
+        <div class="guide-callout-title">Dependência</div>
+        <p>Você precisa do <code>jq</code> instalado no sistema. No macOS: <code>brew install jq</code>. No Ubuntu: <code>sudo apt install jq</code>. No Windows com Git Bash, <code>jq</code> pode ser baixado como binário standalone.</p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Stop hook -->
+    <section class="guide-section fade-in fade-in-d3">
+      <h2 class="guide-section-title">5. Type-check como gate de saída</h2>
+      <p>Além do auto-fix por arquivo, você pode adicionar um <strong>Stop hook</strong> que verifica o projeto inteiro antes do Claude parar. Se falhar, o Claude <strong>continua trabalhando</strong> até resolver.</p>
+
+      <div class="guide-code-block">
+        <code>
+{<br>
+&nbsp;&nbsp;"hooks": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"PostToolUse": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-muted);">// ... hooks de formatação acima</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"Stop": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"hooks": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "command",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"command": "npx tsc --noEmit",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"timeout": 60<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+&nbsp;&nbsp;}<br>
+}
+        </code>
+      </div>
+
+      <p><code>tsc --noEmit</code> verifica tipos sem gerar output. Se sair com erro, o Claude vê as mensagens de erro no stderr e automaticamente tenta corrigir os problemas de tipo — e o hook roda de novo até passar.</p>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Configs por linguagem -->
+    <section class="guide-section fade-in fade-in-d3">
+      <h2 class="guide-section-title">6. Configs por linguagem</h2>
+      <p>O comando do hook muda conforme a stack. Aqui estão os mais comuns:</p>
+
+      <h3 class="guide-section-subtitle" style="margin-top: 32px;">Python — Black + Ruff</h3>
+      <div class="guide-code-block">
+        <code>
+"command": "FILE=$(jq -r '.tool_input.file_path') && [[ \"$FILE\" == *.py ]] && black \"$FILE\" && ruff check --fix \"$FILE\" || true"
+        </code>
+      </div>
+
+      <h3 class="guide-section-subtitle" style="margin-top: 32px;">Go — gofmt + golangci-lint</h3>
+      <div class="guide-code-block">
+        <code>
+"command": "FILE=$(jq -r '.tool_input.file_path') && [[ \"$FILE\" == *.go ]] && gofmt -w \"$FILE\" && golangci-lint run --fix \"$FILE\" || true"
+        </code>
+      </div>
+
+      <h3 class="guide-section-subtitle" style="margin-top: 32px;">Rust — rustfmt + clippy</h3>
+      <div class="guide-code-block">
+        <code>
+"command": "FILE=$(jq -r '.tool_input.file_path') && [[ \"$FILE\" == *.rs ]] && rustfmt \"$FILE\" && cargo clippy --fix --allow-dirty || true"
+        </code>
+      </div>
+
+      <div class="guide-callout">
+        <div class="guide-callout-title">O padrão</div>
+        <p>Todos seguem a mesma estrutura: <code>jq</code> extrai o path → checa extensão → roda formatter → roda linter com <code>--fix</code>. O <code>|| true</code> evita que o hook falhe se o arquivo não for da linguagem certa.</p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Proteger arquivos -->
+    <section class="guide-section fade-in fade-in-d4">
+      <h2 class="guide-section-title">7. Proteger arquivos sensíveis</h2>
+      <p>Use um <strong>PreToolUse</strong> hook para impedir que o Claude edite arquivos que não deveria tocar:</p>
+
+      <div class="guide-code-block">
+        <code>
+{<br>
+&nbsp;&nbsp;"hooks": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"PreToolUse": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"matcher": "Edit|Write",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"hooks": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "command",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"command": "bash -c 'FILE=$(jq -r \".tool_input.file_path\") && for p in .env package-lock.json; do [[ \"$FILE\" == *\"$p\"* ]] && echo \"Blocked: $FILE\" >&2 && exit 2; done; exit 0'",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"timeout": 10<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+&nbsp;&nbsp;}<br>
+}
+        </code>
+      </div>
+
+      <p>Exit code <code>2</code> = bloqueio. O Claude recebe a mensagem do stderr e ajusta a abordagem automaticamente.</p>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Config completa -->
+    <section class="guide-section fade-in fade-in-d4">
+      <h2 class="guide-section-title">8. Config completa de referência</h2>
+      <p>Juntando tudo em um único <code>.claude/settings.json</code> para um projeto TypeScript/React:</p>
+
+      <div class="guide-code-block">
+        <code>
+{<br>
+&nbsp;&nbsp;"permissions": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"defaultMode": "acceptEdits"<br>
+&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;"hooks": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"PreToolUse": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"matcher": "Edit|Write",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"hooks": [{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "command",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"command": "bash -c 'FILE=$(jq -r \".tool_input.file_path\") && for p in .env credentials.json; do [[ \"$FILE\" == *\"$p\"* ]] && echo \"Blocked\" >&2 && exit 2; done; exit 0'",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"timeout": 10<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"PostToolUse": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"matcher": "Edit|Write",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"hooks": [{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "command",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"command": "bash -c 'FILE=$(jq -r \".tool_input.file_path\") && [[ \"$FILE\" =~ \\.(ts|tsx|js|jsx)$ ]] || exit 0 && npx prettier --write \"$FILE\" 2>/dev/null && npx eslint --fix \"$FILE\" 2>/dev/null || true'",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"timeout": 120<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"Stop": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"hooks": [{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "command",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"command": "npx tsc --noEmit",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"timeout": 60<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+&nbsp;&nbsp;}<br>
+}
+        </code>
+      </div>
+
+      <div class="guide-callout">
+        <div class="guide-callout-title">acceptEdits</div>
+        <p>O <code>defaultMode: "acceptEdits"</code> faz o Claude editar arquivos sem pedir permissão. Essencial pro auto-fix funcionar sem fricção. O hook roda imediatamente após cada edição.</p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Verificar -->
+    <section class="guide-section fade-in fade-in-d4">
+      <h2 class="guide-section-title">9. Verificar se está funcionando</h2>
+
+      <ol class="guide-steps">
+        <li>
+          <strong>Checar hooks carregados</strong>
+          <p>Dentro do Claude Code, digite <code>/hooks</code> para ver todos os hooks ativos e confirmar que foram carregados corretamente.</p>
+        </li>
+        <li>
+          <strong>Testar manualmente</strong>
+          <p>Simule o input que o hook recebe:</p>
+          <div class="guide-code-block mt-24">
+            <code>echo '{"tool_input":{"file_path":"src/index.ts"}}' | bash -c 'FILE=$(jq -r ".tool_input.file_path") && echo "Would format: $FILE"'</code>
+          </div>
+        </li>
+        <li>
+          <strong>Rodar o Claude e observar</strong>
+          <p>Peça pro Claude editar qualquer arquivo. Você vai ver no transcript que o hook rodou automaticamente após a edição.</p>
+        </li>
+      </ol>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Troubleshooting -->
+    <section class="guide-section fade-in fade-in-d4">
+      <h2 class="guide-section-title">10. Troubleshooting</h2>
+
+      <div class="guide-grid">
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Hook não dispara</h3>
+          <p>Verifique o matcher (case-sensitive), o evento correto (<code>PostToolUse</code> vs <code>PreToolUse</code>) e a sintaxe JSON (sem trailing commas).</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">jq não encontrado</h3>
+          <p>Instale o <code>jq</code>: <code>brew install jq</code> (macOS), <code>apt install jq</code> (Ubuntu) ou baixe o binário para Windows.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Erro de parse JSON</h3>
+          <p>Cheque se seu <code>~/.zshrc</code> ou <code>~/.bashrc</code> tem <code>echo</code> fora de bloco interativo. Envolva com <code>if [[ $- == *i* ]]</code>.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Hook lento demais</h3>
+          <p>Aumente o <code>timeout</code> ou use <code>"async": true</code> para hooks que não precisam bloquear a execução.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Resumo visual -->
+    <section class="guide-section fade-in fade-in-d4">
+      <h2 class="guide-section-title">Resumo rápido</h2>
+
+      <div class="guide-card" style="background: var(--bg-secondary);">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9375rem;">
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500; width: 40%;">Onde configurar</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);"><code>.claude/settings.json</code></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Evento principal</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);"><code>PostToolUse</code> com matcher <code>Edit|Write</code></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Formatação</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">Prettier, Black, gofmt, rustfmt</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Linting</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">ESLint, Ruff, golangci-lint, clippy</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Gate de saída</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">Stop hook com <code>tsc --noEmit</code></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Proteção</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">PreToolUse com exit code 2</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Modo recomendado</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);"><code>acceptEdits</code> para zero fricção</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CTA SINAPSE - Final -->
+    <section class="guide-section fade-in fade-in-d4" style="text-align: center;">
+      <div class="guide-card" style="border-color: var(--border-hover); padding: 40px 24px;">
+        <span class="guide-badge mb-16">Turma T2 Aberta</span>
+        <h2 class="guide-section-title" style="margin-bottom: 12px;">Quer dominar Claude Code na prática?</h2>
+        <p style="max-width: 480px; margin: 0 auto 28px;">No SINAPSE eu e o Soier ensinamos a montar workflows completos com IA — auto-fix, agentes autônomos e ferramentas autorais que você não encontra em nenhum outro lugar.</p>
+        <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Conhecer o SINAPSE</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="guide-footer fade-in fade-in-d4">
+      <p>Criado por <span class="guide-author">Caio Imori</span></p>
+      <p style="margin-top: 8px;">Claude Code Auto-Fix — código limpo no automático.</p>
+    </footer>
+
+  </article>
+</body>
+</html>
