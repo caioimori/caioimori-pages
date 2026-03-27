@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Segundo Cérebro com Claude Code + Obsidian — Caio Imori</title>
+  <meta name="description" content="Como criar um segundo cérebro que se alimenta sozinho todos os dias usando Claude Code e Obsidian. Setup completo, CLAUDE.md, agendamento e vault structure.">
+  <link rel="stylesheet" href="../assets/css/guide.css">
+  <style>
+    body {
+      background-image:
+        linear-gradient(rgba(0,0,0,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.018) 1px, transparent 1px);
+      background-size: 48px 48px;
+      background-position: center center;
+    }
+  </style>
+</head>
+<body>
+  <article class="guide">
+
+    <!-- Hero -->
+    <header class="guide-section fade-in">
+      <span class="guide-badge">Guia Prático</span>
+      <h1 class="guide-hero-title">Segundo Cérebro com Claude Code + Obsidian</h1>
+      <p class="guide-subtitle">Um sistema de conhecimento pessoal que se alimenta sozinho todos os dias — sem você precisar abrir nenhum app ou organizar nada manualmente.</p>
+    </header>
+
+    <!-- CTA SINAPSE - Topo (sutil) -->
+    <div class="fade-in fade-in-d1" style="margin-bottom: 48px;">
+      <a href="https://sinapse.club" target="_blank" rel="noopener" style="display: block; text-decoration: none; padding: 14px 20px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; transition: border-color 0.2s ease;">
+        <p style="margin: 0; font-size: 0.875rem; color: var(--text-muted);">Este guia é um conteúdo <strong style="color: var(--text-primary);">SINAPSE</strong> — <span style="color: var(--text-secondary);">aprenda IA aplicada com clareza e execução &rarr;</span></p>
+      </a>
+    </div>
+
+    <!-- O conceito -->
+    <section class="guide-section fade-in fade-in-d1">
+      <h2 class="guide-section-title">A ideia</h2>
+      <p>Você programa um agente de IA para entrar no seu vault do Obsidian <strong>todo dia no mesmo horário</strong>. Ele revisa tudo que você fez durante o dia, organiza notas soltas, corrige links quebrados e complementa com informação nova.</p>
+      <p>O efeito acumulado é o mais interessante: depois de algumas semanas, as notas ficam cada vez mais conectadas, o contexto fica mais rico e o agente passa a te ajudar melhor em tudo — porque ele já tem acesso a todo o histórico organizado.</p>
+
+      <div class="guide-callout">
+        <div class="guide-callout-title">O ciclo</div>
+        <p>Quanto mais o agente alimenta o vault, mais inteligente o sistema fica. É um ciclo que se retroalimenta. Tudo que você aprende, produz e consome entra no vault e se conecta com o que já existe — <strong>com zero esforço manual</strong>.</p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Por que Obsidian -->
+    <section class="guide-section fade-in fade-in-d1">
+      <h2 class="guide-section-title">Por que Obsidian?</h2>
+      <p>Obsidian é a base ideal para esse sistema por três razões:</p>
+
+      <div class="guide-grid">
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Arquivos locais</h3>
+          <p>Tudo são arquivos <code>.md</code> no seu computador. O Claude Code lê e escreve diretamente neles sem precisar de API nenhuma.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Links bidirecionais</h3>
+          <p>Os <code>[[wikilinks]]</code> criam uma rede de conhecimento estilo Wikipedia. O agente usa isso pra conectar notas novas com as que já existem.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Graph View</h3>
+          <p>Obsidian renderiza um grafo visual de todas as conexões. Conforme o agente alimenta, o grafo cresce e você <strong>vê</strong> o conhecimento se formando.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Portabilidade total</h3>
+          <p>Não depende de nenhuma plataforma. São seus arquivos, no seu computador, sincronizáveis com qualquer serviço de nuvem.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Estrutura do Vault -->
+    <section class="guide-section fade-in fade-in-d2">
+      <h2 class="guide-section-title">Estrutura do vault</h2>
+      <p>Organize seu vault com pastas que o agente vai usar como referência. Não precisa ser perfeito desde o início — o agente vai organizar com o tempo.</p>
+
+      <div class="guide-code-block">
+        <code>
+vault/<br>
+├── inbox/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-muted);"># notas rápidas e capturas do dia</span><br>
+├── notas/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-muted);"># notas processadas e organizadas</span><br>
+├── projetos/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-muted);"># notas por projeto ativo</span><br>
+├── referencias/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-muted);"># artigos, livros, recursos externos</span><br>
+├── templates/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-muted);"># templates de nota (daily, meeting, etc)</span><br>
+├── daily/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-muted);"># daily notes automáticas</span><br>
+└── CLAUDE.md&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--text-muted);"># instruções para o agente</span>
+        </code>
+      </div>
+
+      <div class="guide-callout">
+        <div class="guide-callout-title">Inbox é a chave</div>
+        <p>Durante o dia, jogue tudo na <code>inbox/</code> sem se preocupar com organização. O agente cuida de mover, renomear e conectar cada nota no horário programado.</p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- CLAUDE.md -->
+    <section class="guide-section fade-in fade-in-d2">
+      <h2 class="guide-section-title">O arquivo CLAUDE.md</h2>
+      <p>O <code>CLAUDE.md</code> fica na raiz do vault e funciona como as <strong>instruções permanentes</strong> do agente. Toda vez que o Claude Code abre o vault, ele lê esse arquivo primeiro. É aqui que você define o comportamento da manutenção automática.</p>
+
+      <div class="guide-code-block">
+        <code>
+<span style="color: var(--text-muted);"># CLAUDE.md — Instruções do Second Brain</span><br><br>
+Você é o curador do meu vault de conhecimento pessoal<br>
+no Obsidian. Toda noite você executa uma rotina de<br>
+manutenção seguindo estas regras:<br><br>
+<span style="color: var(--text-muted);">## Regras gerais</span><br>
+- Use [[wikilinks]] para conectar notas relacionadas<br>
+- Nunca delete notas — reorganize e conecte<br>
+- Mantenha um tom consistente e conciso<br>
+- Adicione tags relevantes no frontmatter YAML<br>
+- Preserve o conteúdo original, apenas enriqueça<br><br>
+<span style="color: var(--text-muted);">## Rotina noturna (nightly maintenance)</span><br><br>
+<span style="color: var(--text-muted);">### 1. Processar inbox</span><br>
+- Leia cada nota em inbox/<br>
+- Mova para a pasta apropriada (notas/, projetos/, etc)<br>
+- Renomeie com título descritivo<br>
+- Adicione frontmatter (tags, date, related)<br>
+- Crie [[links]] para notas existentes relevantes<br><br>
+<span style="color: var(--text-muted);">### 2. Verificar links</span><br>
+- Encontre [[links]] quebrados (apontam pra nota que<br>
+&nbsp;&nbsp;não existe)<br>
+- Corrija ou crie a nota de destino com conteúdo stub<br><br>
+<span style="color: var(--text-muted);">### 3. Enriquecer notas recentes</span><br>
+- Revise notas modificadas nos últimos 7 dias<br>
+- Adicione conexões que faltam com notas mais antigas<br>
+- Sugira relações entre conceitos de áreas diferentes<br><br>
+<span style="color: var(--text-muted);">### 4. Daily summary</span><br>
+- Crie uma nota em daily/ com resumo do que foi<br>
+&nbsp;&nbsp;processado<br>
+- Liste notas movidas, links criados e conexões feitas
+        </code>
+      </div>
+
+      <p>Esse é um ponto de partida. Personalize conforme o tipo de conteúdo que você mais captura — artigos, reuniões, ideias de projeto, aprendizados técnicos.</p>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Como rodar -->
+    <section class="guide-section fade-in fade-in-d3">
+      <h2 class="guide-section-title">Como rodar o agente</h2>
+      <p>O Claude Code roda direto no terminal apontando para o diretório do vault. O comando base é:</p>
+
+      <div class="guide-code-block">
+        <code>claude -p "Execute a rotina noturna de manutenção do vault conforme o CLAUDE.md" \<br>&nbsp;&nbsp;--allowedTools "Read,Write,Edit,Glob,Grep" \<br>&nbsp;&nbsp;/caminho/para/seu/vault</code>
+      </div>
+
+      <p>A flag <code>-p</code> passa o prompt direto sem abrir uma sessão interativa. O agente lê o <code>CLAUDE.md</code>, executa a rotina e encerra. As <code>allowedTools</code> garantem que ele só use operações de arquivo — sem rodar comandos arbitrários.</p>
+
+      <div class="guide-callout">
+        <div class="guide-callout-title">Dica</div>
+        <p>Rode manualmente primeiro para ver o que o agente faz. Ajuste o <code>CLAUDE.md</code> até o comportamento estar do jeito que você quer antes de automatizar.</p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Agendamento -->
+    <section class="guide-section fade-in fade-in-d3">
+      <h2 class="guide-section-title">Agendar para rodar todo dia</h2>
+      <p>Depois de testar manualmente, agende a execução automática. Duas opções:</p>
+
+      <ol class="guide-steps">
+        <li>
+          <strong>macOS / Linux — crontab</strong>
+          Abra o terminal e rode <code>crontab -e</code>. Adicione a linha:
+          <div class="guide-code-block mt-24">
+            <code>0 23 * * * cd /caminho/vault && claude -p "Execute a rotina noturna de manutenção" --allowedTools "Read,Write,Edit,Glob,Grep"</code>
+          </div>
+          <p class="mt-24">Isso roda todo dia às 23h. Ajuste o horário conforme preferir.</p>
+        </li>
+        <li>
+          <strong>Windows — Task Scheduler</strong>
+          Crie uma tarefa agendada que execute um script <code>.bat</code>:
+          <div class="guide-code-block mt-24">
+            <code>cd C:\Users\SeuUser\vault<br>claude -p "Execute a rotina noturna de manutenção" --allowedTools "Read,Write,Edit,Glob,Grep"</code>
+          </div>
+          <p class="mt-24">Configure o trigger para <strong>diariamente às 23:00</strong> no Task Scheduler.</p>
+        </li>
+        <li>
+          <strong>Claude Code Triggers (nativo)</strong>
+          Se você usa Claude Code com suporte a scheduled triggers:
+          <div class="guide-code-block mt-24">
+            <code>claude schedule create \<br>&nbsp;&nbsp;--name "nightly-vault" \<br>&nbsp;&nbsp;--cron "0 23 * * *" \<br>&nbsp;&nbsp;--prompt "Execute a rotina noturna de manutenção do vault"</code>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- O que o agente faz na prática -->
+    <section class="guide-section fade-in fade-in-d3">
+      <h2 class="guide-section-title">O que o agente faz na prática</h2>
+
+      <div class="guide-grid">
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Processa inbox</h3>
+          <p>Pega notas jogadas às pressas durante o dia, dá títulos descritivos, move pra pasta certa e adiciona metadados.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Conecta notas</h3>
+          <p>Encontra relações entre notas que você nunca faria manualmente. Um artigo sobre marketing se conecta com uma ideia de produto de 3 meses atrás.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Corrige links</h3>
+          <p>Identifica <code>[[links]]</code> que apontam pra nada e resolve — criando a nota ou corrigindo o nome.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Gera resumos</h3>
+          <p>Cria uma daily note com tudo que foi processado, movido e conectado naquela execução.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Efeito composto -->
+    <section class="guide-section fade-in fade-in-d4">
+      <h2 class="guide-section-title">O efeito composto</h2>
+      <p>A mágica não está na primeira execução. Está no <strong>acúmulo</strong>.</p>
+
+      <div class="guide-card" style="background: var(--bg-secondary);">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9375rem;">
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500; width: 35%;">Semana 1</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">Notas organizadas, inbox limpa todo dia</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Semana 4</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">Conexões começam a surgir entre áreas que você não esperava</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Mês 2</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">O vault vira um copiloto — contexto rico pra qualquer decisão</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Mês 6+</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">Um sistema de conhecimento que pensa junto com você</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="guide-callout">
+        <div class="guide-callout-title">A assimetria</div>
+        <p>A diferença entre quem tem um sistema desse rodando e quem organiza tudo na mão é enorme. E essa distância <strong>só aumenta com o tempo</strong>.</p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Dicas avançadas -->
+    <section class="guide-section fade-in fade-in-d4">
+      <h2 class="guide-section-title">Dicas para ir além</h2>
+
+      <ul class="guide-list">
+        <li><strong>Frontmatter é poder.</strong> Defina no CLAUDE.md que toda nota precisa de <code>tags</code>, <code>date</code> e <code>related</code> no YAML. Isso estrutura o vault pra buscas futuras.</li>
+        <li><strong>Use templates.</strong> Crie templates em <code>templates/</code> para tipos de nota recorrentes (reunião, artigo, ideia). O agente vai usar como referência.</li>
+        <li><strong>MOCs (Maps of Content).</strong> Peça pro agente manter MOCs — notas-índice que agrupam notas de um tema. Funciona como uma curadoria automática.</li>
+        <li><strong>Sincronize com a nuvem.</strong> Use iCloud, OneDrive ou Syncthing pra acessar o vault no celular via Obsidian mobile. Jogue notas na inbox de qualquer lugar.</li>
+        <li><strong>Revise o daily log.</strong> Gaste 2 minutos de manhã lendo o que o agente fez na noite anterior. Você vai descobrir conexões que não tinha visto.</li>
+      </ul>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Resumo rápido -->
+    <section class="guide-section fade-in fade-in-d4">
+      <h2 class="guide-section-title">Resumo rápido</h2>
+
+      <div class="guide-card" style="background: var(--bg-secondary);">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9375rem;">
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500; width: 40%;">Stack</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">Claude Code + Obsidian</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Arquivo chave</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);"><code>CLAUDE.md</code> na raiz do vault</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Execução</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);"><code>claude -p "prompt" /vault</code></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Agendamento</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">crontab, Task Scheduler ou triggers nativos</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Esforço manual</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">Zero depois de configurado</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Efeito</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">Composto — cresce sozinho com o tempo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CTA SINAPSE - Final -->
+    <section class="guide-section fade-in fade-in-d4" style="text-align: center;">
+      <div class="guide-card" style="border-color: var(--border-hover); padding: 40px 24px;">
+        <span class="guide-badge mb-16">Turma T2 Aberta</span>
+        <h2 class="guide-section-title" style="margin-bottom: 12px;">Quer montar esse sistema do zero?</h2>
+        <p style="max-width: 480px; margin: 0 auto 28px;">No SINAPSE eu e o Soier ensinamos a construir esse tipo de fluxo com acompanhamento de perto. Ferramentas autorais que você não encontra em nenhum outro lugar.</p>
+        <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Conhecer o SINAPSE</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="guide-footer fade-in fade-in-d4">
+      <p>Criado por <span class="guide-author">Caio Imori</span></p>
+      <p style="margin-top: 8px;">Claude Code + Obsidian — segundo cérebro no automático.</p>
+    </footer>
+
+  </article>
+</body>
+</html>
