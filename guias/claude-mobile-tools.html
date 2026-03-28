@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ferramentas de Trabalho no Claude Mobile — Caio Imori</title>
+  <meta name="description" content="Lista completa de integrações do Claude no celular e passo a passo para conectar Figma, Canva, Slack, Amplitude e mais de 50 ferramentas.">
+  <link rel="stylesheet" href="../assets/css/guide.css">
+  <style>
+    body {
+      background-image:
+        linear-gradient(rgba(0,0,0,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.018) 1px, transparent 1px);
+      background-size: 48px 48px;
+      background-position: center center;
+    }
+  </style>
+</head>
+<body>
+  <article class="guide">
+
+    <!-- Hero -->
+    <header class="guide-section fade-in">
+      <span class="guide-badge">Guia Prático</span>
+      <h1 class="guide-hero-title">Ferramentas de Trabalho no Claude Mobile</h1>
+      <p class="guide-subtitle">Figma, Canva, Slack, Amplitude e mais de 50 integrações — tudo acessível direto do celular, dentro do app.</p>
+    </header>
+
+    <!-- CTA SINAPSE - Topo (sutil) -->
+    <div class="fade-in fade-in-d1" style="margin-bottom: 48px;">
+      <a href="https://sinapse.club" target="_blank" rel="noopener" style="display: block; text-decoration: none; padding: 14px 20px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; transition: border-color 0.2s ease;">
+        <p style="margin: 0; font-size: 0.875rem; color: var(--text-muted);">Este guia é um conteúdo <strong style="color: var(--text-primary);">SINAPSE</strong> — <span style="color: var(--text-secondary);">aprenda IA aplicada com clareza e execução &rarr;</span></p>
+      </a>
+    </div>
+
+    <!-- O que mudou -->
+    <section class="guide-section fade-in fade-in-d1">
+      <h2 class="guide-section-title">O que mudou</h2>
+      <p>Até pouco tempo, pra usar integrações com ferramentas externas no Claude, você precisava estar no desktop. Agora a Anthropic liberou essas conexões no <strong>mobile também</strong> — iOS e Android.</p>
+      <p>Na prática, o Claude no celular deixou de ser só chat e virou um <strong>hub de trabalho real</strong>. Você abre o app, pede pro Claude puxar um design do Figma, criar slides no Canva e consultar um dashboard do Amplitude. Tudo numa conversa só, sem trocar de app.</p>
+
+      <div class="guide-callout">
+        <div class="guide-callout-title">O detalhe</div>
+        <p>Você conecta as ferramentas uma vez no computador e elas ficam disponíveis no celular automaticamente. Sem configuração extra no mobile.</p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Passo a passo -->
+    <section class="guide-section fade-in fade-in-d2">
+      <h2 class="guide-section-title">Passo a passo para conectar</h2>
+      <p>A configuração é feita no <strong>computador</strong> (web ou app desktop). Depois de conectar, tudo funciona no celular automaticamente.</p>
+
+      <ol class="guide-steps">
+        <li>
+          <strong>Abra o Claude no computador</strong>
+          <p>Acesse <a href="https://claude.ai" target="_blank" rel="noopener" style="color: var(--text-primary); font-weight: 500;">claude.ai</a> ou abra o Claude Desktop.</p>
+        </li>
+        <li>
+          <strong>Acesse os Connectors</strong>
+          <p>No chat, clique no botão <strong>"+"</strong> no canto inferior esquerdo (ou digite <strong>"/"</strong>). Passe o mouse em <strong>"Connectors"</strong> e clique em <strong>"Manage connectors"</strong>.</p>
+        </li>
+        <li>
+          <strong>Navegue o diretório</strong>
+          <p>Clique no <strong>"+"</strong> ao lado de Connectors para abrir o diretório completo. Você pode filtrar por categoria ou rolar a lista.</p>
+        </li>
+        <li>
+          <strong>Conecte a ferramenta</strong>
+          <p>Selecione a ferramenta desejada, revise o que ela faz e clique em <strong>"Connect"</strong>. Siga o fluxo de autenticação (geralmente OAuth — login na sua conta da ferramenta).</p>
+        </li>
+        <li>
+          <strong>Configure as permissões</strong>
+          <p>Defina o que o Claude pode acessar na ferramenta. Você controla os limites.</p>
+        </li>
+        <li>
+          <strong>Abra o Claude no celular</strong>
+          <p>Faça login no app mobile (iOS ou Android). As ferramentas conectadas no computador já estarão disponíveis automaticamente.</p>
+        </li>
+      </ol>
+
+      <div class="guide-callout">
+        <div class="guide-callout-title">Importante</div>
+        <p>Não é possível <strong>adicionar</strong> novas integrações pelo celular — só pelo computador. Mas depois de conectar, você <strong>usa</strong> normalmente no mobile e pode ativar/desativar por conversa.</p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Como usar no mobile -->
+    <section class="guide-section fade-in fade-in-d2">
+      <h2 class="guide-section-title">Como usar no celular</h2>
+      <p>Com as ferramentas conectadas, dentro de qualquer conversa no app mobile:</p>
+
+      <ol class="guide-steps">
+        <li>
+          <strong>Toque no "+" no campo de mensagem</strong>
+          <p>Vai aparecer o menu com os Connectors disponíveis.</p>
+        </li>
+        <li>
+          <strong>Ative as ferramentas que precisa</strong>
+          <p>Toggle on/off as integrações relevantes para aquela conversa.</p>
+        </li>
+        <li>
+          <strong>Peça o que quiser em linguagem natural</strong>
+          <p>O Claude acessa a ferramenta quando for relevante. Exemplo: <em>"Puxa o layout mais recente do projeto X no Figma"</em> ou <em>"Cria uma apresentação no Canva com esses dados"</em>.</p>
+        </li>
+      </ol>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Apps Interativos -->
+    <section class="guide-section fade-in fade-in-d2">
+      <h2 class="guide-section-title">Apps Interativos (destaque)</h2>
+      <p>Essas 9 integrações renderizam <strong>interfaces ao vivo</strong> dentro da conversa — dashboards, boards, designs. Não são só texto, são ferramentas funcionais.</p>
+
+      <div class="guide-grid">
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Figma</h3>
+          <p>Explore designs, crie diagramas e fluxogramas visuais. Revise layouts sem sair do chat.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Canva</h3>
+          <p>Crie apresentações e customize em tempo real. Peça slides pro Claude e edite na hora.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Slack</h3>
+          <p>Busque mensagens, rascunhe respostas, formate comunicações do time.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Amplitude</h3>
+          <p>Consulte dashboards de analytics, construa gráficos e explore tendências de produto.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Asana</h3>
+          <p>Gerencie projetos, tarefas e timelines. Crie e atualize tasks por texto.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">monday.com</h3>
+          <p>Visualize workflows, coordene projetos e automatize processos.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Hex</h3>
+          <p>Análise de dados com gráficos interativos. Pergunte sobre seus dados em linguagem natural.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Box</h3>
+          <p>Busque arquivos, pré-visualize documentos e extraia insights do conteúdo armazenado.</p>
+        </div>
+        <div class="guide-card">
+          <h3 class="guide-section-subtitle">Clay</h3>
+          <p>Pesquise empresas, descubra contatos e enriqueça dados de leads automaticamente.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Lista completa por categoria -->
+    <section class="guide-section fade-in fade-in-d3">
+      <h2 class="guide-section-title">Lista completa por categoria</h2>
+      <p>O diretório tem <strong>mais de 50 integrações</strong> com novas adicionadas toda semana. Aqui estão as principais por área:</p>
+
+      <h3 class="guide-section-subtitle" style="margin-top: 32px;">Comunicação</h3>
+      <div class="guide-card">
+        <ul class="guide-list" style="margin-bottom: 0;">
+          <li><strong>Slack</strong> — mensagens, buscas e rascunhos</li>
+          <li><strong>Gmail</strong> — buscar emails, resumir threads, rascunhar respostas</li>
+          <li><strong>Microsoft 365</strong> — email, calendário, documentos</li>
+          <li><strong>Google Calendar</strong> — consultar e gerenciar agenda</li>
+        </ul>
+      </div>
+
+      <h3 class="guide-section-subtitle" style="margin-top: 24px;">Gestão de Projetos</h3>
+      <div class="guide-card">
+        <ul class="guide-list" style="margin-bottom: 0;">
+          <li><strong>Asana</strong> — tarefas, projetos, timelines</li>
+          <li><strong>monday.com</strong> — workflows e coordenação</li>
+          <li><strong>Linear</strong> — issues e sprints de engenharia</li>
+          <li><strong>Jira</strong> — tickets e boards</li>
+          <li><strong>ClickUp</strong> — tarefas, documentos, projetos</li>
+        </ul>
+      </div>
+
+      <h3 class="guide-section-subtitle" style="margin-top: 24px;">Design</h3>
+      <div class="guide-card">
+        <ul class="guide-list" style="margin-bottom: 0;">
+          <li><strong>Figma</strong> — designs, diagramas, protótipos</li>
+          <li><strong>Canva</strong> — apresentações e conteúdo visual</li>
+          <li><strong>Gamma</strong> — decks e documentos visuais</li>
+        </ul>
+      </div>
+
+      <h3 class="guide-section-subtitle" style="margin-top: 24px;">Dados e Analytics</h3>
+      <div class="guide-card">
+        <ul class="guide-list" style="margin-bottom: 0;">
+          <li><strong>Amplitude</strong> — dashboards de produto</li>
+          <li><strong>Hex</strong> — business intelligence e queries</li>
+          <li><strong>Airtable</strong> — bases de dados estruturados</li>
+        </ul>
+      </div>
+
+      <h3 class="guide-section-subtitle" style="margin-top: 24px;">Conhecimento e Conteúdo</h3>
+      <div class="guide-card">
+        <ul class="guide-list" style="margin-bottom: 0;">
+          <li><strong>Notion</strong> — páginas, bases, wikis</li>
+          <li><strong>Google Drive</strong> — documentos e planilhas</li>
+          <li><strong>WordPress.com</strong> — posts, páginas, analytics do site</li>
+          <li><strong>Box</strong> — arquivos e documentos corporativos</li>
+        </ul>
+      </div>
+
+      <h3 class="guide-section-subtitle" style="margin-top: 24px;">Vendas e CRM</h3>
+      <div class="guide-card">
+        <ul class="guide-list" style="margin-bottom: 0;">
+          <li><strong>HubSpot</strong> — CRM, contatos, pipeline</li>
+          <li><strong>Clay</strong> — enrichment e prospecção</li>
+          <li><strong>Salesforce</strong> — contexto enterprise (em breve)</li>
+        </ul>
+      </div>
+
+      <h3 class="guide-section-subtitle" style="margin-top: 24px;">Engenharia</h3>
+      <div class="guide-card">
+        <ul class="guide-list" style="margin-bottom: 0;">
+          <li><strong>GitHub</strong> — repos, PRs, issues</li>
+          <li><strong>Vercel</strong> — deploys e projetos</li>
+          <li><strong>Linear</strong> — issues de engenharia</li>
+        </ul>
+      </div>
+
+      <h3 class="guide-section-subtitle" style="margin-top: 24px;">Financeiro</h3>
+      <div class="guide-card">
+        <ul class="guide-list" style="margin-bottom: 0;">
+          <li><strong>Stripe</strong> — pagamentos e dados financeiros</li>
+        </ul>
+      </div>
+
+      <h3 class="guide-section-subtitle" style="margin-top: 24px;">Automação</h3>
+      <div class="guide-card">
+        <ul class="guide-list" style="margin-bottom: 0;">
+          <li><strong>Zapier</strong> — conecta o Claude a 8.000+ apps</li>
+          <li><strong>Jotform</strong> — formulários e coleta de dados</li>
+        </ul>
+      </div>
+
+      <p style="margin-top: 16px; color: var(--text-muted); font-size: 0.875rem;">Lista parcial. O diretório completo está em <strong>claude.ai/connectors</strong> e é atualizado semanalmente.</p>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Quem pode usar -->
+    <section class="guide-section fade-in fade-in-d3">
+      <h2 class="guide-section-title">Quem pode usar</h2>
+
+      <div class="guide-card" style="background: var(--bg-secondary);">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9375rem;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--border);">
+              <th style="padding: 12px 8px; text-align: left; color: var(--text-muted); font-weight: 600;">Plano</th>
+              <th style="padding: 12px 8px; text-align: left; color: var(--text-muted); font-weight: 600;">Acesso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-primary); font-weight: 500;">Free</td>
+              <td style="padding: 12px 8px; color: var(--text-secondary);">Connectors do diretório + 1 conector customizado</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-primary); font-weight: 500;">Pro</td>
+              <td style="padding: 12px 8px; color: var(--text-secondary);">Todos os connectors + customizados ilimitados</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-primary); font-weight: 500;">Max</td>
+              <td style="padding: 12px 8px; color: var(--text-secondary);">Todos os connectors + customizados ilimitados</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-primary); font-weight: 500;">Team</td>
+              <td style="padding: 12px 8px; color: var(--text-secondary);">Todos, mas só em projetos privados</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 8px; color: var(--text-primary); font-weight: 500;">Enterprise</td>
+              <td style="padding: 12px 8px; color: var(--text-secondary);">Todos, com controle de admin + só em projetos privados</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Dicas -->
+    <section class="guide-section fade-in fade-in-d4">
+      <h2 class="guide-section-title">Dicas de uso</h2>
+
+      <ul class="guide-list">
+        <li><strong>Ative só o que precisa por conversa.</strong> Com muitas integrações ligadas ao mesmo tempo, o Claude pode ficar mais lento. Ative só as relevantes pro que você vai fazer.</li>
+        <li><strong>Se tiver mais de 10 connectors, use "On demand".</strong> Nas configurações, troque o modo de Auto para On demand. O Claude só acessa a ferramenta quando você pedir explicitamente.</li>
+        <li><strong>Combine ferramentas numa conversa só.</strong> "Puxa os dados do Amplitude, monta um deck no Canva e manda o resumo no Slack" — tudo numa mensagem.</li>
+        <li><strong>Tempo morto vira tempo produtivo.</strong> No trânsito, na fila, no intervalo. Abra o Claude e resolva coisas que antes precisavam de computador.</li>
+        <li><strong>Dados criptografados.</strong> Todas as transferências são criptografadas. O Claude só acessa o que você tem permissão de ver na ferramenta original.</li>
+      </ul>
+    </section>
+
+    <hr class="guide-divider">
+
+    <!-- Resumo -->
+    <section class="guide-section fade-in fade-in-d4">
+      <h2 class="guide-section-title">Resumo rápido</h2>
+
+      <div class="guide-card" style="background: var(--bg-secondary);">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9375rem;">
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500; width: 40%;">Total de integrações</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">50+ (diretório cresce toda semana)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Apps interativos</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">Figma, Canva, Slack, Amplitude, Asana, monday.com, Hex, Box, Clay</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Conectar onde</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">No computador (claude.ai ou Desktop)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Usar no mobile</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">Automático — conectou no desktop, funciona no celular</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Planos</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">Free (limitado), Pro, Max, Team, Enterprise</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Diretório completo</td>
+              <td style="padding: 12px 8px; color: var(--text-primary);">claude.ai/connectors</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CTA SINAPSE - Final -->
+    <section class="guide-section fade-in fade-in-d4" style="text-align: center;">
+      <div class="guide-card" style="border-color: var(--border-hover); padding: 40px 24px;">
+        <span class="guide-badge mb-16">Turma T2 Aberta</span>
+        <h2 class="guide-section-title" style="margin-bottom: 12px;">Quer dominar IA aplicada ao trabalho?</h2>
+        <p style="max-width: 480px; margin: 0 auto 28px;">No SINAPSE eu e o Soier ensinamos a montar fluxos reais com IA — integrações, automações e ferramentas autorais que você não encontra em nenhum outro lugar.</p>
+        <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Conhecer o SINAPSE</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="guide-footer fade-in fade-in-d4">
+      <p>Criado por <span class="guide-author">Caio Imori</span></p>
+      <p style="margin-top: 8px;">Claude Mobile Tools — seu celular virou hub de trabalho.</p>
+    </footer>
+
+  </article>
+</body>
+</html>
