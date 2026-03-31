@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Como ativar o Computer Use no Claude Code - Caio Imori</title>
+  <title>Como ativar o Computer Use no Claude Code CLI - Caio Imori</title>
   <meta
     name="description"
-    content="Guia prático para ativar o Computer Use no Claude Code: requisitos, passo a passo no Claude Desktop, permissões, limitações atuais e uso opcional com Dispatch."
+    content="Guia prático para ativar o Computer Use no Claude Code CLI: pré-requisitos oficiais, ativação via /mcp, permissões no macOS e limites atuais."
   >
   <link rel="stylesheet" href="../assets/css/guide.css">
 </head>
@@ -22,10 +22,10 @@
       <div class="claude-hero-grid">
         <div>
           <p class="claude-overline">Claude Code // Computer Use</p>
-          <h1 class="guide-hero-title claude-headline">Como ativar o Computer Use no Claude Code</h1>
+          <h1 class="guide-hero-title claude-headline">Como ativar o Computer Use no Claude Code CLI</h1>
           <p class="guide-subtitle claude-subtitle">
-            O recurso que deixa o Claude clicar, digitar, abrir apps e operar o seu Mac por você agora existe dentro do
-            Claude Code - mas ainda está em research preview. Aqui está o caminho exato para ligar isso com segurança.
+            No Claude Code de terminal, o Computer Use é ativado como um servidor MCP nativo chamado
+            <strong>computer-use</strong>. É ele que permite ao Claude abrir apps, clicar, digitar e enxergar sua tela no macOS.
           </p>
 
           <div class="claude-actions">
@@ -43,34 +43,34 @@
           </div>
 
           <ul class="claude-facts">
-            <li><strong>Plano:</strong> Claude Pro ou Claude Max.</li>
-            <li><strong>Plataforma:</strong> por enquanto, <strong>macOS</strong> no Claude Desktop.</li>
-            <li><strong>App:</strong> Claude Desktop atualizado e com sessão iniciada.</li>
-            <li><strong>Execução:</strong> o desktop precisa ficar acordado e o app aberto.</li>
+            <li><strong>Plano:</strong> Claude Pro ou Claude Max; não vale para Team ou Enterprise.</li>
+            <li><strong>Plataforma:</strong> por enquanto, <strong>macOS</strong>.</li>
+            <li><strong>Versão:</strong> Claude Code <strong>v2.1.85</strong> ou superior.</li>
+            <li><strong>Sessão:</strong> precisa ser interativa, não funciona com <strong>-p</strong>.</li>
           </ul>
         </aside>
       </div>
 
       <div class="claude-stats">
         <div class="claude-stat">
-          <span class="claude-stat-label">Disponibilidade</span>
-          <span class="claude-stat-value">Research preview</span>
-          <p>O recurso segue em prévia de pesquisa e ainda está evoluindo rapidamente.</p>
+          <span class="claude-stat-label">Ativação</span>
+          <span class="claude-stat-value">/mcp</span>
+          <p>No CLI, o fluxo oficial começa abrindo o gerenciador de MCP dentro da sessão.</p>
         </div>
         <div class="claude-stat">
-          <span class="claude-stat-label">Onde ativa</span>
-          <span class="claude-stat-value">Settings &gt; General</span>
-          <p>O toggle fica nas configurações do Claude Desktop, não no terminal.</p>
+          <span class="claude-stat-label">Servidor</span>
+          <span class="claude-stat-value">computer-use</span>
+          <p>Ele aparece como um MCP nativo, desativado por padrão, até você habilitar.</p>
         </div>
         <div class="claude-stat">
           <span class="claude-stat-label">Permissões</span>
-          <span class="claude-stat-value">App por app</span>
-          <p>Claude pede sua autorização sempre que vai tocar um app novo.</p>
+          <span class="claude-stat-value">2 no macOS</span>
+          <p>Você vai conceder <strong>Accessibility</strong> e <strong>Screen Recording</strong>.</p>
         </div>
         <div class="claude-stat">
-          <span class="claude-stat-label">Uso remoto</span>
-          <span class="claude-stat-value">Dispatch</span>
-          <p>Opcionalmente, você pode disparar tarefas pelo celular e deixar o desktop executar.</p>
+          <span class="claude-stat-label">Interrupção</span>
+          <span class="claude-stat-value">Esc ou Ctrl+C</span>
+          <p>Você pode abortar o controle da tela a qualquer momento.</p>
         </div>
       </div>
     </header>
@@ -92,35 +92,35 @@
       <div class="claude-section-title-wrap">
         <div class="claude-section-index">00</div>
         <div>
-          <h2 class="claude-section-title">O que o Computer Use faz</h2>
+          <h2 class="claude-section-title">Antes de tudo: CLI e Desktop não ativam do mesmo jeito</h2>
           <p class="claude-section-intro">
-            Quando Claude Code não tem um connector, plugin ou outra integração mais precisa para resolver a tarefa,
-            ele pode interagir diretamente com a sua tela: abrir janelas, navegar no browser, clicar, rolar, digitar e
-            acionar ferramentas locais.
+            O erro principal da versão anterior era misturar o fluxo do <strong>Claude Desktop app</strong> com o do
+            <strong>Claude Code CLI</strong>. Para o guia que você vai usar na automação, o caminho correto é o do terminal.
           </p>
         </div>
       </div>
 
       <div class="claude-split-grid">
         <div class="claude-surface claude-surface-accent">
-          <h3 class="claude-card-title">Como ele decide agir</h3>
+          <h3 class="claude-card-title">Claude Code CLI</h3>
           <p class="claude-card-copy">
-            Segundo a documentação oficial, Claude tenta usar a rota mais precisa primeiro. Na prática, a ordem é:
+            No terminal, o Computer Use é habilitado no menu <span class="claude-inline-code">/mcp</span> como o servidor
+            integrado <span class="claude-inline-code">computer-use</span>.
           </p>
           <div class="claude-chip-row mt-24">
-            <span class="claude-chip">Connectors e integrações</span>
-            <span class="claude-chip">Browser quando fizer sentido</span>
-            <span class="claude-chip">Interação direta com a tela</span>
+            <span class="claude-chip">claude</span>
+            <span class="claude-chip">/mcp</span>
+            <span class="claude-chip">Enable computer-use</span>
           </div>
         </div>
 
         <div class="claude-surface claude-surface-soft">
-          <h3 class="claude-card-title">O que isso habilita</h3>
+          <h3 class="claude-card-title">Claude Desktop app</h3>
           <ul class="claude-checklist mt-24">
-            <li>Abrir apps e arquivos locais sem você pegar no mouse.</li>
-            <li>Navegar em interfaces que não têm MCP ou connector dedicado.</li>
-            <li>Usar browser, IDE e ferramentas de dev no mesmo fluxo.</li>
-            <li>Continuar uma tarefa no seu computador enquanto você está longe dele.</li>
+            <li>Lá, a ativação é por toggle em <strong>Settings</strong>.</li>
+            <li>Esse é um fluxo diferente, documentado separadamente.</li>
+            <li>Para este guia, o que vale é o processo do <strong>CLI</strong>.</li>
+            <li>Se alguém seguir o fluxo do app desktop no terminal, vai errar.</li>
           </ul>
         </div>
       </div>
@@ -134,8 +134,8 @@
         <div>
           <h2 class="claude-section-title">Pré-requisitos reais</h2>
           <p class="claude-section-intro">
-            A documentação pública da Claude converge nesses pontos. Se você quer só validar elegibilidade, essa é a
-            lista curta.
+            Segundo a documentação oficial do Claude Code, o servidor <span class="claude-inline-code">computer-use</span>
+            só aparece em setups elegíveis.
           </p>
         </div>
       </div>
@@ -146,18 +146,19 @@
           <p class="claude-card-copy">Baixe ou atualize em <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download</a>.</p>
         </div>
         <div class="claude-check-item">
-          <h3 class="claude-card-title">2. macOS suportado</h3>
-          <p class="claude-card-copy">O app desktop exige macOS 11 ou superior. O Computer Use no Claude Code está, por enquanto, restrito ao Mac.</p>
+          <h3 class="claude-card-title">2. macOS + versão mínima</h3>
+          <p class="claude-card-copy">O Computer Use no CLI está disponível só no <strong>macOS</strong> e exige <strong>Claude Code v2.1.85+</strong>.</p>
         </div>
         <div class="claude-check-item">
-          <h3 class="claude-card-title">3. Plano pago correto</h3>
-          <p class="claude-card-copy">Computer Use no Claude Code está liberado em research preview para assinantes <strong>Pro</strong> e <strong>Max</strong>.</p>
+          <h3 class="claude-card-title">3. Sessão e autenticação corretas</h3>
+          <p class="claude-card-copy">Você precisa estar numa sessão interativa e autenticado via <strong>claude.ai</strong>, não só por Bedrock, Vertex ou Foundry.</p>
         </div>
       </div>
 
       <div class="claude-note mt-24">
         <p class="mb-0">
-          <strong>Resumo rápido:</strong> app atualizado, plano Pro ou Max, desktop acordado, Claude Desktop aberto. Sem isso, não tem Computer Use funcionando.
+          <strong>Resumo rápido:</strong> macOS, Pro ou Max, Claude Code 2.1.85+, sessão interativa e login via claude.ai. Sem isso, o
+          <span class="claude-inline-code">computer-use</span> nem aparece no <span class="claude-inline-code">/mcp</span>.
         </p>
       </div>
     </section>
@@ -170,61 +171,66 @@
         <div>
           <h2 class="claude-section-title">Passo a passo para ativar</h2>
           <p class="claude-section-intro">
-            Esse é o fluxo documentado hoje pela Anthropic para ligar o recurso dentro do Claude Desktop e começar a usar
-            no Claude Code.
+            Esse é o fluxo oficial da Anthropic para ativar o recurso no <strong>Claude Code CLI</strong>.
           </p>
         </div>
       </div>
 
       <ol class="claude-step-list">
         <li>
-          <strong class="claude-step-title">Atualize o Claude Desktop</strong>
+          <strong class="claude-step-title">Abra o terminal e inicie o Claude Code</strong>
           <p class="claude-step-copy">
-            Baixe a versão mais recente em <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download</a>,
-            abra o app e faça login na sua conta.
+            Entre no seu terminal, vá para o projeto e rode <span class="claude-inline-code">claude</span> para abrir uma sessão interativa normal.
           </p>
         </li>
         <li>
-          <strong class="claude-step-title">Abra as configurações do desktop</strong>
+          <strong class="claude-step-title">Abra o gerenciador de MCP</strong>
           <p class="claude-step-copy">
-            No Claude Desktop, entre em <span class="claude-inline-code">Settings &gt; General</span>. O toggle do Computer Use fica
-            nessa área, sob as configurações do app desktop.
+            Dentro da sessão, rode <span class="claude-inline-code">/mcp</span>. É ali que ficam os servidores MCP disponíveis para o projeto atual.
           </p>
         </li>
         <li>
-          <strong class="claude-step-title">Ligue o toggle de Computer Use</strong>
+          <strong class="claude-step-title">Encontre o servidor computer-use</strong>
           <p class="claude-step-copy">
-            Ative a chave <strong>Computer use</strong>. Se ela não estiver visível, normalmente o problema é plano incompatível,
-            app desatualizado ou rollout ainda não liberado para a sua conta.
+            Procure por <span class="claude-inline-code">computer-use</span> na lista. Ele aparece como um servidor MCP embutido e,
+            por padrão, começa como <strong>disabled</strong>.
           </p>
         </li>
         <li>
-          <strong class="claude-step-title">Abra uma sessão do Claude Code no desktop</strong>
+          <strong class="claude-step-title">Ative o computer-use</strong>
           <p class="claude-step-copy">
-            Entre no Claude Code dentro do app desktop e comece uma sessão normal. O Computer Use só entra em cena quando a
-            tarefa realmente exige interagir com a sua máquina.
+            Selecione <span class="claude-inline-code">computer-use</span> e escolha <strong>Enable</strong>. Essa configuração
+            persiste <strong>por projeto</strong>, então você não precisa repetir toda vez no mesmo repositório.
           </p>
         </li>
         <li>
-          <strong class="claude-step-title">Peça uma tarefa que exija tela ou app local</strong>
+          <strong class="claude-step-title">Conceda as permissões do macOS</strong>
           <p class="claude-step-copy">
-            Exemplos: abrir um app, navegar num dashboard interno, mexer numa planilha local, rodar uma ferramenta visual
-            ou operar algo no browser sem integração pronta.
+            Na primeira tentativa de uso, o macOS vai pedir <strong>Accessibility</strong> para clicar, digitar e rolar, e
+            <strong>Screen Recording</strong> para Claude enxergar a tela. Depois de conceder, clique em <strong>Try again</strong>.
           </p>
         </li>
         <li>
-          <strong class="claude-step-title">Autorize o acesso ao primeiro app</strong>
+          <strong class="claude-step-title">Reinicie a sessão se o macOS pedir</strong>
           <p class="claude-step-copy">
-            Claude vai pedir permissão antes de tocar cada aplicativo novo. Aprove ou bloqueie caso a caso. Você também pode
-            interromper a execução a qualquer momento.
+            A própria documentação avisa que o macOS pode exigir reinício do Claude Code depois da permissão de
+            <strong>Screen Recording</strong>. Se o prompt ficar reaparecendo, feche e abra uma nova sessão.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Peça uma tarefa visual e aprove os apps da sessão</strong>
+          <p class="claude-step-copy">
+            A partir daí, peça algo que realmente precise de GUI. Quando Claude quiser controlar um app específico, o terminal
+            vai mostrar um prompt para <strong>Allow for this session</strong> ou <strong>Deny</strong>.
           </p>
         </li>
       </ol>
 
       <div class="claude-note mt-24">
         <p class="mb-0">
-          <strong>Dica prática:</strong> comece com tarefas simples e bem delimitadas. A própria Anthropic avisa que o recurso
-          ainda pode errar em fluxos longos ou interfaces mais complexas.
+          <strong>Dica prática:</strong> se o servidor <span class="claude-inline-code">computer-use</span> não aparecer no
+          <span class="claude-inline-code">/mcp</span>, quase sempre o motivo é um destes: plano errado, macOS ausente,
+          versão antiga, sessão não interativa ou autenticação só via provedor de terceiros.
         </p>
       </div>
     </section>
@@ -235,15 +241,51 @@
       <div class="claude-section-title-wrap">
         <div class="claude-section-index">03</div>
         <div>
-          <h2 class="claude-section-title">Como pedir do jeito certo</h2>
+          <h2 class="claude-section-title">Como funcionam as permissões</h2>
           <p class="claude-section-intro">
-            O ganho aqui não é só ligar o toggle. É formular pedidos que façam o Claude operar de forma previsível e segura.
+            Ativar o servidor não libera o seu Mac inteiro de uma vez. O Claude continua pedindo aprovação por app durante a sessão.
           </p>
         </div>
       </div>
 
       <div class="claude-split-grid">
         <div class="claude-surface">
+          <h3 class="claude-card-title">O que a sessão pede</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Quais apps Claude quer controlar.</li>
+            <li>Se há permissões extras, como acesso ao clipboard.</li>
+            <li>Quantos outros apps serão escondidos enquanto Claude trabalha.</li>
+            <li>Se o app aprovado dá alcance amplo, como Finder ou System Settings.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Regras úteis de operação</h3>
+          <ul class="claude-checklist mt-24">
+            <li>As aprovações valem só para a <strong>sessão atual</strong>.</li>
+            <li>O terminal fica visível, mas é <strong>excluído dos screenshots</strong>.</li>
+            <li>Outros apps visíveis são escondidos enquanto Claude controla a tela.</li>
+            <li>Você pode parar tudo com <strong>Esc</strong> ou <strong>Ctrl+C</strong>.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">04</div>
+        <div>
+          <h2 class="claude-section-title">Como pedir do jeito certo</h2>
+          <p class="claude-section-intro">
+            O ganho aqui não é só ligar o servidor. É formular pedidos que façam o Claude operar de forma previsível e segura.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
           <h3 class="claude-card-title">Prompts que funcionam melhor</h3>
           <ul class="claude-checklist mt-24">
             <li>"Abra o app X, exporte o relatório Y e salve na pasta Z."</li>
@@ -269,67 +311,27 @@
 
     <section class="guide-section claude-section fade-in fade-in-d3">
       <div class="claude-section-title-wrap">
-        <div class="claude-section-index">04</div>
+        <div class="claude-section-index">05</div>
         <div>
           <h2 class="claude-section-title">Permissões e segurança</h2>
           <p class="claude-section-intro">
-            O Computer Use toca sua tela real, não um navegador isolado. Então a regra é simples: trate o recurso como algo
-            poderoso e não como uma automação inocente.
-          </p>
-        </div>
-      </div>
-
-      <div class="claude-split-grid">
-        <div class="claude-surface claude-surface-accent">
-          <h3 class="claude-card-title">Faça isso</h3>
-          <ul class="claude-do mt-24">
-            <li>Comece pelos apps em que você realmente confia.</li>
-            <li>Feche janelas com documentos sensíveis antes de usar.</li>
-            <li>Conceda acesso por aplicativo com bastante critério.</li>
-            <li>Use prompts específicos para reduzir interpretações erradas.</li>
-            <li>Saiba como interromper ou revogar acesso rapidamente.</li>
-          </ul>
-        </div>
-
-        <div class="claude-surface">
-          <h3 class="claude-card-title">Evite isso</h3>
-          <ul class="claude-dont mt-24">
-            <li>Apps bancários, saúde, governo ou qualquer sistema altamente sensível.</li>
-            <li>Trabalhar com dados pessoais de terceiros visíveis na tela.</li>
-            <li>Delegar operações irreversíveis sem supervisão.</li>
-            <li>Assumir que as salvaguardas são perfeitas.</li>
-            <li>Dar acesso amplo quando um fluxo mais simples resolveria.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <hr class="guide-divider">
-
-    <section class="guide-section claude-section fade-in fade-in-d3">
-      <div class="claude-section-title-wrap">
-        <div class="claude-section-index">05</div>
-        <div>
-          <h2 class="claude-section-title">Limites atuais</h2>
-          <p class="claude-section-intro">
-            A Anthropic ainda trata o recurso como prévia de pesquisa, então vale ajustar expectativa para não usar Computer Use
-            no tipo errado de trabalho.
+            O Computer Use roda no seu desktop real, não em um sandbox isolado. Então vale usar como ferramenta poderosa, não como automação cega.
           </p>
         </div>
       </div>
 
       <div class="claude-card-grid">
         <div class="claude-check-item">
-          <h3 class="claude-card-title">Ainda pode errar</h3>
-          <p class="claude-card-copy">Fluxos longos ou complexos às vezes precisam de uma segunda tentativa.</p>
+          <h3 class="claude-card-title">Comece pelos apps confiáveis</h3>
+          <p class="claude-card-copy">Feche janelas sensíveis antes de usar e aprove app por app com bastante critério.</p>
         </div>
         <div class="claude-check-item">
-          <h3 class="claude-card-title">É mais lento que integração direta</h3>
-          <p class="claude-card-copy">Se houver connector, MCP ou plugin, esse caminho tende a ser melhor.</p>
+          <h3 class="claude-card-title">A rota mais precisa vem antes</h3>
+          <p class="claude-card-copy">Se houver MCP, Bash ou Chrome extension, Claude tenta isso antes de usar a tela.</p>
         </div>
         <div class="claude-check-item">
-          <h3 class="claude-card-title">O desktop precisa ficar vivo</h3>
-          <p class="claude-card-copy">Se o computador dormir ou o Claude Desktop fechar, a execução para.</p>
+          <h3 class="claude-card-title">Use supervisão humana</h3>
+          <p class="claude-card-copy">A própria Anthropic recomenda cautela com prompt injection e tarefas de alto risco.</p>
         </div>
       </div>
     </section>
@@ -340,31 +342,25 @@
       <div class="claude-section-title-wrap">
         <div class="claude-section-index">06</div>
         <div>
-          <h2 class="claude-section-title">Opcional: usar com Dispatch</h2>
+          <h2 class="claude-section-title">Limites atuais</h2>
           <p class="claude-section-intro">
-            Se a sua conta já tiver acesso ao Dispatch, você pode disparar tarefas pelo celular e deixar o desktop trabalhar
-            no seu lugar. Isso não é obrigatório para ativar o Computer Use, mas combina muito bem com ele. Para esse fluxo,
-            você precisa do app mobile da Claude atualizado e conexão ativa nos dois dispositivos.
+            A documentação do CLI deixa claro onde o recurso funciona e onde ele ainda não entra.
           </p>
         </div>
       </div>
 
-      <div class="claude-split-grid">
-        <div class="claude-surface">
-          <h3 class="claude-card-title">O que já está documentado</h3>
-          <p class="claude-card-copy mt-24">
-            A central de ajuda explica que, no fluxo contínuo do Dispatch, tarefas de desenvolvimento podem ser
-            encaminhadas para sessões do <strong>Claude Code</strong>, enquanto o resultado volta para a mesma thread.
-          </p>
+      <div class="claude-card-grid">
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Uma sessão por vez</h3>
+          <p class="claude-card-copy">Existe um lock global da máquina. Se outra sessão estiver usando a tela, a nova falha.</p>
         </div>
-
-        <div class="claude-surface">
-          <h3 class="claude-card-title">Como preparar o fluxo</h3>
-          <p class="claude-card-copy mt-24">
-            O onboarding detalhado está documentado na área do Cowork: abra <strong>Cowork</strong> no celular ou no desktop,
-            entre em <strong>Dispatch</strong>, toque em <strong>Get started</strong>, libere acesso a arquivos e a opção de
-            manter o computador acordado, e finalize a configuração.
-          </p>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Só no modo interativo</h3>
+          <p class="claude-card-copy">O recurso não funciona no modo não interativo com a flag <span class="claude-inline-code">-p</span>.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Só no macOS</h3>
+          <p class="claude-card-copy">Linux e Windows ainda não entram no fluxo do Computer Use do CLI.</p>
         </div>
       </div>
     </section>
@@ -374,6 +370,40 @@
     <section class="guide-section claude-section fade-in fade-in-d4">
       <div class="claude-section-title-wrap">
         <div class="claude-section-index">07</div>
+        <div>
+          <h2 class="claude-section-title">Diferença do Desktop app</h2>
+          <p class="claude-section-intro">
+            Se você viu tutoriais conflitantes, esta é a diferença que resolve a confusão.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface">
+          <h3 class="claude-card-title">No Claude Code CLI</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Ativação em <span class="claude-inline-code">/mcp</span>.</li>
+            <li>Servidor embutido <span class="claude-inline-code">computer-use</span>.</li>
+            <li>Fluxo oficial para terminal e automações orientadas ao CLI.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">No Desktop app</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Ativação por toggle em <strong>Settings</strong>.</li>
+            <li>É a superfície visual do app, não o fluxo do terminal.</li>
+            <li>Não é o caminho certo para um tutorial de ativação do CLI.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">08</div>
         <div>
           <h2 class="claude-section-title">Resumo rápido</h2>
           <p class="claude-section-intro">
@@ -387,27 +417,27 @@
           <tbody>
             <tr>
               <td>Precisa de qual plano?</td>
-              <td>Claude <strong>Pro</strong> ou <strong>Max</strong>.</td>
+              <td>Claude <strong>Pro</strong> ou <strong>Max</strong>; não disponível em Team ou Enterprise.</td>
             </tr>
             <tr>
               <td>Funciona onde hoje?</td>
-              <td><strong>macOS</strong> no Claude Desktop.</td>
+              <td><strong>macOS</strong>, no <strong>Claude Code CLI</strong>.</td>
             </tr>
             <tr>
               <td>Onde ativa?</td>
-              <td><span class="claude-inline-code">Settings &gt; General &gt; Computer use</span></td>
+              <td><span class="claude-inline-code">claude</span> → <span class="claude-inline-code">/mcp</span> → Enable <span class="claude-inline-code">computer-use</span></td>
             </tr>
             <tr>
-              <td>Precisa do desktop aberto?</td>
-              <td>Sim. O computador tem que estar acordado e o app rodando.</td>
+              <td>Quais permissões pede?</td>
+              <td><strong>Accessibility</strong> e <strong>Screen Recording</strong>.</td>
             </tr>
             <tr>
-              <td>Permissão é automática?</td>
-              <td>Não. Claude pede autorização antes de acessar cada app novo.</td>
+              <td>Funciona no -p?</td>
+              <td>Não. Só em sessão <strong>interativa</strong>.</td>
             </tr>
             <tr>
-              <td>Vale para coisas sensíveis?</td>
-              <td>Não é recomendado para finanças, saúde, jurídico ou dados críticos.</td>
+              <td>Se o servidor não aparecer?</td>
+              <td>Cheque macOS, versão 2.1.85+, plano Pro/Max e login via <strong>claude.ai</strong>.</td>
             </tr>
           </tbody>
         </table>
