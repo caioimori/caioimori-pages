@@ -941,3 +941,312 @@ body.guide-theme-claude .guide {
     top: 18px;
   }
 }
+
+/* ============================================
+   Mythos Summary Variant
+   ============================================ */
+
+body.guide-theme-mythos {
+  --bg-primary: #f7f4ec;
+  --bg-secondary: rgba(255, 252, 245, 0.72);
+  --bg-tertiary: #ece7dc;
+  --text-primary: #141413;
+  --text-secondary: rgba(20, 20, 19, 0.76);
+  --text-muted: rgba(20, 20, 19, 0.52);
+  --border: rgba(20, 20, 19, 0.1);
+  --border-hover: rgba(20, 20, 19, 0.2);
+  --badge-bg: rgba(255, 252, 245, 0.84);
+  --accent: #141413;
+  --accent-hover: #141413;
+  --card-shadow: 0 0 0 1px rgba(20, 20, 19, 0.03), 0 32px 90px -56px rgba(20, 20, 19, 0.35);
+  background-color: var(--bg-primary);
+  background-image:
+    radial-gradient(circle at 20% 0%, rgba(20, 20, 19, 0.05), transparent 24%),
+    radial-gradient(circle at 100% 10%, rgba(20, 20, 19, 0.05), transparent 28%),
+    linear-gradient(rgba(20, 20, 19, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 20, 19, 0.025) 1px, transparent 1px);
+  background-size: auto, auto, 64px 64px, 64px 64px;
+  background-position: top left, top right, center center, center center;
+  color: var(--text-secondary);
+  font-family: "Georgia", "Times New Roman", serif;
+}
+
+body.guide-theme-mythos::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(90deg, rgba(20, 20, 19, 0.018) 50%, transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.45));
+  background-size: 3px 3px, 100% 100%;
+}
+
+.mythos-shell {
+  position: relative;
+  z-index: 1;
+  max-width: 1120px;
+}
+
+.mythos-hero {
+  margin-bottom: 56px;
+}
+
+.mythos-overline {
+  margin-bottom: 18px;
+  color: var(--text-muted);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.mythos-grid,
+.mythos-hero-grid,
+.mythos-card-grid,
+.mythos-stats {
+  display: grid;
+  gap: 18px;
+}
+
+.mythos-hero-grid {
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  align-items: stretch;
+}
+
+.mythos-headline {
+  max-width: 11ch;
+  margin-bottom: 18px;
+  color: var(--text-primary);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(3rem, 8vw, 5.8rem);
+  font-weight: 700;
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+}
+
+.mythos-subtitle {
+  max-width: 44rem;
+  margin-bottom: 28px;
+  font-size: 1.18rem;
+  line-height: 1.68;
+}
+
+.mythos-panel,
+.mythos-stat,
+.mythos-surface,
+.mythos-quote {
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: rgba(255, 252, 245, 0.74);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.mythos-panel,
+.mythos-surface,
+.mythos-stat {
+  padding: 26px;
+}
+
+.mythos-panel-title,
+.mythos-card-title,
+.mythos-section-title {
+  color: var(--text-primary);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.mythos-panel-title,
+.mythos-card-title {
+  font-size: 1.22rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.mythos-panel-copy,
+.mythos-card-copy,
+.mythos-section-intro,
+.mythos-quote-copy {
+  color: var(--text-secondary);
+}
+
+.mythos-art {
+  width: 100%;
+  border-radius: 18px;
+  display: block;
+  margin-top: 18px;
+  background: #ece7dc;
+}
+
+.mythos-checklist,
+.mythos-bullets {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.mythos-checklist li,
+.mythos-bullets li {
+  position: relative;
+  padding-left: 24px;
+}
+
+.mythos-checklist li::before,
+.mythos-bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(20, 20, 19, 0.8);
+  box-shadow: 0 0 0 6px rgba(20, 20, 19, 0.08);
+}
+
+.mythos-stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 18px;
+}
+
+.mythos-stat-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.mythos-stat-value {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+.mythos-section-wrap {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  margin-bottom: 24px;
+}
+
+.mythos-section-index {
+  padding-top: 10px;
+  color: var(--text-muted);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.mythos-section-title {
+  margin-bottom: 10px;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+}
+
+.mythos-section-intro {
+  max-width: 52rem;
+  font-size: 1.05rem;
+}
+
+.mythos-card-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.mythos-surface-soft {
+  background: linear-gradient(180deg, rgba(20, 20, 19, 0.03), rgba(255, 252, 245, 0.78));
+}
+
+.mythos-quote {
+  padding: 24px 26px;
+  border-left: 3px solid rgba(20, 20, 19, 0.75);
+}
+
+.mythos-quote-copy {
+  margin-bottom: 10px;
+  font-size: 1.02rem;
+}
+
+.mythos-quote-label {
+  color: var(--text-muted);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.mythos-summary-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mythos-summary-table td {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.mythos-summary-table tr:last-child td {
+  border-bottom: none;
+}
+
+.mythos-summary-table td:first-child {
+  width: 34%;
+  padding-right: 16px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.mythos-inline {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(20, 20, 19, 0.1);
+  background: rgba(20, 20, 19, 0.04);
+  color: var(--text-primary);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .mythos-hero-grid,
+  .mythos-card-grid,
+  .mythos-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .mythos-headline {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .mythos-shell {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .mythos-section-wrap {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
