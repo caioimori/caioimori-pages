@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>/teleport e /remote-control no Claude Code - Caio Imori</title>
+  <meta
+    name="description"
+    content="Guia de sessoes cross-device no Claude Code: diferenca entre --remote, /teleport e /remote-control, requisitos, limites e quando usar cada fluxo."
+  >
+  <link rel="stylesheet" href="../assets/css/guide.css">
+</head>
+<body class="guide-theme-claude">
+  <article class="guide claude-shell">
+
+    <header class="guide-section claude-hero fade-in">
+      <div class="claude-kicker-row">
+        <span class="guide-badge">Guia de ativacao</span>
+        <span class="claude-meta-pill">Status em 2 de abril de 2026</span>
+      </div>
+
+      <div class="claude-hero-grid">
+        <div>
+          <p class="claude-overline">Claude Code // Teleport + Remote Control</p>
+          <h1 class="guide-hero-title claude-headline">/teleport e /remote-control: sessoes cross-device de verdade</h1>
+          <p class="guide-subtitle claude-subtitle">
+            O leak apontou cedo para um fluxo de Claude Code menos preso a uma unica maquina.
+            Hoje as docs publicas ja deixam isso claro: voce pode
+            <strong>criar sessoes remotas na web</strong>, <strong>teleportar uma sessao web para o terminal</strong>
+            e <strong>controlar uma sessao local pelo celular ou navegador</strong>.
+          </p>
+
+          <div class="claude-actions">
+            <a href="#nao-confundir" class="guide-cta">Ver o setup certo</a>
+          </div>
+        </div>
+
+        <aside class="claude-panel">
+          <div>
+            <span class="claude-meta-pill">Nao misture</span>
+            <h2 class="claude-panel-title" style="margin-top: 18px;">Sao 3 fluxos diferentes</h2>
+            <p class="claude-panel-copy">
+              A maior fonte de confusao aqui e tratar tudo como a mesma coisa. Na pratica, `--remote`, `/teleport` e `/remote-control` resolvem problemas diferentes.
+            </p>
+          </div>
+
+          <ul class="claude-facts">
+            <li><strong>--remote:</strong> cria uma nova sessao na web, rodando na nuvem.</li>
+            <li><strong>/teleport:</strong> puxa uma sessao web para o seu terminal local.</li>
+            <li><strong>/remote-control:</strong> expoe a sua sessao local para voce continuar de outro device.</li>
+            <li><strong>Mobile:</strong> funciona com <strong>claude.ai/code</strong> e com o app Claude no iOS/Android.</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="claude-stats">
+        <div class="claude-stat">
+          <span class="claude-stat-label">Web</span>
+          <span class="claude-stat-value">--remote</span>
+          <p>Cria uma tarefa nova na nuvem, monitoravel no navegador e no app mobile.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Handoff</span>
+          <span class="claude-stat-value">/teleport</span>
+          <p>Puxa a sessao web para o terminal com branch, repo e historico completos.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Controle remoto</span>
+          <span class="claude-stat-value">/remote-control</span>
+          <p>Conecta o celular ou browser a uma sessao local que continua rodando na sua maquina.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Versao</span>
+          <span class="claude-stat-value">2.1.51+</span>
+          <p>Remote Control exige Claude Code 2.1.51 ou superior segundo a documentacao oficial.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="guide-section fade-in fade-in-d1">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Quer transformar IA em operacao de verdade?</h2>
+        <p class="claude-card-copy mt-24">
+          No SINAPSE voce aprende a montar fluxos reais com agentes, contexto, automacoes e sessoes distribuidas para trabalhar com menos friccao.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta">Acessar sinapse.club</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section claude-section fade-in fade-in-d1" id="nao-confundir">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">00</div>
+        <div>
+          <h2 class="claude-section-title">Antes de tudo: nao confunda os 3 fluxos</h2>
+          <p class="claude-section-intro">
+            Se voce entender essa tabela, ja evita 90% da confusao sobre sessoes cross-device no Claude Code.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td><span class="claude-inline-code">claude --remote</span></td>
+              <td>Cria uma <strong>nova sessao web</strong> no claude.ai/code. O trabalho roda na <strong>infra da Anthropic</strong>, nao na sua maquina.</td>
+            </tr>
+            <tr>
+              <td><span class="claude-inline-code">/teleport</span></td>
+              <td>Puxa uma sessao que ja esta na web de volta para o <strong>seu terminal local</strong>, com historico completo.</td>
+            </tr>
+            <tr>
+              <td><span class="claude-inline-code">/remote-control</span></td>
+              <td>Permite continuar uma <strong>sessao local</strong> do seu desktop via browser ou app mobile. A sessao continua rodando na <strong>sua maquina</strong>.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Leitura certa:</strong> <span class="claude-inline-code">--remote</span> e cloud.
+          <span class="claude-inline-code">/teleport</span> e handoff da cloud para o terminal.
+          <span class="claude-inline-code">/remote-control</span> e espelho da sua sessao local para outro device.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">01</div>
+        <div>
+          <h2 class="claude-section-title">Como funciona o fluxo com /teleport</h2>
+          <p class="claude-section-intro">
+            `/teleport` entra quando voce comecou uma tarefa na web e quer trazer essa mesma sessao para o terminal local sem perder contexto.
+          </p>
+        </div>
+      </div>
+
+      <div class="guide-code-block">
+        <pre><code># criar uma nova sessao na web
+claude --remote "Corrige o bug de autenticacao em src/auth/login.ts"
+
+# depois, no terminal local, puxar a sessao de volta
+/teleport
+
+# ou usar o binario direto
+claude --teleport
+claude --teleport &lt;session-id&gt;</code></pre>
+      </div>
+
+      <div class="claude-card-grid mt-24">
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Onde comeca</h3>
+          <p class="claude-card-copy mt-24">
+            Primeiro voce dispara uma tarefa na web com <span class="claude-inline-code">--remote</span>. Ela aparece em <span class="claude-inline-code">claude.ai/code</span> e no app mobile.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Como voltar para o terminal</h3>
+          <p class="claude-card-copy mt-24">
+            Use <span class="claude-inline-code">/teleport</span>, <span class="claude-inline-code">claude --teleport</span> ou pressione <span class="claude-inline-code">t</span> dentro de <span class="claude-inline-code">/tasks</span>.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">O que e carregado</h3>
+          <p class="claude-card-copy mt-24">
+            O Claude verifica repo correto, busca a branch remota, faz checkout e carrega o historico completo da conversa.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">02</div>
+        <div>
+          <h2 class="claude-section-title">Requisitos reais do /teleport</h2>
+          <p class="claude-section-intro">
+            A doc oficial lista quatro checagens objetivas antes de uma sessao ser teleportada para o terminal.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Checklist</h3>
+          <ul class="claude-checklist mt-24">
+            <li><strong>Git limpo:</strong> sem changes locais nao commitadas, ou voce vai ter que stashear.</li>
+            <li><strong>Repo correto:</strong> o checkout local precisa ser do mesmo repositorio, nao um fork.</li>
+            <li><strong>Branch publicada:</strong> a branch da sessao web precisa existir no remoto.</li>
+            <li><strong>Mesma conta:</strong> voce precisa estar autenticado no mesmo claude.ai da sessao web.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface claude-surface-soft">
+          <h3 class="claude-card-title">A nuance importante</h3>
+          <ul class="claude-checklist mt-24">
+            <li>O handoff e <strong>one-way</strong> nesse sentido: voce puxa uma sessao web para o terminal.</li>
+            <li>Voce nao "empurra" uma sessao local existente para a web com teleport.</li>
+            <li>Para iniciar algo na web, o fluxo certo e <span class="claude-inline-code">claude --remote</span>.</li>
+            <li>Teleport resolve continuidade, nao espelhamento ao vivo.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">03</div>
+        <div>
+          <h2 class="claude-section-title">Como funciona o /remote-control</h2>
+          <p class="claude-section-intro">
+            `/remote-control` e outro jogo: aqui voce nao move a sessao para a nuvem.
+            Voce abre uma janela remota para uma sessao que continua rodando localmente na sua maquina.
+          </p>
+        </div>
+      </div>
+
+      <div class="guide-code-block">
+        <pre><code># modo servidor dedicado
+claude remote-control
+
+# sessao interativa local, mas acessivel remotamente
+claude --remote-control
+claude --remote-control "Meu Projeto"
+
+# ativar dentro de uma sessao que ja esta rodando
+/remote-control
+/remote-control Meu Projeto</code></pre>
+      </div>
+
+      <div class="claude-card-grid mt-24">
+        <div class="claude-surface">
+          <h3 class="claude-card-title">O que fica local</h3>
+          <p class="claude-card-copy mt-24">
+            Filesystem, MCP servers, tools e configuracao continuam na sua maquina. O web/mobile vira so a janela dessa sessao.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Como conectar do celular</h3>
+          <p class="claude-card-copy mt-24">
+            O terminal mostra uma URL de sessao e um QR code. Da para abrir no <span class="claude-inline-code">claude.ai/code</span> ou direto no app Claude.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Como usar junto</h3>
+          <p class="claude-card-copy mt-24">
+            Voce pode digitar do terminal, do browser e do celular na mesma sessao. Tudo fica sincronizado em tempo real.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">04</div>
+        <div>
+          <h2 class="claude-section-title">Requisitos e limites do Remote Control</h2>
+          <p class="claude-section-intro">
+            Essa parte importa porque o comportamento muda bastante dependendo do plano e da forma de login.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td>Versao minima</td>
+              <td><strong>Claude Code v2.1.51+</strong>.</td>
+            </tr>
+            <tr>
+              <td>Planos</td>
+              <td>Disponivel em <strong>Pro, Max, Team e Enterprise</strong>. Em Team/Enterprise, admin precisa ligar o toggle.</td>
+            </tr>
+            <tr>
+              <td>Auth</td>
+              <td>Precisa de login via <strong>claude.ai</strong>. API key sozinha nao serve para Remote Control.</td>
+            </tr>
+            <tr>
+              <td>Workspace trust</td>
+              <td>Voce precisa abrir o projeto no Claude Code ao menos uma vez para aceitar o trust dialog.</td>
+            </tr>
+            <tr>
+              <td>Terminal aberto</td>
+              <td>Se voce fechar o terminal ou matar o processo local, a sessao acaba.</td>
+            </tr>
+            <tr>
+              <td>Onde a sessao roda</td>
+              <td>Na <strong>sua maquina</strong>, com trafego saindo por HTTPS via API da Anthropic. Nao abre porta inbound local.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>A diferenca mais importante:</strong> no Remote Control, a Anthropic nao esta executando seu repo em infra propria.
+          Ela so intermedeia a conexao com a sessao que continua viva no seu computador.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">05</div>
+        <div>
+          <h2 class="claude-section-title">Quando usar cada um</h2>
+          <p class="claude-section-intro">
+            Se voce escolher o fluxo errado, o problema nao e a feature. E o modelo mental.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-soft">
+          <h3 class="claude-card-title">Use --remote + /teleport quando</h3>
+          <ul class="claude-do mt-24">
+            <li>Voce quer disparar uma tarefa na nuvem e seguir com a vida.</li>
+            <li>Quer monitorar progresso pelo celular enquanto o trabalho roda no cloud.</li>
+            <li>Quer voltar para o terminal depois para revisar, ajustar ou finalizar localmente.</li>
+            <li>Quer rodar varias tasks paralelas independentes em sessoes web separadas.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Use /remote-control quando</h3>
+          <ul class="claude-do mt-24">
+            <li>Voce ja esta com uma sessao local boa e quer continuar de outro device.</li>
+            <li>Precisa do seu filesystem, MCPs, worktree e configuracao exatamente como estao na sua maquina.</li>
+            <li>Quer alternar entre desktop, browser e mobile sem trocar o lugar onde a sessao executa.</li>
+            <li>Quer trabalhar de forma sincrona em uma mesma conversa viva entre superficies.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">06</div>
+        <div>
+          <h2 class="claude-section-title">Resumo rapido</h2>
+          <p class="claude-section-intro">
+            Se voce precisar explicar isso em 20 segundos, usa esta tabela.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td>O que faz --remote</td>
+              <td>Cria uma <strong>nova sessao web</strong> no claude.ai/code, rodando na nuvem.</td>
+            </tr>
+            <tr>
+              <td>O que faz /teleport</td>
+              <td>Puxa uma sessao web existente para o <strong>terminal local</strong>, com branch e historico completos.</td>
+            </tr>
+            <tr>
+              <td>O que faz /remote-control</td>
+              <td>Continua uma <strong>sessao local</strong> pelo browser ou celular, sem mover a execucao para a nuvem.</td>
+            </tr>
+            <tr>
+              <td>Qual usa mobile melhor</td>
+              <td>Os dois podem envolver mobile, mas em modelos diferentes: <strong>monitorar/steer web sessions</strong> ou <strong>controlar sua sessao local</strong>.</td>
+            </tr>
+            <tr>
+              <td>Onde as pessoas mais erram</td>
+              <td>Confundindo handoff de sessao com espelhamento remoto ao vivo.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="guide-section fade-in fade-in-d4">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Se voce quer operar nesse nivel, entra no SINAPSE</h2>
+        <p class="claude-card-copy mt-24">
+          A proposta e sair do uso reativo e aprender a montar fluxos distribuidos com agentes, automacoes e contexto entre superficies.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta">Conhecer o SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="guide-footer fade-in fade-in-d4">
+      <p>Criado por <span class="guide-author">Caio Imori</span></p>
+      <p style="margin-top: 8px;">Guia focado em uso real de sessoes cross-device com Claude Code.</p>
+    </footer>
+  </article>
+</body>
+</html>
