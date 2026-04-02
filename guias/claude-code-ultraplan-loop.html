@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ULTRAPLAN e /loop no Claude Code - Caio Imori</title>
+  <meta
+    name="description"
+    content="Guia sobre ULTRAPLAN e /loop no Claude Code: o que o leak sugere sobre planning em cloud, o que existe publicamente hoje em plan mode e scheduled tasks, e como pensar automacao de longo prazo."
+  >
+  <link rel="stylesheet" href="../assets/css/guide.css">
+</head>
+<body class="guide-theme-claude">
+  <article class="guide claude-shell">
+
+    <header class="guide-section claude-hero fade-in">
+      <div class="claude-kicker-row">
+        <span class="guide-badge">Guia de analise</span>
+        <span class="claude-meta-pill">Status em 2 de abril de 2026</span>
+      </div>
+
+      <div class="claude-hero-grid">
+        <div>
+          <p class="claude-overline">Claude Code // ULTRAPLAN + loop</p>
+          <h1 class="guide-hero-title claude-headline">ULTRAPLAN e /loop: planejamento profundo + automacao recorrente</h1>
+          <p class="guide-subtitle claude-subtitle">
+            O leak sugere que a Anthropic vinha explorando um modo de
+            <strong>planning pesado em cloud</strong> para tarefas complexas.
+            Ao mesmo tempo, o produto publico ja oferece pecas concretas para isso hoje:
+            <strong>Plan mode</strong>, <strong>remote tasks</strong> e <strong>scheduled tasks</strong>.
+          </p>
+
+          <div class="claude-actions">
+            <a href="#nao-confundir" class="guide-cta">Ver o modelo certo</a>
+          </div>
+        </div>
+
+        <aside class="claude-panel">
+          <div>
+            <span class="claude-meta-pill">Framing correto</span>
+            <h2 class="claude-panel-title" style="margin-top: 18px;">Nao venda equivalencia falsa</h2>
+            <p class="claude-panel-copy">
+              O melhor jeito de ensinar esse tema e separar bem as coisas: ULTRAPLAN parece sinal de roadmap interno; scheduling e automacao recorrente ja existem publicamente, mas com limites claros.
+            </p>
+          </div>
+
+          <ul class="claude-facts">
+            <li><strong>ULTRAPLAN:</strong> nao encontrei documentacao oficial publica com esse nome em 2 de abril de 2026.</li>
+            <li><strong>Plan mode:</strong> ja existe publicamente para mapear abordagem antes de executar.</li>
+            <li><strong>Remote tasks:</strong> ja permitem mandar execucao para a nuvem.</li>
+            <li><strong>Scheduled tasks:</strong> ja rodam Claude em recorrencia no Desktop.</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="claude-stats">
+        <div class="claude-stat">
+          <span class="claude-stat-label">Planning</span>
+          <span class="claude-stat-value">ULTRAPLAN?</span>
+          <p>O leak sugere um modo de planejamento aprofundado, mas isso nao aparece com suporte publico nas docs abertas.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Publico hoje</span>
+          <span class="claude-stat-value">Plan mode</span>
+          <p>Desktop e Web ja suportam planejar primeiro e executar depois, com modos e ambientes distintos.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Recorrencia</span>
+          <span class="claude-stat-value">Scheduled tasks</span>
+          <p>Desktop ja tem tarefas recorrentes locais e remotas, com frequencias e permissoes proprias.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Modelo mental</span>
+          <span class="claude-stat-value">Plan + run + repeat</span>
+          <p>O valor real esta em combinar boa estrategia com execucao recorrente no ambiente certo.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="guide-section fade-in fade-in-d1">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Quer transformar isso em operacao real de longo prazo?</h2>
+        <p class="claude-card-copy mt-24">
+          No SINAPSE voce aprende a montar fluxos com planejamento, execucao automatizada, recorrencia e memoria para operar projetos com agentes de forma consistente.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta">Acessar sinapse.club</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section claude-section fade-in fade-in-d1" id="nao-confundir">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">00</div>
+        <div>
+          <h2 class="claude-section-title">Antes de tudo: nao confunda as camadas</h2>
+          <p class="claude-section-intro">
+            Para esse assunto ficar forte, a primeira coisa e separar o que parece
+            <strong>feature interna</strong> do que ja esta operacionalmente disponivel.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td>ULTRAPLAN</td>
+              <td>Parece uma ideia de <strong>planning aprofundado em cloud</strong> revelada por analises do leak. Nao aparece como recurso oficial publico nas docs abertas que validei.</td>
+            </tr>
+            <tr>
+              <td>Plan mode</td>
+              <td>Ja existe publicamente. Claude analisa e cria um plano sem editar arquivos nem rodar comandos.</td>
+            </tr>
+            <tr>
+              <td>Remote tasks</td>
+              <td>Ja existem publicamente no Claude Code on the web e no Desktop. Voce manda trabalho para rodar em cloud.</td>
+            </tr>
+            <tr>
+              <td>/loop e scheduling</td>
+              <td>O nome exato <span class="claude-inline-code">/loop</span> pode aparecer no leak, mas a capacidade publica equivalente hoje esta muito mais clara em <strong>scheduled tasks</strong>.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Resumo curto:</strong> o jeito mais honesto de falar desse tema e:
+          "o leak sugere planning pesado em cloud, enquanto a stack publica atual ja permite planejar, executar remotamente e agendar recorrencia."
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">01</div>
+        <div>
+          <h2 class="claude-section-title">O que ULTRAPLAN parece ser</h2>
+          <p class="claude-section-intro">
+            O nome importa menos do que o conceito. A leitura mais util e que a Anthropic parece ter explorado uma camada onde
+            o agente recebe tempo e ambiente para pensar profundamente antes de agir.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Planning offloaded</h3>
+          <p class="claude-card-copy mt-24">
+            Em vez de gastar todo o raciocinio no mesmo loop da execucao, o sistema separaria um bloco de planejamento com mais folego e mais custo computacional.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Interface de aprovacao</h3>
+          <p class="claude-card-copy mt-24">
+            A ideia central faz sentido em tarefas caras de errar: primeiro revisar o plano, depois liberar a execucao.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Cloud first</h3>
+          <p class="claude-card-copy mt-24">
+            Esse tipo de planning profundo combina mais com sessao remota ou web do que com uma interacao curta de terminal.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Nao e doc publica</h3>
+          <p class="claude-card-copy mt-24">
+            Em 2 de abril de 2026, eu nao encontrei documentacao oficial aberta da Anthropic usando o nome ULTRAPLAN como feature publica.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Sinal de produto</h3>
+          <p class="claude-card-copy mt-24">
+            Mesmo sem ship oficial, o conceito mostra uma direcao clara: planning vira produto, nao so fase informal da conversa.
+          </p>
+        </div>
+        <div class="claude-surface claude-surface-soft">
+          <h3 class="claude-card-title">Licao pratica</h3>
+          <p class="claude-card-copy mt-24">
+            Para builders, a grande licao e separar estrategia de execucao quando o custo de errar na abordagem e alto.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">02</div>
+        <div>
+          <h2 class="claude-section-title">O que existe publicamente hoje no lugar disso</h2>
+          <p class="claude-section-intro">
+            Mesmo sem ULTRAPLAN publico, a stack atual ja te deixa montar um fluxo muito parecido com planejamento, aprovacao e execucao.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Plan mode</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Claude analisa seu codigo e cria um plano sem modificar arquivos ou rodar comandos.</li>
+            <li>Bom para tarefas complexas em que voce quer revisar a estrategia primeiro.</li>
+            <li>Depois de aprovar, voce pode trocar para modos de execucao como Ask permissions ou Auto accept edits.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Remote execution</h3>
+          <ul class="claude-checklist mt-24">
+            <li><span class="claude-inline-code">claude --remote</span> cria uma sessao web rodando em cloud.</li>
+            <li>No Desktop, voce tambem pode escolher ambientes <strong>Remote</strong> para execucao cloud.</li>
+            <li>Isso ja te permite planejar e depois mandar executar em outra superficie ou infraestrutura.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="guide-code-block mt-24">
+        <pre><code># planejar primeiro
+claude --permission-mode plan
+
+# depois mandar executar remotamente
+claude --remote "Execute o plano em docs/migration-plan.md"</code></pre>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Leitura pratica:</strong> voce nao precisa esperar um "ULTRAPLAN" publico para operar com esse modelo mental.
+          O fluxo plan first, then run ja esta disponivel.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">03</div>
+        <div>
+          <h2 class="claude-section-title">Como a recorrencia funciona de verdade hoje</h2>
+          <p class="claude-section-intro">
+            A melhor ancoragem publica para o conceito de <span class="claude-inline-code">/loop</span> hoje e a camada de <strong>scheduled tasks</strong> no Claude Code Desktop.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td>Onde existe</td>
+              <td>No <strong>Claude Code Desktop</strong>, com tarefas locais e remotas agendadas.</td>
+            </tr>
+            <tr>
+              <td>Frequencias</td>
+              <td>Manual, hourly, daily, weekdays e weekly. Para intervalos fora do picker, a doc diz que voce pode pedir em linguagem natural.</td>
+            </tr>
+            <tr>
+              <td>Como roda local</td>
+              <td>O app checa o schedule a cada minuto enquanto esta aberto e cria uma sessao nova quando a hora chega.</td>
+            </tr>
+            <tr>
+              <td>Se o computador dorme</td>
+              <td>Runs locais podem ser perdidos. Na volta, o Desktop tenta um catch-up da execucao mais recente perdida.</td>
+            </tr>
+            <tr>
+              <td>Se voce quer rodar mesmo off</td>
+              <td>A doc recomenda <strong>remote tasks</strong> para tarefas que precisam continuar mesmo quando sua maquina esta desligada.</td>
+            </tr>
+            <tr>
+              <td>Permissoes</td>
+              <td>Cada task tem seu proprio permission mode. Em Ask mode, a run pode ficar esperando aprovacao.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">04</div>
+        <div>
+          <h2 class="claude-section-title">O modelo certo para automacao de longo prazo</h2>
+          <p class="claude-section-intro">
+            O ganho real aqui nao e "deixar uma tarefa rodando para sempre". E montar uma esteira com checkpoints certos.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">1. Planejar primeiro</h3>
+          <p class="claude-card-copy mt-24">
+            Use plan mode para desenhar a estrategia quando a tarefa for cara de errar ou envolver muitas dependencias.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">2. Aprovar a abordagem</h3>
+          <p class="claude-card-copy mt-24">
+            Revise o plano antes de automatizar a recorrencia. O erro mais caro e repetir a estrategia errada em loop.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">3. Escolher o ambiente</h3>
+          <p class="claude-card-copy mt-24">
+            Local se voce precisa do seu filesystem e setup. Remote se quer resiliencia e execucao sem depender da sua maquina acordada.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">4. Agendar com guardrails</h3>
+          <p class="claude-card-copy mt-24">
+            Toda automacao recorrente precisa de instrucoes do tipo "so rode se..." ou "se passar do horario, faca X". A doc recomenda esse cuidado explicitamente.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">5. Revisar permissoes</h3>
+          <p class="claude-card-copy mt-24">
+            Execute uma vez manualmente, aprove sempre allow onde faz sentido e evite travas silenciosas depois.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">6. Tratar como sistema</h3>
+          <p class="claude-card-copy mt-24">
+            Planejamento, execucao e recorrencia sao camadas diferentes. Quando voce separa isso bem, a automacao fica muito mais confiavel.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">05</div>
+        <div>
+          <h2 class="claude-section-title">O que tratar com cautela</h2>
+          <p class="claude-section-intro">
+            Essa parte protege seu conteudo de soar como anuncio oficial de algo que ainda parece interno.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Pode afirmar com seguranca</h3>
+          <ul class="claude-do mt-24">
+            <li>O leak sugere uma direcao de planejamento mais pesado e separado da execucao.</li>
+            <li>Plan mode, remote tasks e scheduled tasks ja existem publicamente no ecossistema Claude Code.</li>
+            <li>Scheduled tasks no Desktop ja permitem recorrencia real com frequencias, permissoes e historico.</li>
+            <li>Remote tasks sao a opcao oficial quando voce quer rodar mesmo com sua maquina desligada.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Melhor nao vender como fato final</h3>
+          <ul class="claude-dont mt-24">
+            <li>Dizer que ULTRAPLAN ja e recurso publico com esse nome nas docs abertas.</li>
+            <li>Tratar <span class="claude-inline-code">/loop</span> como unica ou principal forma oficial de recorrencia se as docs publicas ancoram isso em scheduled tasks.</li>
+            <li>Prometer automacao "infinita" sem mencionar ambiente, permissoes, sleeps e missed runs.</li>
+            <li>Assumir que planejamento em cloud e aprovacao explicita ja existem exatamente como no leak.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">06</div>
+        <div>
+          <h2 class="claude-section-title">Resumo rapido</h2>
+          <p class="claude-section-intro">
+            Se voce precisar explicar isso em 30 segundos, esta tabela resolve.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td>O que e ULTRAPLAN</td>
+              <td>Um conceito de planning aprofundado em cloud inferido a partir do leak, sem doc publica oficial com esse nome nas fontes abertas que validei.</td>
+            </tr>
+            <tr>
+              <td>O que existe hoje</td>
+              <td><strong>Plan mode</strong>, <strong>remote execution</strong> e <strong>scheduled tasks</strong>.</td>
+            </tr>
+            <tr>
+              <td>O que seria /loop hoje</td>
+              <td>O equivalente publico mais claro esta em <strong>scheduled tasks</strong> no Desktop, com recorrencia configuravel.</td>
+            </tr>
+            <tr>
+              <td>Qual a licao central</td>
+              <td>Separar planejamento, execucao e recorrencia deixa a automacao muito mais confiavel.</td>
+            </tr>
+            <tr>
+              <td>Quando vira jogo grande</td>
+              <td>Quando voce planeja bem, escolhe o ambiente certo e adiciona guardrails no prompt da automacao recorrente.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="guide-section fade-in fade-in-d4">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Se voce quer operar nesse nivel, entra no SINAPSE</h2>
+        <p class="claude-card-copy mt-24">
+          A proposta e sair do hype sobre agentes autonomos e aprender a montar planejamento, execucao remota e recorrencia de forma realmente util.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta">Conhecer o SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="guide-footer fade-in fade-in-d4">
+      <p>Criado por <span class="guide-author">Caio Imori</span></p>
+      <p style="margin-top: 8px;">Guia focado em separar roadmap de automacao real no tema ULTRAPLAN + loop.</p>
+    </footer>
+  </article>
+</body>
+</html>
