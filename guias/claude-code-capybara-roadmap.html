@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capybara, modelos secretos e a arquitetura futura do Claude Code - Caio Imori</title>
+  <meta
+    name="description"
+    content="Guia sobre Capybara, modelos nao anunciados e o que o leak do Claude Code revela sobre o futuro da arquitetura de agentes, telemetria e roadmap interno da Anthropic."
+  >
+  <link rel="stylesheet" href="../assets/css/guide.css">
+</head>
+<body class="guide-theme-claude">
+  <article class="guide claude-shell">
+
+    <header class="guide-section claude-hero fade-in">
+      <div class="claude-kicker-row">
+        <span class="guide-badge">Guia de analise</span>
+        <span class="claude-meta-pill">Status em 2 de abril de 2026</span>
+      </div>
+
+      <div class="claude-hero-grid">
+        <div>
+          <p class="claude-overline">Claude Code // Capybara + roadmap</p>
+          <h1 class="guide-hero-title claude-headline">Modelos secretos, Capybara e a arquitetura futura do Claude Code</h1>
+          <p class="guide-subtitle claude-subtitle">
+            O leak nao vale tanto pelos nomes internos. O valor real esta no que ele sugere sobre
+            <strong>como a Anthropic experimenta modelos</strong>,
+            <strong>como mede frustracao e erro</strong>,
+            e <strong>como pensa agentes de software em producao</strong>.
+          </p>
+
+          <div class="claude-actions">
+            <a href="#framing" class="guide-cta">Entender o framing certo</a>
+          </div>
+        </div>
+
+        <aside class="claude-panel">
+          <div>
+            <span class="claude-meta-pill">Leitura correta</span>
+            <h2 class="claude-panel-title" style="margin-top: 18px;">Nao venda strings internas como launch</h2>
+            <p class="claude-panel-copy">
+              Em 2 de abril de 2026, as docs publicas listam <strong>Opus 4.6</strong>,
+              <strong>Sonnet 4.6</strong> e <strong>Haiku 4.5</strong>.
+              O leak sugere variantes internas, codenames e instrumentacao pesada, mas isso nao equivale a anuncio oficial.
+            </p>
+          </div>
+
+          <ul class="claude-facts">
+            <li><strong>Capybara:</strong> aparece em reports como codename interno.</li>
+            <li><strong>Opus 4.7 / Sonnet 4.8:</strong> circulam em analises pos-leak, mas nao aparecem nas docs publicas abertas que validei.</li>
+            <li><strong>1M de contexto:</strong> ja e publico hoje para Opus 4.6 e Sonnet 4.6 no Claude Code.</li>
+            <li><strong>Valor real:</strong> telemetria, memoria, compaction e arquitetura de agente.</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="claude-stats">
+        <div class="claude-stat">
+          <span class="claude-stat-label">Publico hoje</span>
+          <span class="claude-stat-value">4.6 + 1M</span>
+          <p>As docs publicas atuais ancoram o produto em Opus 4.6, Sonnet 4.6 e contexto estendido de 1M.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Leak</span>
+          <span class="claude-stat-value">Codenames</span>
+          <p>Capybara, Fennec, Numbat e outros nomes sugerem experimentacao interna e branching de modelo.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Telemetria</span>
+          <span class="claude-stat-value">Frustracao</span>
+          <p>Regex de frustracao, false claims e falhas de autocompact mostram produto medido de ponta a ponta.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Licao</span>
+          <span class="claude-stat-value">Arquitetura</span>
+          <p>Quem aprende com esse leak aprende mais sobre sistemas de agentes do que sobre um suposto launch secreto.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="guide-section fade-in fade-in-d1">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Quer transformar esse tipo de leitura em vantagem operacional?</h2>
+        <p class="claude-card-copy mt-24">
+          No SINAPSE a ideia e sair do comentario sobre IA e aprender a operar agentes, memoria, automacao e orquestracao com rigor de produto.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta">Acessar sinapse.club</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section claude-section fade-in fade-in-d1" id="framing">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">00</div>
+        <div>
+          <h2 class="claude-section-title">Antes de tudo: nome interno nao e anuncio oficial</h2>
+          <p class="claude-section-intro">
+            O jeito certo de ensinar esse tema e separar <strong>o que e publico hoje</strong> do que
+            <strong>foi inferido a partir de reports sobre o leak</strong>.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td>Docs publicas atuais</td>
+              <td>Listam <strong>Claude Opus 4.6</strong>, <strong>Claude Sonnet 4.6</strong> e <strong>Claude Haiku 4.5</strong> como lineup atual.</td>
+            </tr>
+            <tr>
+              <td>1M contexto</td>
+              <td>Ja aparece publicamente nas docs do Claude Code para <strong>Opus 4.6</strong> e <strong>Sonnet 4.6</strong>.</td>
+            </tr>
+            <tr>
+              <td>Aliases publicos</td>
+              <td><strong>opusplan</strong> ja e alias oficial documentado para planejar com Opus e executar com Sonnet.</td>
+            </tr>
+            <tr>
+              <td>Opus 4.7 / Sonnet 4.8</td>
+              <td>Circulam em analises pos-leak, mas <strong>nao aparecem nas docs publicas abertas que validei</strong>.</td>
+            </tr>
+            <tr>
+              <td>Capybara</td>
+              <td>O melhor enquadramento e tratar como <strong>codename interno</strong> ou variante experimental, nao como produto anunciado.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Resumo curto:</strong> o leak vale menos como "spoiler de nomes" e mais como
+          janela para a forma como a Anthropic organiza experimentos, mede qualidade e evolui seus agentes.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">01</div>
+        <div>
+          <h2 class="claude-section-title">O que Capybara e outros nomes realmente sinalizam</h2>
+          <p class="claude-section-intro">
+            Mesmo quando os nomes mudam ou nunca chegam ao publico, os sinais de arquitetura continuam valiosos.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Capybara como codename</h3>
+          <p class="claude-card-copy mt-24">
+            Reports como o da VentureBeat descrevem <strong>Capybara</strong> como codename interno para uma variante da familia Claude 4.6, nao como launch publico.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Familias paralelas</h3>
+          <p class="claude-card-copy mt-24">
+            Fennec, Numbat e Tengu aparecem como sinal de que a Anthropic trabalha com ramificacoes internas, testes e feature flags por modelo.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Strings como 4.7 e 4.8</h3>
+          <p class="claude-card-copy mt-24">
+            O leak alimentou leituras sobre versoes como <strong>Opus 4.7</strong> e <strong>Sonnet 4.8</strong>, mas eu nao encontrei essas versoes no lineup publico oficial validado hoje.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">1M nao e segredo</h3>
+          <p class="claude-card-copy mt-24">
+            O que ja e publico e importante: Claude Code documenta contexto de <strong>1M de tokens</strong> para Opus 4.6 e Sonnet 4.6 em contas e planos compativeis.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">opusplan ja existe</h3>
+          <p class="claude-card-copy mt-24">
+            A propria doc oficial mostra <span class="claude-inline-code">opusplan</span> como alias hibrido, o que indica que a separacao entre pensar e executar ja faz parte do produto publico.
+          </p>
+        </div>
+        <div class="claude-surface claude-surface-soft">
+          <h3 class="claude-card-title">Licao de roadmap</h3>
+          <p class="claude-card-copy mt-24">
+            O sinal mais forte nao e "vem ai tal nome". E que a Anthropic parece iterar varias geracoes, thresholds e guardrails antes de estabilizar uma release publica.
+          </p>
+        </div>
+      </div>
+
+      <div class="guide-code-block mt-24">
+        <pre><code># exemplos publicos ja documentados hoje
+/model opus
+/model opus[1m]
+/model sonnet[1m]
+/model opusplan</code></pre>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">02</div>
+        <div>
+          <h2 class="claude-section-title">Por que a telemetria importa mais do que os nomes</h2>
+          <p class="claude-section-intro">
+            O leak gera mais valor quando voce olha para a instrumentacao interna do produto do que quando voce fica preso ao nome do proximo modelo.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Frustracao detectada no input</h3>
+          <p class="claude-card-copy mt-24">
+            Alex Kim mostrou um regex interno para detectar frustracao do usuario. Isso revela que o produto mede explicitamente quando a experiencia degrada.
+          </p>
+        </div>
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">False claims como KPI</h3>
+          <p class="claude-card-copy mt-24">
+            A VentureBeat relata comentarios internos com <strong>false claims rate</strong> e regressao de qualidade em iteracoes da Capybara. Isso e engenharia de confiabilidade, nao so benchmark.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Assertiveness counterweight</h3>
+          <p class="claude-card-copy mt-24">
+            O vazamento sugere mecanismos para equilibrar agressividade em refactors. Em outras palavras: o problema nao e apenas acertar, e acertar sem destruir o codigo.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Autocompact com custo real</h3>
+          <p class="claude-card-copy mt-24">
+            Um comentario reportado por Alex Kim fala em dezenas de milhares de falhas de compaction queimando cerca de <strong>250 mil API calls por dia</strong> globalmente.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Memoria cetica</h3>
+          <p class="claude-card-copy mt-24">
+            Outra leitura forte do leak e a ideia de memoria como indice, hint e verificacao, em vez de memoria como verdade absoluta despejada em contexto.
+          </p>
+        </div>
+        <div class="claude-surface claude-surface-soft">
+          <h3 class="claude-card-title">Produto medido de ponta a ponta</h3>
+          <p class="claude-card-copy mt-24">
+            O quadro geral e claro: Anthropic parece medir frustracao, custo, cache, compaction, honestidade e agressividade do agente como sistema integrado.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Leitura pratica:</strong> o futuro dos agentes nao depende so de modelos mais fortes.
+          Depende de observabilidade, memoria, thresholds e mecanismos de recuperacao quando o sistema comeca a degradar.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">03</div>
+        <div>
+          <h2 class="claude-section-title">O que isso ensina sobre a arquitetura do futuro</h2>
+          <p class="claude-section-intro">
+            Se voce constroi agentes, copilotos ou automacoes, estas sao as licoes que mais importam daqui para frente.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-soft">
+          <h3 class="claude-card-title">Licoes de arquitetura</h3>
+          <ul class="claude-do mt-24">
+            <li>Memoria boa precisa de <strong>indice, compaction e verificacao</strong>.</li>
+            <li>Planejamento e execucao tendem a virar <strong>camadas separadas</strong>.</li>
+            <li>Subagentes e coordenacao sao parte da arquitetura, nao apenas UX.</li>
+            <li>Thresholds de erro e killswitches importam tanto quanto a inteligencia media do modelo.</li>
+            <li>Modelos diferentes podem entrar por fase: pensar, executar, revisar, consolidar.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Licoes de produto</h3>
+          <ul class="claude-do mt-24">
+            <li>O usuario nao quer "mais IA". Quer <strong>menos degradacao ao longo do tempo</strong>.</li>
+            <li>Medir frustracao explicitamente e sinal de maturidade de produto.</li>
+            <li>Contexto longo so vale quando ha governanca sobre o que entra e o que sai.</li>
+            <li>Roadmap real parece menos com keynote e mais com sistema de experimentos progressivos.</li>
+            <li>O diferencial competitivo vai para quem opera o agente como sistema, nao so como chat.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">04</div>
+        <div>
+          <h2 class="claude-section-title">O que ja e publico hoje e ajuda a ancorar o assunto</h2>
+          <p class="claude-section-intro">
+            Esta parte evita que o conteudo fique no campo da especulacao e mostra o que qualquer pessoa ja pode validar oficialmente.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td>Lineup publico atual</td>
+              <td>As docs de modelos da Anthropic listam <strong>Opus 4.6</strong>, <strong>Sonnet 4.6</strong> e <strong>Haiku 4.5</strong>.</td>
+            </tr>
+            <tr>
+              <td>Contexto estendido</td>
+              <td>Claude Code documenta <strong>1M de contexto</strong> para Opus 4.6 e Sonnet 4.6, dependendo do plano e da configuracao.</td>
+            </tr>
+            <tr>
+              <td>Alias oficial</td>
+              <td><span class="claude-inline-code">opusplan</span> e documentado como alias hibrido para usar Opus no plano e Sonnet na execucao.</td>
+            </tr>
+            <tr>
+              <td>Pin de modelos</td>
+              <td>A doc incentiva pinning por variavel de ambiente para evitar quebra silenciosa quando novos modelos saem.</td>
+            </tr>
+            <tr>
+              <td>Custom model option</td>
+              <td>Claude Code ja permite expor um modelo customizado no picker, o que reforca uma arquitetura preparada para varios backends e variantes.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Ou seja:</strong> parte da "arquitetura do futuro" ja esta aparecendo no produto atual.
+          O leak so deixa mais visivel o quanto isso tudo provavelmente e fruto de iteracao interna intensa.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">05</div>
+        <div>
+          <h2 class="claude-section-title">O que pode afirmar com seguranca e o que convem tratar com cautela</h2>
+          <p class="claude-section-intro">
+            Essa separacao protege seu conteudo e mantem a leitura forte sem perder credibilidade.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Pode afirmar com seguranca</h3>
+          <ul class="claude-do mt-24">
+            <li>O leak expos sinais claros de experimentacao interna em modelos, memoria e orquestracao.</li>
+            <li>Capybara aparece em reports confiaveis como codename interno associado a uma variante Claude 4.6.</li>
+            <li>A Anthropic mede comportamento do sistema com indicadores de erro, compaction e frustracao.</li>
+            <li>O lineup publico atual continua ancorado em Opus 4.6, Sonnet 4.6 e Haiku 4.5.</li>
+            <li>1M de contexto e <span class="claude-inline-code">opusplan</span> ja sao capacidades publicamente documentadas.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Melhor tratar com cautela</h3>
+          <ul class="claude-dont mt-24">
+            <li>Dizer que <strong>Opus 4.7</strong> e <strong>Sonnet 4.8</strong> ja estao oficialmente anunciados.</li>
+            <li>Prometer que Capybara vai sair com esse nome ou com esse posicionamento.</li>
+            <li>Assumir que toda string encontrada no codigo vira produto publico sem mudar.</li>
+            <li>Confundir codename, alias interno e release comercial como se fossem a mesma coisa.</li>
+            <li>Tratar um leak de engenharia como calendario oficial de lancamentos.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">06</div>
+        <div>
+          <h2 class="claude-section-title">Resumo rapido</h2>
+          <p class="claude-section-intro">
+            Se voce precisar explicar esse assunto em menos de 30 segundos, esta tabela resolve.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td>O que o leak mostra</td>
+              <td>Que a Anthropic parece operar com codenames, iteracoes internas e observabilidade pesada para evoluir Claude Code.</td>
+            </tr>
+            <tr>
+              <td>Capybara</td>
+              <td>Melhor tratar como codename interno ou variante experimental, nao como launch publico.</td>
+            </tr>
+            <tr>
+              <td>1M tokens</td>
+              <td>Nao e segredo: ja esta documentado publicamente para Opus 4.6 e Sonnet 4.6 em Claude Code.</td>
+            </tr>
+            <tr>
+              <td>Opus 4.7 / Sonnet 4.8</td>
+              <td>Entram como leitura de analises pos-leak, sem suporte nas docs publicas abertas que validei hoje.</td>
+            </tr>
+            <tr>
+              <td>O sinal mais importante</td>
+              <td>Telemetria, memoria, compaction, thresholds e guardrails importam mais do que o nome do proximo modelo.</td>
+            </tr>
+            <tr>
+              <td>Licao para builders</td>
+              <td>O futuro pertence a quem projeta agentes como sistema operado, medido e recuperavel, nao apenas como LLM em chat.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="guide-section fade-in fade-in-d4">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Se voce quer operar nesse nivel, entra no SINAPSE</h2>
+        <p class="claude-card-copy mt-24">
+          A proposta e sair da curiosidade sobre leaks e aprender a montar sistemas com agentes, memoria, automacao e orquestracao que geram vantagem real.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta">Conhecer o SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="guide-footer fade-in fade-in-d4">
+      <p>Criado por <span class="guide-author">Caio Imori</span></p>
+      <p style="margin-top: 8px;">Guia focado em separar codename, release publica e arquitetura real no caso Capybara.</p>
+    </footer>
+  </article>
+</body>
+</html>
