@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code vazou: o que foi confirmado e o que aprender - Caio Imori</title>
+  <meta
+    name="description"
+    content="Guia sobre o vazamento do Claude Code: o que aconteceu na versao 2.1.88, o que foi confirmado oficialmente, o que a arquitetura revelou e o que fazer hoje."
+  >
+  <link rel="stylesheet" href="../assets/css/guide.css">
+</head>
+<body class="guide-theme-claude">
+  <article class="guide claude-shell">
+
+    <header class="guide-section claude-hero fade-in">
+      <div class="claude-kicker-row">
+        <span class="guide-badge">Guia de analise</span>
+        <span class="claude-meta-pill">Status em 2 de abril de 2026</span>
+      </div>
+
+      <div class="claude-hero-grid">
+        <div>
+          <p class="claude-overline">Claude Code // Source leak</p>
+          <h1 class="guide-hero-title claude-headline">Claude Code vazou: o que foi confirmado e o que aprender com isso</h1>
+          <p class="guide-subtitle claude-subtitle">
+            A versao <strong>2.1.88</strong> publicada no npm saiu com um arquivo de debug que expunha
+            o codigo interno do Claude Code. O valor real da historia nao esta so no erro:
+            esta no que ele revela sobre como um agente de codigo de nivel de producao e pensado por dentro.
+          </p>
+
+          <div class="claude-actions">
+            <a href="#confirmado" class="guide-cta">Ver o que importa</a>
+          </div>
+        </div>
+
+        <aside class="claude-panel">
+          <div>
+            <span class="claude-meta-pill">Framing correto</span>
+            <h2 class="claude-panel-title" style="margin-top: 18px;">Quatro fatos para nao errar a leitura</h2>
+            <p class="claude-panel-copy">
+              O headline viral chama atencao. O valor de verdade vem de separar o que foi confirmado do que virou folclore de timeline.
+            </p>
+          </div>
+
+          <ul class="claude-facts">
+            <li><strong>Causa:</strong> erro de packaging em release, nao invasao externa confirmada.</li>
+            <li><strong>Escopo:</strong> quase <strong>2.000 arquivos</strong> TypeScript e mais de <strong>500 mil linhas</strong>.</li>
+            <li><strong>Anthropic:</strong> disse que nao houve exposicao de dados sensiveis de clientes nem credenciais.</li>
+            <li><strong>Hoje:</strong> a documentacao oficial ja trata a instalacao via <strong>npm</strong> como <strong>deprecated</strong>.</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="claude-stats">
+        <div class="claude-stat">
+          <span class="claude-stat-label">Versao</span>
+          <span class="claude-stat-value">2.1.88</span>
+          <p>Foi a release do npm citada nos reports sobre o vazamento do source map.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Escopo</span>
+          <span class="claude-stat-value">500k+ linhas</span>
+          <p>Axios e The Hacker News relatam exposicao de quase 2.000 arquivos e mais de 500 mil linhas.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Causa</span>
+          <span class="claude-stat-value">Human error</span>
+          <p>A Anthropic enquadrou o caso como erro humano de release packaging, nao breach classico.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Direcao atual</span>
+          <span class="claude-stat-value">Native &gt; npm</span>
+          <p>A doc oficial agora recomenda install nativo e diz que npm esta em modo deprecated.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="guide-section fade-in fade-in-d1">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Quer transformar esse tipo de sinal em execucao real?</h2>
+        <p class="claude-card-copy mt-24">
+          No SINAPSE voce aprende a montar fluxos com agentes, automacoes, pesquisa aplicada e operacao de IA para sair da curiosidade e entrar na pratica.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta">Acessar sinapse.club</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section claude-section fade-in fade-in-d1" id="confirmado">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">00</div>
+        <div>
+          <h2 class="claude-section-title">Antes de tudo: nao foi um hack classico</h2>
+          <p class="claude-section-intro">
+            O ponto central aqui e importante porque muda totalmente a leitura do caso.
+            A Anthropic disse que a release incluiu codigo interno por <strong>erro humano de empacotamento</strong>,
+            e nao por um ataque externo confirmado.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">O que foi</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Um arquivo de debug foi publicado junto da release <strong>2.1.88</strong> no npm.</li>
+            <li>Esse arquivo apontava para um archive com o codigo TypeScript interno do Claude Code.</li>
+            <li>O material foi rapidamente espelhado e analisado pela comunidade.</li>
+            <li>O criador do produto disse que havia um passo manual de deploy que deveria ter sido melhor automatizado.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface claude-surface-soft">
+          <h3 class="claude-card-title">O que nao foi</h3>
+          <ul class="claude-checklist mt-24">
+            <li>A Anthropic nao enquadrou o caso como <strong>security breach</strong>.</li>
+            <li>A empresa disse que <strong>nenhum dado sensivel de cliente</strong> ou credencial foi exposto.</li>
+            <li>O valor da historia nao esta em panico operacional, e sim no aprendizado tecnico e de processo.</li>
+            <li>Isso nao significa que tudo que circulou nas redes sobre o codigo esteja automaticamente correto.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Leitura curta:</strong> nao confunda <span class="claude-inline-code">source leak por packaging</span> com
+          <span class="claude-inline-code">intrusao confirmada</span>. O framing certo e: houve exposicao real de codigo interno,
+          mas o caso foi descrito oficialmente como erro de release.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">01</div>
+        <div>
+          <h2 class="claude-section-title">O que esta confirmado</h2>
+          <p class="claude-section-intro">
+            Esta e a parte que vale usar como base segura em conteudo, post ou automacao de mensagem.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-surface">
+          <h3 class="claude-card-title">1. A release foi a 2.1.88</h3>
+          <p class="claude-card-copy mt-24">
+            Os reports apontam a versao <strong>2.1.88</strong> publicada no npm como a release que carregou o arquivo de debug.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">2. O vazamento foi grande</h3>
+          <p class="claude-card-copy mt-24">
+            Axios e The Hacker News falam em quase <strong>2.000 arquivos</strong> TypeScript e mais de <strong>500 mil linhas</strong>.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">3. A Anthropic confirmou</h3>
+          <p class="claude-card-copy mt-24">
+            A empresa confirmou que uma release incluiu codigo interno e disse que nao houve exposicao de dados sensiveis nem credenciais.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">4. Foi erro humano</h3>
+          <p class="claude-card-copy mt-24">
+            A explicacao oficial fala em <strong>release packaging issue</strong> por erro humano. O criador citou um passo manual de deploy.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">5. Havia roadmap la dentro</h3>
+          <p class="claude-card-copy mt-24">
+            Axios relata que o codigo expunha dezenas de feature flags e capacidades ainda nao amplamente lancadas.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">6. O npm perdeu prioridade</h3>
+          <p class="claude-card-copy mt-24">
+            A documentacao oficial atual do Claude Code ja marca a instalacao via npm como <strong>deprecated</strong> e recomenda o install nativo.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">02</div>
+        <div>
+          <h2 class="claude-section-title">O que esse vazamento revelou na pratica</h2>
+          <p class="claude-section-intro">
+            O ganho real para quem constroi em cima de agentes nao e ficar colecionando curiosidade.
+            E perceber quais primitivas a Anthropic parece estar tratando como essenciais para uma ferramenta de codigo de producao.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Feature flags como estrategia</h3>
+          <p class="claude-card-copy mt-24">
+            O vazamento mostrou um produto cercado por flags. Isso sugere rollout gradual, experimentacao controlada e risco tratado como configuracao, nao improviso.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Background mode importa</h3>
+          <p class="claude-card-copy mt-24">
+            Entre os exemplos citados por Axios estao capacidades de assistente persistente em segundo plano. Isso aponta para tarefas mais longas e menos sincronia humana.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Memoria precisa ser revisada</h3>
+          <p class="claude-card-copy mt-24">
+            Um dos sinais publicados e a ideia de Claude revisar a sessao anterior para aprender e transferir ganhos. Isso indica memoria com curadoria, nao so armazenamento bruto.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Remote control vira camada nativa</h3>
+          <p class="claude-card-copy mt-24">
+            Capacidades remotas ja aparecem como eixo de produto. O agente deixa de ser so terminal local e passa a ser operado de outros contextos.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Arquitetura antes de marketing</h3>
+          <p class="claude-card-copy mt-24">
+            O que vazou nao foi um deck. Foi mecanismo de produto. Para builders, isso vale mais do que benchmark isolado ou demo polida.
+          </p>
+        </div>
+        <div class="claude-surface claude-surface-soft">
+          <h3 class="claude-card-title">Permissao e controle seguem no centro</h3>
+          <p class="claude-card-copy mt-24">
+            Mesmo sem cada detalhe documentado, o desenho geral reforca algo importante: agentes de producao precisam de limites, estados e aprovacoes visiveis.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Importante:</strong> esta secao mistura fatos reportados com leitura arquitetural.
+          Os exemplos de background, review de sessao e remote control aparecem em reports confiaveis sobre o codigo;
+          a interpretacao sobre o que isso ensina e inferencia editorial.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">03</div>
+        <div>
+          <h2 class="claude-section-title">As 5 licoes que um builder deveria tirar daqui</h2>
+          <p class="claude-section-intro">
+            Se voce constrói agentes, automacoes ou copilotos, este vazamento funciona como um playbook involuntario de produto.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-soft">
+          <h3 class="claude-card-title">O que copiar da logica</h3>
+          <ul class="claude-do mt-24">
+            <li>Use <strong>feature flags</strong> para liberar capacidades mais autonomas com controle.</li>
+            <li>Trate <strong>background execution</strong> como primitive de produto, nao extra futurista.</li>
+            <li>Faça memoria passar por <strong>revisao e selecao</strong>, em vez de despejar tudo.</li>
+            <li>Mostre permissao, estado e escopo de forma explicita para o usuario.</li>
+            <li>Pense em arquitetura de agente como operacao longa, nao apenas prompt bonito.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">O que esse caso ensina de processo</h3>
+          <ul class="claude-dont mt-24">
+            <li>Nao deixe passo manual de release sem automacao e sem verificacao forte.</li>
+            <li>Nao trate source map e artefato de debug como detalhe de build.</li>
+            <li>Nao se apoie so em branding de seguranca se a cadeia operacional nao acompanha.</li>
+            <li>Nao confunda velocidade de shipping com maturidade de distribuicao.</li>
+            <li>Nao misture rumor viral com fato confirmado quando for ensinar a audiencia.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">04</div>
+        <div>
+          <h2 class="claude-section-title">O que fazer se voce usa Claude Code hoje</h2>
+          <p class="claude-section-intro">
+            Esta e a parte operacional que gera mais valor imediato, porque a propria documentacao do Claude Code ja mudou o enquadramento da instalacao.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td>Se voce usa npm</td>
+              <td>A doc oficial ja marca o npm como <strong>deprecated</strong>. Quando possivel, migre para o <strong>native install</strong>.</td>
+            </tr>
+            <tr>
+              <td>Se quer menos risco</td>
+              <td>Use o canal <strong>stable</strong> em vez de <strong>latest</strong> para nao receber releases imediatamente.</td>
+            </tr>
+            <tr>
+              <td>Se ja estava no npm</td>
+              <td>A doc orienta instalar o binario nativo e depois remover a versao global antiga do npm.</td>
+            </tr>
+            <tr>
+              <td>Se quer atualizar agora</td>
+              <td>O comando oficial continua sendo <span class="claude-inline-code">claude update</span>.</td>
+            </tr>
+            <tr>
+              <td>Se quer verificar integridade</td>
+              <td>Manifestos assinados passam a estar disponiveis a partir da release <strong>2.1.89</strong>, segundo a documentacao oficial.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="guide-code-block mt-24">
+        <pre><code># caminho oficial sugerido hoje
+claude update
+
+# se voce veio do npm, a doc recomenda migrar para install nativo
+npm uninstall -g @anthropic-ai/claude-code</code></pre>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Resumo pratico:</strong> o takeaway nao e "pare de usar Claude Code".
+          E "pare de tratar a distribuicao por npm como caminho principal se a propria doc oficial ja te empurra para o binario nativo".
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">05</div>
+        <div>
+          <h2 class="claude-section-title">O que e fato e o que e hype</h2>
+          <p class="claude-section-intro">
+            Essa separacao faz seu conteudo ficar mais forte, mais confiavel e menos refem de numero de timeline.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Pode afirmar com seguranca</h3>
+          <ul class="claude-do mt-24">
+            <li>A Anthropic confirmou que codigo interno saiu em uma release do Claude Code.</li>
+            <li>A causa oficial foi erro humano de packaging, nao security breach.</li>
+            <li>Reports confiaveis falam em quase 2.000 arquivos e 500 mil linhas de codigo.</li>
+            <li>O codigo expunha dezenas de feature flags e sinais de roadmap.</li>
+            <li>A doc oficial hoje recomenda install nativo e trata npm como deprecated.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Melhor tratar com cautela</h3>
+          <ul class="claude-dont mt-24">
+            <li>O numero exato de <strong>44 features</strong> nao aparece confirmado nas fontes oficiais abertas que eu validei.</li>
+            <li>Dizer que cada item encontrado no codigo representa roadmap garantido e exagero.</li>
+            <li>Chamar o caso de hack massivo sem nuance piora a precisao.</li>
+            <li>Tomar todo mirror viral no GitHub como fonte primaria tambem e um erro.</li>
+            <li>Confundir learning architecture com manual completo de produto leva a leitura rasa.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">06</div>
+        <div>
+          <h2 class="claude-section-title">Resumo rapido</h2>
+          <p class="claude-section-intro">
+            Se voce precisar explicar essa historia em menos de 30 segundos, use esta tabela.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td>O que aconteceu</td>
+              <td>Uma release do Claude Code no npm incluiu um arquivo de debug que expunha codigo interno.</td>
+            </tr>
+            <tr>
+              <td>Qual versao</td>
+              <td><strong>2.1.88</strong>, segundo os reports publicados em 31 de marco e 1 de abril de 2026.</td>
+            </tr>
+            <tr>
+              <td>Foi breach?</td>
+              <td>A Anthropic disse que foi <strong>erro humano de packaging</strong>, nao security breach.</td>
+            </tr>
+            <tr>
+              <td>O que vazou</td>
+              <td>Quase 2.000 arquivos TypeScript, mais de 500 mil linhas e sinais claros de roadmap e arquitetura.</td>
+            </tr>
+            <tr>
+              <td>O que isso vale</td>
+              <td>Para builders, e uma aula involuntaria de como um coding agent de producao e estruturado.</td>
+            </tr>
+            <tr>
+              <td>O que fazer hoje</td>
+              <td>Migrar do npm para o install nativo quando possivel e tratar rumor viral com filtro.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="guide-section fade-in fade-in-d4">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Se voce quer operar nesse nivel, entra no SINAPSE</h2>
+        <p class="claude-card-copy mt-24">
+          A proposta e sair do comentario sobre IA e aprender a montar sistemas, fluxos e operacoes com agentes que geram ganho real de capacidade.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta">Conhecer o SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="guide-footer fade-in fade-in-d4">
+      <p>Criado por <span class="guide-author">Caio Imori</span></p>
+      <p style="margin-top: 8px;">Guia focado em fatos confirmados, valor pratico e leitura arquitetural do vazamento do Claude Code.</p>
+    </footer>
+  </article>
+</body>
+</html>
