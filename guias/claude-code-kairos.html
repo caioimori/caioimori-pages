@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KAIROS no Claude Code: o agente que nunca dorme? - Caio Imori</title>
+  <meta
+    name="description"
+    content="Guia sobre o KAIROS do Claude Code: o que o leak sugere sobre o modo always-on, autoDream, memoria persistente e o que isso ensina para builders."
+  >
+  <link rel="stylesheet" href="../assets/css/guide.css">
+</head>
+<body class="guide-theme-claude">
+  <article class="guide claude-shell">
+
+    <header class="guide-section claude-hero fade-in">
+      <div class="claude-kicker-row">
+        <span class="guide-badge">Guia de analise</span>
+        <span class="claude-meta-pill">Status em 2 de abril de 2026</span>
+      </div>
+
+      <div class="claude-hero-grid">
+        <div>
+          <p class="claude-overline">Claude Code // KAIROS</p>
+          <h1 class="guide-hero-title claude-headline">KAIROS: o agente que nunca dorme?</h1>
+          <p class="guide-subtitle claude-subtitle">
+            O que o leak do Claude Code sugere e que a Anthropic vinha trabalhando em um modo interno e
+            <strong>ainda nao publico</strong> de agente sempre ativo: persistente, com memoria mais estruturada,
+            gatilhos de fundo e um modo <strong>autoDream</strong> para consolidar o que foi aprendido em idle.
+          </p>
+
+          <div class="claude-actions">
+            <a href="#estado-real" class="guide-cta">Ver o que importa</a>
+          </div>
+        </div>
+
+        <aside class="claude-panel">
+          <div>
+            <span class="claude-meta-pill">Estado real</span>
+            <h2 class="claude-panel-title" style="margin-top: 18px;">Nao trate como feature publica</h2>
+            <p class="claude-panel-copy">
+              O ponto mais importante do guia e este: KAIROS aparece em analises do leak como modo interno
+              fortemente gated. Nao encontrei documentacao oficial publica ensinando a ativar isso hoje.
+            </p>
+          </div>
+
+          <ul class="claude-facts">
+            <li><strong>Origem:</strong> analises do source leak de 31 de marco de 2026, nao anuncio de produto.</li>
+            <li><strong>Flags:</strong> repetidamente descrito como gated por <strong>KAIROS</strong> e <strong>PROACTIVE</strong>.</li>
+            <li><strong>Nucleo:</strong> daemon de fundo, memoria persistente, logs diarios e consolidacao em idle.</li>
+            <li><strong>Hoje:</strong> o que a doc oficial publica documenta e memoria via <strong>CLAUDE.md</strong>, <strong>#</strong> e <strong>/memory</strong>.</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="claude-stats">
+        <div class="claude-stat">
+          <span class="claude-stat-label">Modo</span>
+          <span class="claude-stat-value">Always-on</span>
+          <p>As analises descrevem KAIROS como um agente de fundo com heartbeat e persistencia entre sessoes.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Memoria</span>
+          <span class="claude-stat-value">autoDream</span>
+          <p>O conceito mais forte e a consolidacao de memoria durante periodos de baixa atividade.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Sinal de produto</span>
+          <span class="claude-stat-value">/dream</span>
+          <p>Alex Kim cita um skill de nightly memory distillation como parte importante do modo.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Publico hoje</span>
+          <span class="claude-stat-value">Nao</span>
+          <p>Em 2 de abril de 2026, nao ha pagina oficial publica do Claude Code documentando KAIROS.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="guide-section fade-in fade-in-d1">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Quer transformar esse tipo de sinal em operacao real?</h2>
+        <p class="claude-card-copy mt-24">
+          No SINAPSE voce aprende a desenhar fluxos com agentes, memoria, automacao e operacao de IA para sair da curiosidade e entrar na execucao.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta">Acessar sinapse.club</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section claude-section fade-in fade-in-d1" id="estado-real">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">00</div>
+        <div>
+          <h2 class="claude-section-title">Antes de tudo: o que KAIROS parece ser</h2>
+          <p class="claude-section-intro">
+            A leitura mais consistente das analises e que KAIROS seria uma camada de
+            <strong>proatividade persistente</strong> em cima do Claude Code: um agente que nao depende
+            apenas de voce abrir uma sessao e mandar um prompt para voltar a agir.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">O desenho geral</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Heartbeat loop para decidir se existe algo que vale fazer agora.</li>
+            <li>Workers de fundo e persistencia entre sessoes.</li>
+            <li>Memoria organizada em camadas, nao so contexto bruto acumulado.</li>
+            <li>Gatilhos por tempo e por eventos, incluindo GitHub webhooks.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface claude-surface-soft">
+          <h3 class="claude-card-title">A leitura correta</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Isso parece ser um <strong>roadmap ou experimento interno</strong>, nao recurso publico liberado.</li>
+            <li>O codigo pode mostrar direcao de produto sem garantir data de ship.</li>
+            <li>O valor pratico para builders esta na arquitetura, nao em tentar vender um toggle inexistente.</li>
+            <li>O framing bom e: o leak revelou para onde o produto pode estar indo.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Resumo curto:</strong> dizer "o Claude Code ja tem um agente 24/7 disponivel para todo mundo"
+          seria exagero. Dizer "o leak revelou um desenho interno de agente sempre ativo com memoria destilada" e muito mais preciso.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">01</div>
+        <div>
+          <h2 class="claude-section-title">O que aparece de forma consistente nas analises</h2>
+          <p class="claude-section-intro">
+            Cruzando Alex Kim com outras leituras do leak, alguns componentes se repetem com frequencia suficiente para formar um desenho coerente.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-surface">
+          <h3 class="claude-card-title">1. Heartbeat loop</h3>
+          <p class="claude-card-copy mt-24">
+            O agente rodaria um ciclo periodico para avaliar o contexto e decidir entre agir ou ficar quieto.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">2. /dream</h3>
+          <p class="claude-card-copy mt-24">
+            Alex Kim cita explicitamente um skill de <strong>nightly memory distillation</strong>, que ajuda a dar forma ao conceito.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">3. Logs append-only</h3>
+          <p class="claude-card-copy mt-24">
+            Varios reports descrevem logs diarios append-only como mecanismo de memoria e accountability.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">4. Webhooks de GitHub</h3>
+          <p class="claude-card-copy mt-24">
+            As analises tambem citam subscricoes a eventos de PR e outros sinais vindos do GitHub.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">5. Workers de fundo</h3>
+          <p class="claude-card-copy mt-24">
+            O desenho recorrente e de um daemon ou processo persistente, e nao so uma sessao reativa de terminal.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">6. autoDream</h3>
+          <p class="claude-card-copy mt-24">
+            O termo aparece como consolidacao de memoria em idle, reorganizando o que o agente aprendeu durante o dia.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">02</div>
+        <div>
+          <h2 class="claude-section-title">Por que autoDream importa tanto</h2>
+          <p class="claude-section-intro">
+            O ponto realmente diferente nao e "um agente ficar online". E o fato de ele aparentemente ter sido pensado para
+            <strong>aprender melhor quando nao esta sendo usado</strong>.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Claude Code publico hoje</h3>
+          <ul class="claude-checklist mt-24">
+            <li>A documentacao oficial fala de memoria via <strong>CLAUDE.md</strong>, <strong>#</strong> e <strong>/memory</strong>.</li>
+            <li>Essas memorias ajudam Claude Code a carregar preferencias e contexto entre sessoes.</li>
+            <li>O modelo publico e: lembrar instrucoes e convencoes importantes.</li>
+            <li>Ja existe memoria, mas nao uma camada publica documentada de "sonho" autonomo.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">KAIROS segundo o leak</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Memoria deixa de ser so armazenamento de preferencias e vira <strong>destilacao</strong>.</li>
+            <li>Daily logs acumulam eventos e decisoes sem apagar o historico.</li>
+            <li>autoDream reorganiza, remove contradicoes e consolida sinais mais uteis.</li>
+            <li>O resultado seria um agente que volta no dia seguinte com contexto mais limpo e mais acionavel.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Leitura pratica:</strong> a grande ideia aqui e que memoria boa nao e memoria infinita.
+          E memoria que passa por curadoria, consolidacao e compressao sem perder o que importa.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">03</div>
+        <div>
+          <h2 class="claude-section-title">O que builders deveriam aprender com isso</h2>
+          <p class="claude-section-intro">
+            Mesmo que KAIROS nunca shipasse exatamente desse jeito, as escolhas arquiteturais sugeridas pelo leak valem como playbook.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-soft">
+          <h3 class="claude-card-title">Licoes de arquitetura</h3>
+          <ul class="claude-do mt-24">
+            <li>Agente sempre ativo precisa de <strong>heartbeat</strong> e criterio para ficar quieto.</li>
+            <li>Memoria persistente precisa de <strong>logs + destilacao</strong>, nao so banco de notas soltas.</li>
+            <li>Autonomia longa pede <strong>append-only audit trail</strong>.</li>
+            <li>Produto proativo fica melhor com <strong>eventos</strong>, nao apenas polling cego.</li>
+            <li>Canal de saida importa tanto quanto capacidade de agir: push, arquivo, notificacao, webhook.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Licoes de produto</h3>
+          <ul class="claude-do mt-24">
+            <li>O salto nao e "mais IA". E <strong>mais persistencia operacional</strong>.</li>
+            <li>Agente realmente util nao precisa interromper o usuario o tempo todo.</li>
+            <li>O melhor copiloto do futuro talvez pareca mais com daemon do que com chat.</li>
+            <li>Memoria organizada vira vantagem competitiva real em horizontes longos.</li>
+            <li>O produto deixa de ser sessao e vira <strong>presenca</strong>.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">04</div>
+        <div>
+          <h2 class="claude-section-title">O que tratar com cautela</h2>
+          <p class="claude-section-intro">
+            Esta e a parte que protege o seu conteudo de soar hype demais e perder credibilidade.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Pode afirmar com seguranca</h3>
+          <ul class="claude-do mt-24">
+            <li>KAIROS aparece como tema recorrente em analises do source leak.</li>
+            <li>Alex Kim descreve KAIROS como modo autonomo nao lancado, com <span class="claude-inline-code">/dream</span>, logs diarios e workers de fundo.</li>
+            <li>Outras analises repetem heartbeat loop, notificacoes e consolidacao de memoria em idle.</li>
+            <li>O estado publico oficial do Claude Code hoje documenta memoria, mas nao documenta KAIROS.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Melhor nao vender como fato final</h3>
+          <ul class="claude-dont mt-24">
+            <li>Dizer que todo usuario ja consegue ativar KAIROS hoje.</li>
+            <li>Assumir que cada detalhe das analises vai chegar ao produto publico sem mudar.</li>
+            <li>Tratar autoDream como recurso oficialmente anunciado e suportado.</li>
+            <li>Prometer que Claude Code ja "aprende sozinho enquanto voce dorme" para qualquer conta.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">05</div>
+        <div>
+          <h2 class="claude-section-title">O que voce pode fazer hoje, sem KAIROS</h2>
+          <p class="claude-section-intro">
+            O melhor uso desse leak nao e esperar um toggle milagroso. E aplicar a logica agora com as pecas que ja existem.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-surface">
+          <h3 class="claude-card-title">1. Estruture memoria</h3>
+          <p class="claude-card-copy mt-24">
+            Use <span class="claude-inline-code">CLAUDE.md</span> e <span class="claude-inline-code">/memory</span> para manter contexto acionavel, nao backlog confuso.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">2. Registre o que importa</h3>
+          <p class="claude-card-copy mt-24">
+            Mantenha logs simples de decisoes, bugs recorrentes e padroes de arquitetura para reduzir reexplicacao futura.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">3. Crie destilacao periodica</h3>
+          <p class="claude-card-copy mt-24">
+            Mesmo sem autoDream nativo, voce pode rodar revisoes regulares para transformar notas em fatos e playbooks.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">4. Use eventos</h3>
+          <p class="claude-card-copy mt-24">
+            Combine Claude Code com CI, webhooks, MCP e automacoes externas para sair do modelo puramente reativo.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">5. Pense em presenca</h3>
+          <p class="claude-card-copy mt-24">
+            Em vez de perguntar so "o que ele responde?", pergunte "o que ele monitora, lembra e atualiza ao longo do tempo?".
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">6. Projete para silencio</h3>
+          <p class="claude-card-copy mt-24">
+            Agente bom nao e o que age toda hora. E o que sabe quando agir e quando apenas registrar e esperar.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">06</div>
+        <div>
+          <h2 class="claude-section-title">Resumo rapido</h2>
+          <p class="claude-section-intro">
+            Se voce precisar explicar KAIROS em poucos segundos, esta tabela resolve.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td>O que e</td>
+              <td>Um modo interno e nao publico do Claude Code, inferido a partir de analises do source leak.</td>
+            </tr>
+            <tr>
+              <td>Qual a ideia central</td>
+              <td>Transformar Claude Code de assistente reativo em agente persistente, com memoria melhor destilada.</td>
+            </tr>
+            <tr>
+              <td>O que chama mais atencao</td>
+              <td><strong>autoDream</strong>, logs diarios append-only, heartbeat loop, webhooks e workers de fundo.</td>
+            </tr>
+            <tr>
+              <td>Ja da para ativar hoje?</td>
+              <td>Nao encontrei documentacao oficial publica que ensine a ativar KAIROS em 2 de abril de 2026.</td>
+            </tr>
+            <tr>
+              <td>Por que importa</td>
+              <td>Porque revela um playbook de memoria persistente e agentes de longa duracao que builders podem aprender agora.</td>
+            </tr>
+            <tr>
+              <td>O que fazer agora</td>
+              <td>Aplicar os principios: memoria estruturada, logs, destilacao periodica, eventos e autonomia com limites.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="guide-section fade-in fade-in-d4">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Se voce quer operar nesse nivel, entra no SINAPSE</h2>
+        <p class="claude-card-copy mt-24">
+          A proposta e sair da curiosidade sobre agentes e aprender a montar sistemas com memoria, automacao e operacao real em cima deles.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta">Conhecer o SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="guide-footer fade-in fade-in-d4">
+      <p>Criado por <span class="guide-author">Caio Imori</span></p>
+      <p style="margin-top: 8px;">Guia focado em separar hype de arquitetura no caso KAIROS do Claude Code.</p>
+    </footer>
+  </article>
+</body>
+</html>
