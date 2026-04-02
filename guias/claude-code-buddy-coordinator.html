@@ -6,7 +6,7 @@
   <title>BUDDY e COORDINATOR MODE no Claude Code - Caio Imori</title>
   <meta
     name="description"
-    content="Guia sobre Buddy e Coordinator Mode no Claude Code: o que o leak sugere, o que parece easter egg, o que importa na arquitetura multiagente e como isso se conecta ao Claude Code publico."
+    content="Guia sobre Buddy e Coordinator Mode no Claude Code: o que o leak sugeriu, o que Buddy ja virou oficialmente em 2.1.89, e o que importa de verdade na arquitetura multiagente."
   >
   <link rel="stylesheet" href="../assets/css/guide.css">
 </head>
@@ -46,7 +46,7 @@
 
           <ul class="claude-facts">
             <li><strong>Buddy:</strong> 18 especies, raridade, hats e stats no terminal.</li>
-            <li><strong>Leitura dominante:</strong> quase certamente easter egg ou April Fools.</li>
+            <li><strong>Leitura dominante:</strong> saiu do leak e virou release oficial de 1 de abril em <strong>v2.1.89</strong>.</li>
             <li><strong>Coordinator:</strong> arquitetura de um agente lider que delega para workers.</li>
             <li><strong>Hoje:</strong> o Claude Code publico ja documenta <strong>subagents</strong>, <strong>background tasks</strong> e <strong>agent teams</strong>.</li>
           </ul>
@@ -66,8 +66,8 @@
         </div>
         <div class="claude-stat">
           <span class="claude-stat-label">Publico hoje</span>
-          <span class="claude-stat-value">Subagents</span>
-          <p>A doc oficial ja fala em subagents, pesquisas em paralelo, background e agent teams.</p>
+          <span class="claude-stat-value">Subagents + teams</span>
+          <p>A doc oficial ja fala em subagents, trabalho em background e agent teams para coordenacao mais ampla.</p>
         </div>
         <div class="claude-stat">
           <span class="claude-stat-label">Sinal real</span>
@@ -109,7 +109,7 @@
           <ul class="claude-checklist mt-24">
             <li>Um companion visual no terminal, com especies, raridade e pequenas animacoes ASCII.</li>
             <li>Uma camada de identidade e afeto em cima da interface, nao uma capability operacional central.</li>
-            <li>Algo que varios analistas leram como easter egg ou April Fools de 2026.</li>
+            <li>Algo que varios analistas leram como easter egg ou April Fools de 2026, leitura depois confirmada pelo proprio changelog.</li>
             <li>Interessante para cultura de produto, nao para automacao de projetos grandes.</li>
           </ul>
         </div>
@@ -177,9 +177,9 @@
           </p>
         </div>
         <div class="claude-surface">
-          <h3 class="claude-card-title">6. Provavel April Fools</h3>
+          <h3 class="claude-card-title">6. Lancado como April 1st</h3>
           <p class="claude-card-copy mt-24">
-            Alex Kim chamou esse modulo de "quase certamente" a brincadeira de 1 de abril, o que encaixa bem com o tom da feature.
+            Alex Kim chamou esse modulo de "quase certamente" a brincadeira de 1 de abril. Depois disso, o changelog oficial confirmou: <span class="claude-inline-code">/buddy</span> chegou em <strong>v2.1.89</strong> como feature de April 1st.
           </p>
         </div>
       </div>
@@ -331,7 +331,7 @@
         <div>
           <h2 class="claude-section-title">O que builders deveriam copiar daqui</h2>
           <p class="claude-section-intro">
-            Mesmo sem Buddy e sem Coordinator publico, ja da para aplicar os principios certos em sistemas seus.
+            Mesmo sem Coordinator publico, ja da para aplicar os principios certos em sistemas seus. Buddy ja existe; o ponto aqui e copiar a arquitetura, nao o mascote.
           </p>
         </div>
       </div>
@@ -358,7 +358,7 @@
         <div class="claude-surface">
           <h3 class="claude-card-title">4. Use contexto isolado</h3>
           <p class="claude-card-copy mt-24">
-            Separar contextos entre workers ajuda a controlar custo, ruído e confusao em tarefas grandes.
+            Separar contextos entre workers ajuda a controlar custo, ruido e confusao em tarefas grandes.
           </p>
         </div>
         <div class="claude-surface">
@@ -394,7 +394,7 @@
           <h3 class="claude-card-title">Pode afirmar com seguranca</h3>
           <ul class="claude-do mt-24">
             <li>Buddy aparece como sistema real de companion no codigo analisado pela comunidade.</li>
-            <li>Alex Kim trata o Buddy como provavel brincadeira de 1 de abril.</li>
+            <li>O changelog oficial confirma que <span class="claude-inline-code">/buddy</span> foi lancado em <strong>v2.1.89</strong> como feature de April 1st.</li>
             <li>Coordinator aparece como pista forte de uma camada de orquestracao multiagente.</li>
             <li>Claude Code publico hoje ja suporta subagents, background e agent teams.</li>
           </ul>
@@ -430,7 +430,7 @@
           <tbody>
             <tr>
               <td>O que e Buddy</td>
-              <td>Um pet/companion de terminal com 18 especies, raridade e cosmética, provavelmente lido como easter egg.</td>
+              <td>Um pet/companion de terminal com 18 especies, raridade e cosmetica, que vazou antes e depois saiu oficialmente como <span class="claude-inline-code">/buddy</span> em <strong>v2.1.89</strong>.</td>
             </tr>
             <tr>
               <td>O que e Coordinator</td>
@@ -473,3 +473,4 @@
   </article>
 </body>
 </html>
+

@@ -48,7 +48,7 @@
             <li><strong>ULTRAPLAN:</strong> nao encontrei documentacao oficial publica com esse nome em 2 de abril de 2026.</li>
             <li><strong>Plan mode:</strong> ja existe publicamente para mapear abordagem antes de executar.</li>
             <li><strong>Remote tasks:</strong> ja permitem mandar execucao para a nuvem.</li>
-            <li><strong>Scheduled tasks:</strong> ja rodam Claude em recorrencia no Desktop.</li>
+            <li><strong>/loop:</strong> ja e publico e oficial para recorrencia session-scoped dentro da CLI.</li>
           </ul>
         </aside>
       </div>
@@ -66,8 +66,8 @@
         </div>
         <div class="claude-stat">
           <span class="claude-stat-label">Recorrencia</span>
-          <span class="claude-stat-value">Scheduled tasks</span>
-          <p>Desktop ja tem tarefas recorrentes locais e remotas, com frequencias e permissoes proprias.</p>
+          <span class="claude-stat-value">/loop + schedules</span>
+          <p>Claude Code hoje documenta /loop, cloud scheduled tasks e desktop scheduled tasks como tres camadas complementares.</p>
         </div>
         <div class="claude-stat">
           <span class="claude-stat-label">Modelo mental</span>
@@ -119,7 +119,7 @@
             </tr>
             <tr>
               <td>/loop e scheduling</td>
-              <td>O nome exato <span class="claude-inline-code">/loop</span> pode aparecer no leak, mas a capacidade publica equivalente hoje esta muito mais clara em <strong>scheduled tasks</strong>.</td>
+              <td><span class="claude-inline-code">/loop</span> ja e recurso oficial publico para scheduling dentro da sessao. Cloud e Desktop scheduled tasks cobrem a camada duravel de recorrencia.</td>
             </tr>
           </tbody>
         </table>
@@ -244,7 +244,7 @@ claude --remote "Execute o plano em docs/migration-plan.md"</code></pre>
         <div>
           <h2 class="claude-section-title">Como a recorrencia funciona de verdade hoje</h2>
           <p class="claude-section-intro">
-            A melhor ancoragem publica para o conceito de <span class="claude-inline-code">/loop</span> hoje e a camada de <strong>scheduled tasks</strong> no Claude Code Desktop.
+            A ancoragem publica hoje e literal: <span class="claude-inline-code">/loop</span> ja e um recurso oficial de scheduling session-scoped, enquanto cloud e desktop scheduled tasks cobrem a recorrencia duravel.
           </p>
         </div>
       </div>
@@ -254,27 +254,27 @@ claude --remote "Execute o plano em docs/migration-plan.md"</code></pre>
           <tbody>
             <tr>
               <td>Onde existe</td>
-              <td>No <strong>Claude Code Desktop</strong>, com tarefas locais e remotas agendadas.</td>
+              <td>Em tres camadas: <strong>/loop</strong> na sessao atual, <strong>cloud scheduled tasks</strong> na infraestrutura da Anthropic e <strong>desktop scheduled tasks</strong> na sua maquina.</td>
             </tr>
             <tr>
-              <td>Frequencias</td>
-              <td>Manual, hourly, daily, weekdays e weekly. Para intervalos fora do picker, a doc diz que voce pode pedir em linguagem natural.</td>
+              <td>Intervalo minimo</td>
+              <td><span class="claude-inline-code">/loop</span> e Desktop aceitam intervalo minimo de <strong>1 minuto</strong>. Cloud tasks comecam em <strong>1 hora</strong>.</td>
             </tr>
             <tr>
-              <td>Como roda local</td>
-              <td>O app checa o schedule a cada minuto enquanto esta aberto e cria uma sessao nova quando a hora chega.</td>
+              <td>Persistencia</td>
+              <td><span class="claude-inline-code">/loop</span> e <strong>session-scoped</strong> e some quando a sessao termina. Cloud e Desktop scheduled tasks persistem entre restarts.</td>
             </tr>
             <tr>
-              <td>Se o computador dorme</td>
-              <td>Runs locais podem ser perdidos. Na volta, o Desktop tenta um catch-up da execucao mais recente perdida.</td>
+              <td>Dependencia da maquina</td>
+              <td>Cloud tasks continuam mesmo com sua maquina desligada. Desktop e <span class="claude-inline-code">/loop</span> dependem da sua maquina ligada; <span class="claude-inline-code">/loop</span> ainda exige a sessao aberta e ociosa.</td>
             </tr>
             <tr>
-              <td>Se voce quer rodar mesmo off</td>
-              <td>A doc recomenda <strong>remote tasks</strong> para tarefas que precisam continuar mesmo quando sua maquina esta desligada.</td>
+              <td>Acesso a arquivos locais</td>
+              <td>Desktop e <span class="claude-inline-code">/loop</span> acessam seu ambiente local. Cloud tasks rodam em clone fresco do repo, sem seus arquivos locais.</td>
             </tr>
             <tr>
-              <td>Permissoes</td>
-              <td>Cada task tem seu proprio permission mode. Em Ask mode, a run pode ficar esperando aprovacao.</td>
+              <td>Quando usar</td>
+              <td>Use <span class="claude-inline-code">/loop</span> para polling rapido durante uma sessao; Desktop para rotinas locais; Cloud para automacao confiavel sem depender da sua maquina.</td>
             </tr>
           </tbody>
         </table>
@@ -353,7 +353,8 @@ claude --remote "Execute o plano em docs/migration-plan.md"</code></pre>
           <ul class="claude-do mt-24">
             <li>O leak sugere uma direcao de planejamento mais pesado e separado da execucao.</li>
             <li>Plan mode, remote tasks e scheduled tasks ja existem publicamente no ecossistema Claude Code.</li>
-            <li>Scheduled tasks no Desktop ja permitem recorrencia real com frequencias, permissoes e historico.</li>
+            <li><span class="claude-inline-code">/loop</span> ja e publico e oficial como scheduler leve dentro da sessao.</li>
+            <li>Cloud e Desktop scheduled tasks cobrem a recorrencia duravel com ambientes diferentes.</li>
             <li>Remote tasks sao a opcao oficial quando voce quer rodar mesmo com sua maquina desligada.</li>
           </ul>
         </div>
@@ -362,7 +363,7 @@ claude --remote "Execute o plano em docs/migration-plan.md"</code></pre>
           <h3 class="claude-card-title">Melhor nao vender como fato final</h3>
           <ul class="claude-dont mt-24">
             <li>Dizer que ULTRAPLAN ja e recurso publico com esse nome nas docs abertas.</li>
-            <li>Tratar <span class="claude-inline-code">/loop</span> como unica ou principal forma oficial de recorrencia se as docs publicas ancoram isso em scheduled tasks.</li>
+            <li>Tratar <span class="claude-inline-code">/loop</span> como leak-only ou como se ainda nao fosse recurso publico.</li>
             <li>Prometer automacao "infinita" sem mencionar ambiente, permissoes, sleeps e missed runs.</li>
             <li>Assumir que planejamento em cloud e aprovacao explicita ja existem exatamente como no leak.</li>
           </ul>
@@ -392,11 +393,11 @@ claude --remote "Execute o plano em docs/migration-plan.md"</code></pre>
             </tr>
             <tr>
               <td>O que existe hoje</td>
-              <td><strong>Plan mode</strong>, <strong>remote execution</strong> e <strong>scheduled tasks</strong>.</td>
+              <td><strong>Plan mode</strong>, <strong>/loop</strong>, <strong>cloud scheduled tasks</strong> e <strong>desktop scheduled tasks</strong>.</td>
             </tr>
             <tr>
-              <td>O que seria /loop hoje</td>
-              <td>O equivalente publico mais claro esta em <strong>scheduled tasks</strong> no Desktop, com recorrencia configuravel.</td>
+              <td>O que e /loop hoje</td>
+              <td>Um recurso publico oficial de scheduling <strong>session-scoped</strong> dentro da CLI, complementar as tasks duraveis de cloud e desktop.</td>
             </tr>
             <tr>
               <td>Qual a licao central</td>

@@ -47,7 +47,7 @@
             <li><strong>Causa:</strong> erro de packaging em release, nao invasao externa confirmada.</li>
             <li><strong>Escopo:</strong> quase <strong>2.000 arquivos</strong> TypeScript e mais de <strong>500 mil linhas</strong>.</li>
             <li><strong>Anthropic:</strong> disse que nao houve exposicao de dados sensiveis de clientes nem credenciais.</li>
-            <li><strong>Hoje:</strong> a documentacao oficial ja trata a instalacao via <strong>npm</strong> como <strong>deprecated</strong>.</li>
+            <li><strong>Hoje:</strong> o quickstart atual prioriza <strong>Native Install</strong> como caminho principal.</li>
           </ul>
         </aside>
       </div>
@@ -70,8 +70,8 @@
         </div>
         <div class="claude-stat">
           <span class="claude-stat-label">Direcao atual</span>
-          <span class="claude-stat-value">Native &gt; npm</span>
-          <p>A doc oficial agora recomenda install nativo e diz que npm esta em modo deprecated.</p>
+          <span class="claude-stat-value">Native first</span>
+          <p>O quickstart atual destaca o install nativo e empurra a experiencia para esse caminho principal.</p>
         </div>
       </div>
     </header>
@@ -178,9 +178,9 @@
           </p>
         </div>
         <div class="claude-surface">
-          <h3 class="claude-card-title">6. O npm perdeu prioridade</h3>
+          <h3 class="claude-card-title">6. Native install virou o caminho principal</h3>
           <p class="claude-card-copy mt-24">
-            A documentacao oficial atual do Claude Code ja marca a instalacao via npm como <strong>deprecated</strong> e recomenda o install nativo.
+            O quickstart atual do Claude Code destaca <strong>Native Install</strong> primeiro. Mesmo sem uma nota publica forte de deprecacao do npm nessa pagina, a direcao oficial atual puxa para o binario nativo.
           </p>
         </div>
       </div>
@@ -304,7 +304,7 @@
           <tbody>
             <tr>
               <td>Se voce usa npm</td>
-              <td>A doc oficial ja marca o npm como <strong>deprecated</strong>. Quando possivel, migre para o <strong>native install</strong>.</td>
+              <td>A release vazada saiu por esse canal. Como o quickstart atual prioriza <strong>Native Install</strong>, vale considerar a migracao quando fizer sentido para seu setup.</td>
             </tr>
             <tr>
               <td>Se quer menos risco</td>
@@ -312,7 +312,7 @@
             </tr>
             <tr>
               <td>Se ja estava no npm</td>
-              <td>A doc orienta instalar o binario nativo e depois remover a versao global antiga do npm.</td>
+              <td>Planeje a transicao com calma e valide o metodo atual nas docs antes de remover seu setup antigo. O ponto principal e reduzir dependencia do fluxo que gerou o incidente.</td>
             </tr>
             <tr>
               <td>Se quer atualizar agora</td>
@@ -327,17 +327,18 @@
       </div>
 
       <div class="guide-code-block mt-24">
-        <pre><code># caminho oficial sugerido hoje
+        <pre><code># caminho priorizado hoje nas docs
 claude update
 
-# se voce veio do npm, a doc recomenda migrar para install nativo
-npm uninstall -g @anthropic-ai/claude-code</code></pre>
+# novo setup? siga o Native Install do quickstart oficial
+# macOS/Linux/WSL: curl -fsSL claude.ai/install.sh | bash
+# Windows PowerShell: irm https://claude.ai/install.ps1 | iex</code></pre>
       </div>
 
       <div class="claude-note mt-24">
         <p class="mb-0">
           <strong>Resumo pratico:</strong> o takeaway nao e "pare de usar Claude Code".
-          E "pare de tratar a distribuicao por npm como caminho principal se a propria doc oficial ja te empurra para o binario nativo".
+          E "trate o install nativo como direcao principal se voce esta revisitando seu setup depois do incidente".
         </p>
       </div>
     </section>
@@ -363,7 +364,7 @@ npm uninstall -g @anthropic-ai/claude-code</code></pre>
             <li>A causa oficial foi erro humano de packaging, nao security breach.</li>
             <li>Reports confiaveis falam em quase 2.000 arquivos e 500 mil linhas de codigo.</li>
             <li>O codigo expunha dezenas de feature flags e sinais de roadmap.</li>
-            <li>A doc oficial hoje recomenda install nativo e trata npm como deprecated.</li>
+            <li>O quickstart atual prioriza install nativo como caminho principal.</li>
           </ul>
         </div>
 
@@ -418,7 +419,7 @@ npm uninstall -g @anthropic-ai/claude-code</code></pre>
             </tr>
             <tr>
               <td>O que fazer hoje</td>
-              <td>Migrar do npm para o install nativo quando possivel e tratar rumor viral com filtro.</td>
+              <td>Considerar Native Install como caminho principal, manter o CLI atualizado e tratar rumor viral com filtro.</td>
             </tr>
           </tbody>
         </table>
