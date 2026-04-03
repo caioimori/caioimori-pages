@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia pratico de instalacao do Claude Code - Caio Imori</title>
+  <meta
+    name="description"
+    content="Guia pratico e direto para instalar Claude Code no macOS e Windows, com requisitos oficiais, dependencias, comandos, verificacao e erros comuns."
+  >
+  <link rel="stylesheet" href="../assets/css/guide.css">
+</head>
+<body class="guide-theme-claude">
+  <article class="guide claude-shell">
+
+    <header class="guide-section claude-hero fade-in">
+      <div class="claude-kicker-row">
+        <span class="guide-badge">Guia de instalacao</span>
+        <span class="claude-meta-pill">Status em 3 de abril de 2026</span>
+      </div>
+
+      <div class="claude-hero-grid">
+        <div>
+          <p class="claude-overline">Claude Code // Setup</p>
+          <h1 class="guide-hero-title claude-headline">Claude Code instalado do jeito certo</h1>
+          <p class="guide-subtitle claude-subtitle">
+            Este guia resume o caminho mais direto para sair do zero e chegar ao primeiro
+            <strong>claude</strong> funcionando, com comandos separados para <strong>macOS</strong> e
+            <strong>Windows</strong>, dependencias reais e correcoes para os erros mais comuns.
+          </p>
+
+          <div class="claude-actions">
+            <a href="#macos" class="guide-cta">Instalar no macOS</a>
+            <a href="#windows" class="guide-cta-secondary">Instalar no Windows</a>
+          </div>
+        </div>
+
+        <aside class="claude-panel">
+          <div>
+            <span class="claude-meta-pill">Antes de comecar</span>
+            <h2 class="claude-panel-title" style="margin-top: 18px;">Checklist minimo</h2>
+            <p class="claude-panel-copy">
+              Se esses quatro pontos estiverem resolvidos, a instalacao costuma levar poucos minutos.
+            </p>
+          </div>
+
+          <ul class="claude-facts">
+            <li><strong>Sistema:</strong> macOS 13+, Windows 10 1809+ ou Windows Server 2019+, 4 GB+ de RAM e internet.</li>
+            <li><strong>Shell:</strong> Bash, Zsh, PowerShell ou CMD.</li>
+            <li><strong>Conta:</strong> Pro, Max, Team, Enterprise ou Console; o plano gratuito nao inclui Claude Code.</li>
+            <li><strong>Windows nativo:</strong> exige <strong>Git for Windows</strong>. Node.js so entra se voce insistir no metodo npm legado.</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="claude-stats">
+        <div class="claude-stat">
+          <span class="claude-stat-label">Metodo ideal</span>
+          <span class="claude-stat-value">Native install</span>
+          <p>Hoje e o caminho principal recomendado pela documentacao oficial.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Node.js</span>
+          <span class="claude-stat-value">Nao no nativo</span>
+          <p>Node 18+ so e necessario para o metodo npm, que esta descontinuado.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Verificacao</span>
+          <span class="claude-stat-value">2 comandos</span>
+          <p><strong>claude --version</strong> e <strong>claude doctor</strong> confirmam se o setup esta correto.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Atualizacao</span>
+          <span class="claude-stat-value">Automatica no nativo</span>
+          <p>Homebrew e WinGet exigem upgrade manual.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="guide-section fade-in fade-in-d1">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Quer ir alem da instalacao e montar fluxos de verdade?</h2>
+        <p class="claude-card-copy mt-24">
+          No SINAPSE a proposta nao e so usar IA, mas construir operacao com agentes, automacao, contexto e execucao aplicada.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta">Conhecer o SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section claude-section fade-in fade-in-d1">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">00</div>
+        <div>
+          <h2 class="claude-section-title">Resumo em 30 segundos</h2>
+          <p class="claude-section-intro">
+            Se voce quer o atalho sem ler o guia inteiro, siga esta ordem.
+          </p>
+        </div>
+      </div>
+
+      <ol class="claude-step-list">
+        <li>
+          <strong class="claude-step-title">macOS</strong>
+          <p class="claude-step-copy">
+            Abra o Terminal e rode <span class="claude-inline-code">curl -fsSL https://claude.ai/install.sh | bash</span>.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Windows</strong>
+          <p class="claude-step-copy">
+            Instale <strong>Git for Windows</strong> primeiro. Depois, no PowerShell, rode
+            <span class="claude-inline-code">irm https://claude.ai/install.ps1 | iex</span>.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Verifique</strong>
+          <p class="claude-step-copy">
+            Rode <span class="claude-inline-code">claude --version</span> e
+            <span class="claude-inline-code">claude doctor</span>.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Entre no projeto</strong>
+          <p class="claude-step-copy">
+            Va para a pasta do repo e execute <span class="claude-inline-code">claude</span>. No primeiro uso, o login abre no navegador.
+          </p>
+        </li>
+      </ol>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Ponto importante:</strong> o instalador nativo e o caminho oficial recomendado hoje. Homebrew e WinGet sao validos, mas exigem atualizacao manual. npm virou opcao de compatibilidade.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d1">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">01</div>
+        <div>
+          <h2 class="claude-section-title">O que voce precisa antes de instalar</h2>
+          <p class="claude-section-intro">
+            Esta e a parte que evita 90% dos erros de setup.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Requisitos do sistema</h3>
+          <p class="claude-card-copy">macOS 13+, Windows 10 1809+ ou Windows Server 2019+, 4 GB+ de RAM e conexao com a internet.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Shell suportado</h3>
+          <p class="claude-card-copy">Bash, Zsh, PowerShell e CMD estao cobertos oficialmente.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Conta elegivel</h3>
+          <p class="claude-card-copy">Claude Code exige Pro, Max, Team, Enterprise ou Console. O plano gratuito do Claude.ai nao entra.</p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid mt-24">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Windows nativo</h3>
+          <ul class="claude-checklist mt-24">
+            <li><strong>Git for Windows</strong> e obrigatorio porque Claude Code usa Git Bash internamente.</li>
+            <li>Voce pode abrir <strong>claude</strong> a partir de PowerShell, CMD ou Git Bash.</li>
+            <li>Voce nao precisa rodar PowerShell como administrador.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Node.js</h3>
+          <ul class="claude-checklist mt-24">
+            <li><strong>Nao e necessario</strong> para o instalador nativo.</li>
+            <li>So use <strong>Node.js 18+</strong> se voce realmente precisar do metodo npm por compatibilidade.</li>
+            <li>A propria documentacao diz que npm esta <strong>descontinuado</strong>.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider" id="macos">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">02</div>
+        <div>
+          <h2 class="claude-section-title">Instalacao no macOS</h2>
+          <p class="claude-section-intro">
+            No Mac, o caminho mais simples continua sendo o instalador nativo. Homebrew entra como alternativa boa para quem centraliza tudo ali.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Opcao recomendada: instalador nativo</h3>
+          <div class="guide-code-block mt-24">
+            <code>curl -fsSL https://claude.ai/install.sh | bash</code>
+          </div>
+          <p class="claude-card-copy">Esse metodo instala o binario nativo e recebe atualizacoes automaticas em segundo plano.</p>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Alternativa: Homebrew</h3>
+          <div class="guide-code-block mt-24">
+            <code>brew install --cask claude-code</code>
+          </div>
+          <p class="claude-card-copy">Funciona bem, mas nao atualiza sozinho. Depois voce precisa rodar <strong>brew upgrade claude-code</strong>.</p>
+        </div>
+      </div>
+
+      <ol class="claude-step-list mt-24">
+        <li>
+          <strong class="claude-step-title">Abra o Terminal</strong>
+          <p class="claude-step-copy">
+            Use o Terminal padrao do macOS, iTerm ou outro shell compativel.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Execute a instalacao</strong>
+          <p class="claude-step-copy">
+            Rode o comando nativo acima. Se voce prefere Homebrew, use o comando alternativo.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Cheque se o comando entrou no PATH</strong>
+          <p class="claude-step-copy">
+            Rode <span class="claude-inline-code">claude --version</span>. Se o comando responder, a instalacao entrou.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Entre em um projeto e abra o Claude</strong>
+          <p class="claude-step-copy">
+            Va para seu repo e rode:
+          </p>
+          <div class="guide-code-block mt-24">
+            <code>cd seu-projeto
+claude</code>
+          </div>
+        </li>
+      </ol>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Se voce quiser menos risco de regressao:</strong> o instalador nativo aceita o canal
+          <span class="claude-inline-code">stable</span>.
+        </p>
+      </div>
+
+      <div class="guide-code-block">
+        <code>curl -fsSL https://claude.ai/install.sh | bash -s stable</code>
+      </div>
+    </section>
+
+    <hr class="guide-divider" id="windows">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">03</div>
+        <div>
+          <h2 class="claude-section-title">Instalacao no Windows</h2>
+          <p class="claude-section-intro">
+            Aqui esta a principal pegadinha: no Windows nativo, <strong>Git for Windows</strong> vem antes do Claude Code.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Passo zero</h3>
+          <p class="claude-card-copy">Instale <a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener">Git for Windows</a> e marque a opcao <strong>Add to PATH</strong>.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Shell certo</h3>
+          <p class="claude-card-copy">Se estiver no PowerShell, use o comando <strong>irm</strong>. Se estiver no CMD, use o instalador <strong>.cmd</strong>.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Alternativa oficial</h3>
+          <p class="claude-card-copy">Se voce prefere pacote do Windows, o caminho oficial alternativo e o <strong>WinGet</strong>.</p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid mt-24">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Opcao recomendada: PowerShell</h3>
+          <div class="guide-code-block mt-24">
+            <code>irm https://claude.ai/install.ps1 | iex</code>
+          </div>
+          <p class="claude-card-copy">Este e o comando oficial para Windows PowerShell.</p>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Alternativas oficiais</h3>
+          <div class="guide-code-block mt-24">
+            <code>curl -fsSL https://claude.ai/install.cmd -o install.cmd &amp;&amp; install.cmd &amp;&amp; del install.cmd</code>
+          </div>
+          <div class="guide-code-block">
+            <code>winget install Anthropic.ClaudeCode</code>
+          </div>
+          <p class="claude-card-copy">CMD usa o instalador <strong>.cmd</strong>. WinGet tambem funciona, mas nao atualiza sozinho.</p>
+        </div>
+      </div>
+
+      <ol class="claude-step-list mt-24">
+        <li>
+          <strong class="claude-step-title">Instale o Git for Windows primeiro</strong>
+          <p class="claude-step-copy">
+            Sem isso, o Claude Code nativo no Windows falha com o erro
+            <span class="claude-inline-code">Claude Code on Windows requires git-bash</span>.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Abra o shell certo</strong>
+          <p class="claude-step-copy">
+            PowerShell usa <span class="claude-inline-code">irm ... | iex</span>. CMD usa o instalador
+            <span class="claude-inline-code">install.cmd</span>.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Execute a instalacao</strong>
+          <p class="claude-step-copy">
+            Rode um dos comandos acima. O nativo via PowerShell continua sendo o principal.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Valide o binario</strong>
+          <p class="claude-step-copy">
+            Rode <span class="claude-inline-code">claude --version</span> e depois
+            <span class="claude-inline-code">claude doctor</span>.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Abra seu projeto</strong>
+          <p class="claude-step-copy">
+            Entre na pasta do repo e rode <span class="claude-inline-code">claude</span>.
+          </p>
+        </li>
+      </ol>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Se o Git ja esta instalado e mesmo assim falha:</strong> a documentacao oficial orienta configurar manualmente o caminho do Git Bash no <span class="claude-inline-code">settings.json</span>.
+        </p>
+      </div>
+
+      <div class="guide-code-block">
+        <code>{
+  "env": {
+    "CLAUDE_CODE_GIT_BASH_PATH": "C:\\Program Files\\Git\\bin\\bash.exe"
+  }
+}</code>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">04</div>
+        <div>
+          <h2 class="claude-section-title">Primeira verificacao e primeiro login</h2>
+          <p class="claude-section-intro">
+            Depois da instalacao, o objetivo e confirmar tres coisas: o binario existe, o PATH esta certo e a autenticacao abre normalmente.
+          </p>
+        </div>
+      </div>
+
+      <div class="guide-code-block">
+        <code>claude --version
+claude doctor
+cd seu-projeto
+claude</code>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface">
+          <h3 class="claude-card-title">O que voce deve ver</h3>
+          <ul class="claude-checklist mt-24">
+            <li><strong>claude --version</strong> responde com a versao instalada.</li>
+            <li><strong>claude doctor</strong> faz a checagem mais detalhada do ambiente.</li>
+            <li>No primeiro <strong>claude</strong>, o navegador abre para login.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Quem pode entrar</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Claude Pro</li>
+            <li>Claude Max</li>
+            <li>Teams, Enterprise ou Console</li>
+            <li>Ou provedores de terceiros como Bedrock, Vertex AI e Microsoft Foundry</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">05</div>
+        <div>
+          <h2 class="claude-section-title">Como atualizar depois</h2>
+          <p class="claude-section-intro">
+            Aqui muita gente confunde comportamento do instalador nativo com Homebrew e WinGet.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Instalacao nativa</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Atualiza automaticamente em segundo plano.</li>
+            <li>Se quiser forcar a atualizacao, rode <span class="claude-inline-code">claude update</span>.</li>
+            <li>Voce pode usar o canal <span class="claude-inline-code">stable</span> para fugir das ultimas novidades imediatamente.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Homebrew e WinGet</h3>
+          <div class="guide-code-block mt-24">
+            <code>brew upgrade claude-code
+winget upgrade Anthropic.ClaudeCode</code>
+          </div>
+          <p class="claude-card-copy">Esses dois metodos nao fazem update automatico.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">06</div>
+        <div>
+          <h2 class="claude-section-title">Erros comuns e como sair deles rapido</h2>
+          <p class="claude-section-intro">
+            Aqui estao os erros que mais aparecem na documentacao oficial de troubleshooting.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">"&&" invalido no Windows</h3>
+          <p class="claude-card-copy">Voce esta no PowerShell usando o comando de CMD. Troque para <strong>irm https://claude.ai/install.ps1 | iex</strong>.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">"irm" nao reconhecido</h3>
+          <p class="claude-card-copy">Voce esta no CMD, nao no PowerShell. Abra PowerShell ou use o instalador <strong>.cmd</strong>.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">"claude" nao e reconhecido</h3>
+          <p class="claude-card-copy">O binario nao entrou no PATH. No macOS ele fica em <strong>~/.local/bin</strong>; no Windows, em <strong>%USERPROFILE%\\.local\\bin</strong>.</p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid mt-24">
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Ajuste rapido de PATH no macOS</h3>
+          <div class="guide-code-block mt-24">
+            <code>echo 'export PATH="$HOME/.local/bin:$PATH"' &gt;&gt; ~/.zshrc
+source ~/.zshrc
+claude --version</code>
+          </div>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Ajuste rapido de PATH no PowerShell</h3>
+          <div class="guide-code-block mt-24">
+            <code>$currentPath = [Environment]::GetEnvironmentVariable('PATH', 'User')
+[Environment]::SetEnvironmentVariable('PATH', "$currentPath;$env:USERPROFILE\\.local\\bin", 'User')</code>
+          </div>
+          <p class="claude-card-copy">Depois feche e abra o terminal e rode <strong>claude --version</strong>.</p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid mt-24">
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Script retornando HTML</h3>
+          <p class="claude-card-copy">Normalmente isso aponta para problema temporario de rede, bloqueio regional, proxy corporativo ou indisponibilidade de rota. Tente Homebrew no macOS ou WinGet no Windows.</p>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Windows abre o app Desktop em vez do CLI</h3>
+          <p class="claude-card-copy">Uma versao antiga do Claude Desktop pode tomar prioridade no PATH. A correcao oficial e atualizar o app Desktop.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">07</div>
+        <div>
+          <h2 class="claude-section-title">Quando vale usar o npm</h2>
+          <p class="claude-section-intro">
+            Quase nunca. Mas como muita gente ainda procura esse comando, vale registrar o contexto certo.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td>Status hoje</td>
+              <td><strong>Descontinuado.</strong> A propria documentacao recomenda o instalador nativo sempre que possivel.</td>
+            </tr>
+            <tr>
+              <td>Quando usar</td>
+              <td>So por compatibilidade ou ambiente legado.</td>
+            </tr>
+            <tr>
+              <td>Dependencia extra</td>
+              <td><strong>Node.js 18+</strong>.</td>
+            </tr>
+            <tr>
+              <td>Comando</td>
+              <td><span class="claude-inline-code">npm install -g @anthropic-ai/claude-code</span></td>
+            </tr>
+            <tr>
+              <td>Aviso oficial</td>
+              <td>Nao use <strong>sudo npm install -g</strong>.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">08</div>
+        <div>
+          <h2 class="claude-section-title">Se voce nao quer usar terminal</h2>
+          <p class="claude-section-intro">
+            A propria documentacao sugere o app Desktop se sua prioridade e evitar setup de linha de comando.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface claude-surface-soft">
+        <p class="claude-card-copy">
+          Se o objetivo e so usar Claude Code com interface grafica, voce pode baixar o app Desktop oficial para
+          <a href="https://claude.ai/download" target="_blank" rel="noopener">macOS ou Windows</a>.
+          Ele remove quase toda a parte manual de terminal.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">09</div>
+        <div>
+          <h2 class="claude-section-title">Fontes oficiais consultadas</h2>
+          <p class="claude-section-intro">
+            Todo o conteudo deste guia foi consolidado a partir da documentacao oficial do Claude Code.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <ul class="claude-source-list">
+          <li><a href="https://code.claude.com/docs/pt/overview" target="_blank" rel="noopener">Visao geral do Claude Code</a></li>
+          <li><a href="https://code.claude.com/docs/pt/setup" target="_blank" rel="noopener">Configuracao avancada</a></li>
+          <li><a href="https://code.claude.com/docs/pt/troubleshooting" target="_blank" rel="noopener">Troubleshooting</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="guide-section fade-in fade-in-d4">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Instalou? O proximo passo e operar melhor que a media.</h2>
+        <p class="claude-card-copy mt-24">
+          O ganho real vem quando Claude Code deixa de ser curiosidade e vira infraestrutura de execucao no seu trabalho.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta">Entrar no SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="guide-footer fade-in fade-in-d4">
+      <p>Criado por <span class="guide-author">Caio Imori</span></p>
+      <p style="margin-top: 8px;">Guia focado em instalacao, dependencias, verificacao e troubleshooting inicial do Claude Code.</p>
+    </footer>
+  </article>
+</body>
+</html>
