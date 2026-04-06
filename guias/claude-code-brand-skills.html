@@ -10,10 +10,24 @@
   >
   <link rel="stylesheet" href="../assets/css/guide.css">
   <style>
-    /* Hero grid: remove mínimo fixo do aside para não sobrepor o título */
+    /* Permite que grid items encolham abaixo do conteúdo mínimo */
+    .claude-hero-grid > * {
+      min-width: 0;
+    }
+
+    /* Quebra palavras longas dentro do título */
+    .claude-headline {
+      overflow-wrap: break-word;
+      word-break: break-word;
+      /* Fonte menor para caber na coluna sem transbordar */
+      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    }
+
+    /* Hero grid: remove mínimo fixo do aside */
     .claude-hero-grid {
       grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.8fr);
     }
+
     @media (max-width: 1024px) {
       .claude-hero-grid {
         grid-template-columns: 1fr;
