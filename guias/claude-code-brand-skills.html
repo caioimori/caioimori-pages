@@ -9,6 +9,17 @@
     content="Como o Claude Code le suas brand guidelines e gera qualquer documento ja seguindo sua identidade visual. Sem voce tocar em cor, fonte ou layout."
   >
   <link rel="stylesheet" href="../assets/css/guide.css">
+  <style>
+    /* Hero grid: remove mínimo fixo do aside para não sobrepor o título */
+    .claude-hero-grid {
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.8fr);
+    }
+    @media (max-width: 1024px) {
+      .claude-hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body class="guide-theme-claude">
   <article class="guide claude-shell">
