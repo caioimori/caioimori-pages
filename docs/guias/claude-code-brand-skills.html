@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Skills no Claude Code — Gerar documentos on-brand automaticamente</title>
+  <meta name="description" content="Aprenda a criar brand skills no Claude Code para gerar PDFs, apresentações e landing pages que respeitam sua identidade visual automaticamente.">
+  <meta name="keywords" content="Claude Code, brand skills, automação, design system, documentos on-brand">
+  <link rel="stylesheet" href="../assets/css/guide.css">
+  <style>
+    .cta-subtle {
+      display: inline-block;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: all 0.2s ease;
+    }
+
+    .cta-subtle:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .cta-primary {
+      display: inline-block;
+      background: var(--text-primary) !important;
+      color: #ffffff !important;
+      border: none !important;
+      padding: 14px 28px !important;
+      font-size: 1rem !important;
+      font-weight: 600 !important;
+      border-radius: 100px !important;
+      text-decoration: none !important;
+      cursor: pointer !important;
+      transition: all 0.2s ease !important;
+      margin-top: 24px !important;
+    }
+
+    .cta-primary:hover {
+      transform: scale(0.97) !important;
+      opacity: 0.9 !important;
+    }
+
+    .cta-primary:active {
+      transform: scale(0.95) !important;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .step-item {
+      display: flex;
+      margin-bottom: 24px;
+      gap: 16px;
+    }
+
+    .step-content h4 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .step-content p {
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .usecase-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .usecase-card h4 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .usecase-card p {
+      color: var(--text-secondary);
+      margin: 8px 0;
+      line-height: 1.6;
+    }
+
+    .usecase-card .example {
+      background: var(--bg-tertiary);
+      border-left: 3px solid var(--accent);
+      padding: 12px 16px;
+      margin-top: 16px;
+      border-radius: 4px;
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Mono', ui-monospace, monospace;
+    }
+
+    .tip-box {
+      background: #f0f9ff;
+      border-left: 4px solid #0284c7;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin: 24px 0;
+    }
+
+    .tip-box strong {
+      color: #0284c7;
+      font-weight: 600;
+    }
+
+    .tip-box p {
+      color: var(--text-secondary);
+      margin: 8px 0 0 0;
+      font-size: 0.9375rem;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 48px 0;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li {
+      padding-left: 24px;
+      margin-bottom: 12px;
+      position: relative;
+      color: var(--text-secondary);
+    }
+
+    li:before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      font-weight: 600;
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="guide">
+    <!-- Top CTA Subtle -->
+    <div style="margin-bottom: 24px; text-align: center;">
+      <a href="https://sinapse.club" class="cta-subtle">Explore brand skills no sinapse.club</a>
+    </div>
+
+    <!-- Badge -->
+    <span class="guide-badge">Guia Prático</span>
+
+    <!-- Hero Title -->
+    <h1 class="guide-hero-title">Brand Skills no Claude Code</h1>
+
+    <!-- Subtitle -->
+    <p class="guide-subtitle">Gere qualquer documento já seguindo sua identidade visual automaticamente</p>
+
+    <!-- Intro -->
+    <div class="guide-section">
+      <p style="font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.7;">
+        Imagine criar um PDF de relatório, uma apresentação de pitch ou um mockup de landing page, e tudo já sair alinhado com suas cores, fontes e espaçamento. Sem designer revisar. Sem edições manuais de design.
+      </p>
+      <p style="color: var(--text-secondary); margin-top: 12px;">
+        Essa é a promessa das <strong>brand skills no Claude Code</strong>: você empacota suas brand guidelines uma vez, e todo documento gerado pelo Claude Code respeita sua identidade visual automaticamente.
+      </p>
+    </div>
+
+    <!-- What are Brand Skills -->
+    <div class="guide-section">
+      <h2 style="font-size: 1.75rem; font-weight: 600; color: var(--text-primary); margin-bottom: 16px; letter-spacing: -0.02em;">O que é uma Brand Skill?</h2>
+
+      <p style="color: var(--text-secondary); margin-bottom: 16px;">
+        Uma <strong>brand skill</strong> é um pacote de guidelines compilado que você envia para o Claude Code uma vez. Ele contém:
+      </p>
+
+      <ul style="margin-bottom: 16px;">
+        <li><strong>Paleta de cores:</strong> Todos os hexadecimais da marca (primária, secundária, acentos)</li>
+        <li><strong>Tipografia:</strong> Fonts usadas, pesos, tamanhos para cada elemento</li>
+        <li><strong>Spacing:</strong> Margens, paddings, gaps entre elementos</li>
+        <li><strong>Componentes:</strong> Botões, cards, badges, dividers já estilizados</li>
+        <li><strong>Tom de voz:</strong> Instruções sobre como escrever em documentos</li>
+      </ul>
+
+      <p style="color: var(--text-secondary);">
+        Uma vez configurada, a skill funciona como um <em>"estilo padrão"</em> para qualquer geração de documento. PDF fica com suas cores. Apresentação respeita sua tipografia. Landing page sai com seu spacing.
+      </p>
+
+      <div class="tip-box">
+        <strong>Por que isso importa?</strong>
+        <p>Consistência visual é o que separa marcas profissionais de amadoras. Brand skills elimina o trabalho manual de revisar design em cada documento — o agente cria tudo certo de primeira.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Tutorial -->
+    <div class="guide-section">
+      <h2 style="font-size: 1.75rem; font-weight: 600; color: var(--text-primary); margin-bottom: 24px; letter-spacing: -0.02em;">Tutorial: Crie sua Brand Skill em menos de 10 minutos</h2>
+
+      <div class="step-item">
+        <span class="step-number">1</span>
+        <div class="step-content">
+          <h4>Levante seus brand guidelines</h4>
+          <p>Abra seu design system (Figma, notion, ou até Google Docs com sua paleta + tipografia) e tenha à mão:</p>
+          <ul style="margin-top: 8px; margin-left: 0;">
+            <li>Cores exatas (hex codes)</li>
+            <li>Fonts que você usa</li>
+            <li>Tamanhos de fonte (hero, heading, body)</li>
+            <li>Espaçamentos padrão</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <span class="step-number">2</span>
+        <div class="step-content">
+          <h4>Crie um arquivo BRAND.yaml</h4>
+          <p>No Claude Code, crie um novo arquivo na raiz do projeto com este formato:</p>
+          <div class="example">
+name: "Minha Marca"
+colors:
+  primary: "#1a1a1a"
+  secondary: "#f7f7f7"
+  accent: "#2997ff"
+typography:
+  heading: "Inter, 700"
+  body: "Inter, 400"
+spacing:
+  unit: "4px"
+  section-gap: "48px"
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <span class="step-number">3</span>
+        <div class="step-content">
+          <h4>Crie uma skill no Claude Code</h4>
+          <p>No Claude Code, use o comando <code style="background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;">/skill-create</code> para empacotar seu BRAND.yaml como uma skill reutilizável.</p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <span class="step-number">4</span>
+        <div class="step-content">
+          <h4>Teste gerando um documento</h4>
+          <p>Peça ao Claude Code para gerar um PDF, uma apresentação ou um mockup. Diga: <em>"Gera isso usando minha brand skill"</em>. O agente vai aplicar suas cores e tipografia automaticamente.</p>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <strong>Dica:</strong>
+        <p>Se você já tem um design system no Figma, extraia as variáveis diretamente e converta para YAML. Economiza tempo — especialmente em projetos grandes com 100+ tokens.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Use Cases -->
+    <div class="guide-section">
+      <h2 style="font-size: 1.75rem; font-weight: 600; color: var(--text-primary); margin-bottom: 24px; letter-spacing: -0.02em;">3 Casos de Uso Práticos</h2>
+
+      <!-- PDF Case -->
+      <div class="usecase-card">
+        <h4>📄 PDFs de Relatório & Propostas</h4>
+        <p>Você precisa gerar um relatório mensal, uma proposta comercial ou um documento financeiro que saia profissional e branded.</p>
+        <div class="example">
+Antes: Designer revisa contraste, alinha cores, ajusta fontes. 2-3 horas.
+Depois: Agente gera PDF já com suas cores e tipografia. 5 minutos.
+        </div>
+        <p style="margin-top: 12px; color: var(--success); font-weight: 500;">✓ Tempo economizado: 90%</p>
+      </div>
+
+      <!-- Presentation Case -->
+      <div class="usecase-card">
+        <h4>🎬 Apresentações & Decks</h4>
+        <p>Precisa de um deck de pitch para investidores, apresentação interna ou workshop. Tudo com sua marca.</p>
+        <div class="example">
+Antes: Montar template PowerPoint/Google Slides, aplicar brand, design dos slides. 4-5 horas.
+Depois: Agente gera apresentação com slides já formatados em sua brand. 15 minutos.
+        </div>
+        <p style="margin-top: 12px; color: var(--success); font-weight: 500;">✓ Tempo economizado: 85%</p>
+      </div>
+
+      <!-- Landing Page Case -->
+      <div class="usecase-card">
+        <h4>🌐 Landing Page Mockups</h4>
+        <p>Você quer validar uma ideia de landing page rapidamente, sem envolver designer.</p>
+        <div class="example">
+Antes: Descrever para designer, esperar mockup, revisar, iterar. 1-2 dias.
+Depois: Agente gera mockup HTML já on-brand. 10 minutos. Você testa em 30 min.
+        </div>
+        <p style="margin-top: 12px; color: var(--success); font-weight: 500;">✓ Tempo economizado: 92%</p>
+      </div>
+
+      <div class="tip-box">
+        <strong>Padrão:</strong>
+        <p>Em todos os casos, brand skills <strong>eliminam comunicação de design</strong> — o agente já sabe como desenhar. Você libera designer para trabalho estratégico (criatividade, UX strategy) e deixa execução tática pro agente.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Final CTA -->
+    <div class="guide-section" style="text-align: center;">
+      <h3 style="font-size: 1.5rem; font-weight: 600; color: var(--text-primary); margin-bottom: 16px;">Pronto para automatizar sua marca?</h3>
+      <p style="color: var(--text-secondary); margin-bottom: 24px;">
+        Explore brand skills e veja como agentes podem gerar documentos on-brand em segundos.
+      </p>
+      <a href="https://sinapse.club" class="cta-primary">Criar minha Brand Skill →</a>
+    </div>
+  </div>
+
+  <!-- Simple analytics -->
+  <script>
+    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+      // Placeholder for future analytics
+    }
+  </script>
+</body>
+</html>
