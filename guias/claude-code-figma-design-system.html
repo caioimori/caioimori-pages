@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Figma + Claude Code: design system fiel direto do canvas - Caio Imori</title>
+  <meta
+    name="description"
+    content="Guia pratico para conectar Figma ao Claude Code via MCP, gerar design systems fieis, mapear componentes com Code Connect e usar o fluxo code-to-canvas."
+  >
+  <link rel="stylesheet" href="../assets/css/guide.css">
+</head>
+<body class="guide-theme-claude">
+  <article class="guide claude-shell">
+
+    <header class="guide-section claude-hero fade-in">
+      <div class="claude-kicker-row">
+        <span class="guide-badge">Guia pratico</span>
+        <span class="claude-meta-pill">Atualizado em abril de 2026</span>
+      </div>
+
+      <div class="claude-hero-grid">
+        <div>
+          <p class="claude-overline">Claude Code // Figma MCP</p>
+          <h1 class="guide-hero-title claude-headline">Do Figma ao codigo sem perder um pixel</h1>
+          <p class="guide-subtitle claude-subtitle">
+            Este guia mostra como conectar <strong>Figma</strong> ao <strong>Claude Code</strong> via MCP,
+            extrair design systems fieis, mapear componentes com <strong>Code Connect</strong> e usar
+            o fluxo bidirecional entre canvas e codigo.
+          </p>
+
+          <div class="claude-actions">
+            <a href="#setup" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Comecar o setup</a>
+            <a href="#code-to-canvas" class="guide-cta-secondary">Ver code-to-canvas</a>
+          </div>
+        </div>
+
+        <aside class="claude-panel">
+          <div>
+            <span class="claude-meta-pill">Antes de comecar</span>
+            <h2 class="claude-panel-title" style="margin-top: 18px;">O que voce precisa</h2>
+            <p class="claude-panel-copy">
+              Tres coisas resolvidas e voce esta pronto para conectar Figma ao Claude Code.
+            </p>
+          </div>
+
+          <ul class="claude-facts">
+            <li><strong>Claude Code:</strong> instalado e autenticado (Pro, Max, Team ou Enterprise).</li>
+            <li><strong>Figma:</strong> conta com acesso ao arquivo que voce quer usar como fonte do design system.</li>
+            <li><strong>MCP Figma:</strong> ja vem integrado no Claude Code — basta autorizar na primeira chamada.</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="claude-stats">
+        <div class="claude-stat">
+          <span class="claude-stat-label">Integracao</span>
+          <span class="claude-stat-value">MCP nativo</span>
+          <p>O Figma MCP e oficial e ja vem disponivel no Claude Code sem instalacao extra.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Direcao</span>
+          <span class="claude-stat-value">Bidirecional</span>
+          <p>Le do Figma para gerar codigo e escreve de volta no canvas.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Code Connect</span>
+          <span class="claude-stat-value">Mapeamento</span>
+          <p>Vincula componentes do Figma a componentes reais do seu codebase.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Fidelidade</span>
+          <span class="claude-stat-value">Pixel-level</span>
+          <p>Tokens, espacamento, cores e tipografia extraidos direto do design.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="guide-section fade-in fade-in-d1">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Quer montar design systems com agentes que entendem o canvas?</h2>
+        <p class="claude-card-copy mt-24">
+          No SINAPSE voce aprende a operar com agentes especializados que transformam briefings em sistemas visuais consistentes, do Figma ao deploy.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Conhecer o SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section claude-section fade-in fade-in-d1">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">00</div>
+        <div>
+          <h2 class="claude-section-title">O que muda com Figma + Claude Code</h2>
+          <p class="claude-section-intro">
+            Antes voce exportava assets, copiava hex codes e recriava espacamentos no olho. Agora o Claude Code le o canvas diretamente.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Leitura direta</h3>
+          <p class="claude-card-copy">Claude Code acessa a arvore de nodes do Figma via MCP. Ve hierarquia, propriedades, tokens e variantes sem voce copiar nada.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Contexto visual</h3>
+          <p class="claude-card-copy">Alem dos dados estruturados, o MCP captura screenshots dos frames para que o Claude interprete o layout visualmente.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Escrita no canvas</h3>
+          <p class="claude-card-copy">O fluxo e bidirecional. Voce pode pedir ao Claude para criar componentes, diagramas e prototipos direto no Figma.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider" id="setup">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">01</div>
+        <div>
+          <h2 class="claude-section-title">Setup: conectando Figma ao Claude Code</h2>
+          <p class="claude-section-intro">
+            O Figma MCP e oficial da Anthropic e ja vem disponivel no Claude Code. Basta autorizar.
+          </p>
+        </div>
+      </div>
+
+      <ol class="claude-step-list">
+        <li>
+          <strong class="claude-step-title">Abra o Claude Code no seu projeto</strong>
+          <p class="claude-step-copy">
+            Navegue ate a pasta do projeto e rode <span class="claude-inline-code">claude</span>. O MCP do Figma ja esta registrado automaticamente.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Cole a URL do Figma no prompt</strong>
+          <p class="claude-step-copy">
+            Copie a URL do frame ou componente no Figma (ex: <span class="claude-inline-code">figma.com/design/ABC123/...</span>) e cole direto no chat. O Claude detecta automaticamente que e uma URL do Figma.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Autorize o acesso na primeira vez</strong>
+          <p class="claude-step-copy">
+            Na primeira chamada, o Claude vai pedir autorizacao para acessar o Figma. Aceite a permissao — ela vale para toda a sessao.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Pronto. O Claude ja le o canvas.</strong>
+          <p class="claude-step-copy">
+            A partir daqui, voce pode pedir para extrair tokens, gerar componentes, comparar design com codigo existente e muito mais.
+          </p>
+        </li>
+      </ol>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Importante:</strong> voce nao precisa instalar nenhum plugin, pacote npm ou configurar servidor MCP manualmente. O Figma MCP e nativo do Claude Code.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">02</div>
+        <div>
+          <h2 class="claude-section-title">Extraindo o design system</h2>
+          <p class="claude-section-intro">
+            O primeiro uso pratico: transformar o que esta no Figma em tokens, variaveis CSS e componentes reais do seu projeto.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">O que o MCP extrai</h3>
+          <ul class="claude-checklist mt-24">
+            <li><strong>Cores</strong> — paleta completa com nomes de variaveis do Figma e valores hex/rgba.</li>
+            <li><strong>Tipografia</strong> — font families, sizes, weights, line-heights e letter-spacings.</li>
+            <li><strong>Espacamento</strong> — padding, gap e margin dos auto-layouts.</li>
+            <li><strong>Border radius</strong> — valores exatos de cada componente.</li>
+            <li><strong>Efeitos</strong> — shadows, blurs e opacidades aplicadas.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Como pedir</h3>
+          <ul class="claude-checklist mt-24">
+            <li>"Extrai o design system desse arquivo do Figma" + URL</li>
+            <li>"Gera as CSS variables baseado nesse frame"</li>
+            <li>"Quais sao os tokens de cor e tipografia desse design?"</li>
+            <li>"Cria um arquivo de theme baseado nesse Figma"</li>
+            <li>"Compara esse design com meu CSS atual e mostra as diferencas"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="claude-surface claude-surface-soft mt-24">
+        <h3 class="claude-card-title">Exemplo de resultado</h3>
+        <p class="claude-card-copy mt-24">
+          Ao colar uma URL e pedir para extrair tokens, o Claude gera algo como:
+        </p>
+        <div class="guide-code-block mt-24">
+          <code>:root {
+  /* Colors — extraido do Figma */
+  --color-primary: #1a1a1a;
+  --color-secondary: #6e6e6e;
+  --color-accent: #2563eb;
+  --color-surface: #f7f7f7;
+  --color-border: #e5e5e5;
+
+  /* Typography */
+  --font-heading: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-size-hero: 3rem;
+  --font-size-h2: 1.75rem;
+  --font-size-body: 1rem;
+  --line-height-tight: 1.1;
+  --line-height-normal: 1.6;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 48px;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-full: 100px;
+}</code>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">03</div>
+        <div>
+          <h2 class="claude-section-title">Design-to-code: do frame ao componente</h2>
+          <p class="claude-section-intro">
+            O fluxo principal. Voce aponta um frame no Figma e o Claude gera o componente pronto, adaptado ao stack do seu projeto.
+          </p>
+        </div>
+      </div>
+
+      <ol class="claude-step-list">
+        <li>
+          <strong class="claude-step-title">Selecione o frame no Figma</strong>
+          <p class="claude-step-copy">
+            Clique no componente ou frame que quer transformar em codigo. Copie a URL com o node selecionado (o <span class="claude-inline-code">?node-id=</span> aparece automaticamente).
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Cole no Claude Code com instrucao</strong>
+          <p class="claude-step-copy">
+            Exemplo: "Implementa esse card como componente React seguindo meu design system" + URL. O Claude usa <span class="claude-inline-code">get_design_context</span> para ler o frame.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Claude analisa a arvore de nodes</strong>
+          <p class="claude-step-copy">
+            O MCP retorna a estrutura hierarquica do frame (layers, auto-layout, fills, strokes, text nodes), alem de um screenshot para referencia visual.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Codigo gerado e adaptado ao projeto</strong>
+          <p class="claude-step-copy">
+            O Claude nao gera codigo generico. Ele verifica seu codebase, encontra componentes existentes, tokens ja definidos e padroes de layout — e reutiliza tudo.
+          </p>
+        </li>
+      </ol>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Dica:</strong> quanto mais organizado o Figma (auto-layout, nomes claros, variaveis de design), melhor o codigo gerado. Frames com posicionamento absoluto e cores hardcoded produzem resultados mais genericos.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">04</div>
+        <div>
+          <h2 class="claude-section-title">Code Connect: mapeando componentes</h2>
+          <p class="claude-section-intro">
+            O recurso que torna o fluxo repetitivo muito mais eficiente. Voce vincula um componente do Figma a um componente do seu codebase — uma vez — e o Claude sempre usa o certo.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">O que e Code Connect</h3>
+          <p class="claude-card-copy mt-24">
+            E um mapeamento persistente entre componentes do Figma e componentes do codigo. Quando o Claude encontra um componente mapeado no design, ele usa diretamente o import do seu projeto em vez de recriar do zero.
+          </p>
+          <p class="claude-card-copy mt-24">
+            Exemplo: o componente "Button/Primary" no Figma fica vinculado a <span class="claude-inline-code">&lt;Button variant="primary" /&gt;</span> do seu codebase.
+          </p>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Como configurar</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Peca ao Claude: "Configura Code Connect para esse arquivo do Figma"</li>
+            <li>Ele vai sugerir mapeamentos entre componentes do Figma e do codigo</li>
+            <li>Voce confirma, ajusta ou adiciona mapeamentos manualmente</li>
+            <li>Os mapeamentos ficam salvos e sao usados em todas as proximas geracoes</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="claude-surface claude-surface-soft mt-24">
+        <h3 class="claude-card-title">Comandos uteis</h3>
+        <table class="claude-compact-table mt-24">
+          <tr>
+            <td>Ver mapeamentos</td>
+            <td>"Mostra os Code Connect mappings atuais"</td>
+          </tr>
+          <tr>
+            <td>Adicionar mapping</td>
+            <td>"Mapeia o componente X do Figma para o componente Y do meu codigo"</td>
+          </tr>
+          <tr>
+            <td>Sugestoes automaticas</td>
+            <td>"Sugere Code Connect mappings para esse arquivo do Figma"</td>
+          </tr>
+          <tr>
+            <td>Gerar com mappings</td>
+            <td>"Implementa essa tela usando os Code Connect mappings" + URL</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <hr class="guide-divider" id="code-to-canvas">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">05</div>
+        <div>
+          <h2 class="claude-section-title">Code-to-canvas: escrevendo de volta no Figma</h2>
+          <p class="claude-section-intro">
+            O fluxo inverso. Voce pede ao Claude para criar ou modificar elementos diretamente no canvas do Figma.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Criar arquivos</h3>
+          <p class="claude-card-copy">O Claude pode criar novos arquivos no Figma a partir de descricoes textuais ou baseado em codigo existente.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Gerar diagramas</h3>
+          <p class="claude-card-copy">Diagramas de arquitetura, fluxos de usuario e wireframes criados direto no FigJam a partir de instrucoes no prompt.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Design system rules</h3>
+          <p class="claude-card-copy">Definir regras do design system no Figma que o Claude segue automaticamente em geracoes futuras.</p>
+        </div>
+      </div>
+
+      <div class="claude-surface mt-24">
+        <h3 class="claude-card-title">Exemplos praticos de code-to-canvas</h3>
+        <ul class="claude-checklist mt-24">
+          <li>"Cria um diagrama de arquitetura do meu projeto no FigJam"</li>
+          <li>"Gera um wireframe dessa feature no Figma baseado na minha descricao"</li>
+          <li>"Cria as design system rules no Figma baseado no meu CSS atual"</li>
+          <li>"Atualiza os tokens de cor no Figma para refletir as mudancas que fiz no codigo"</li>
+          <li>"Cria um novo arquivo no Figma com os componentes que implementei"</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">06</div>
+        <div>
+          <h2 class="claude-section-title">Figma Console: controle total via codigo</h2>
+          <p class="claude-section-intro">
+            Para quem quer ir alem do MCP oficial, o Figma Console MCP permite executar codigo diretamente no Figma — criar componentes, manipular layers, instanciar da biblioteca e mais.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">O que voce pode fazer</h3>
+          <ul class="claude-checklist mt-24">
+            <li><strong>Criar componentes</strong> — frames, textos, shapes e component sets programaticamente.</li>
+            <li><strong>Instanciar da biblioteca</strong> — buscar componentes existentes e criar instancias.</li>
+            <li><strong>Manipular propriedades</strong> — fills, strokes, auto-layout, constraints, tudo via codigo.</li>
+            <li><strong>Capturar screenshots</strong> — validar visualmente apos cada modificacao.</li>
+            <li><strong>Gerenciar variaveis</strong> — criar, editar e deletar design tokens direto no Figma.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Quando usar</h3>
+          <ul class="claude-checklist mt-24">
+            <li><strong>Batch operations</strong> — criar 20 variantes de um componente de uma vez.</li>
+            <li><strong>Design system audit</strong> — verificar consistencia de tokens e componentes.</li>
+            <li><strong>Prototipagem rapida</strong> — gerar telas inteiras a partir de descricoes.</li>
+            <li><strong>Sincronizacao</strong> — manter tokens do Figma alinhados com o codigo.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Prerequisito:</strong> o Figma Console MCP requer o plugin do Figma Console instalado no seu Figma. Diferente do MCP oficial, ele executa codigo diretamente na API do plugin.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">07</div>
+        <div>
+          <h2 class="claude-section-title">Workflow completo na pratica</h2>
+          <p class="claude-section-intro">
+            O ciclo ideal quando voce usa Figma + Claude Code juntos no dia a dia.
+          </p>
+        </div>
+      </div>
+
+      <ol class="claude-step-list">
+        <li>
+          <strong class="claude-step-title">Designer finaliza o frame no Figma</strong>
+          <p class="claude-step-copy">
+            Com auto-layout, variaveis de design, nomes claros e componentes da biblioteca. Quanto mais estruturado, melhor o output.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Dev cola a URL no Claude Code</strong>
+          <p class="claude-step-copy">
+            "Implementa essa tela" + URL. O Claude le o design, identifica componentes existentes via Code Connect e gera o codigo adaptado ao projeto.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Claude gera e voce revisa</strong>
+          <p class="claude-step-copy">
+            O codigo ja usa seus tokens, seus componentes e seus padroes. Voce revisa, ajusta detalhes e comita.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Mudancas no codigo refletem no Figma</strong>
+          <p class="claude-step-copy">
+            Se voce mudou tokens, cores ou componentes no codigo, pode pedir ao Claude para sincronizar de volta no Figma.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Design system rules garantem consistencia</strong>
+          <p class="claude-step-copy">
+            Defina regras no Figma que o Claude segue automaticamente — nomes de classes, padroes de componentes, grid systems.
+          </p>
+        </li>
+      </ol>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">08</div>
+        <div>
+          <h2 class="claude-section-title">Dicas para fidelidade maxima</h2>
+          <p class="claude-section-intro">
+            O que fazer no Figma para que o Claude gere codigo mais fiel ao design.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Faca isso</h3>
+          <ul class="claude-do mt-24">
+            <li>Use auto-layout em tudo — ele vira flexbox/grid no codigo.</li>
+            <li>Nomeie layers com clareza — "hero-section", "card-title", nao "Frame 427".</li>
+            <li>Use variaveis de design para cores e espacamento — viram CSS variables.</li>
+            <li>Organize componentes na biblioteca — o Code Connect funciona melhor.</li>
+            <li>Adicione annotations em frames complexos — o Claude le e segue as instrucoes.</li>
+            <li>Use fill container em vez de hug contents quando fizer sentido.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Evite isso</h3>
+          <ul class="claude-dont mt-24">
+            <li>Posicionamento absoluto sem necessidade — gera codigo fragil.</li>
+            <li>Cores hardcoded fora de variaveis — o Claude nao tem como nomear.</li>
+            <li>Layers com nomes genericos (Frame 1, Group 2) — perdem semantica.</li>
+            <li>Fontes que nao estao no projeto — o Claude vai referenciar e nao vai funcionar.</li>
+            <li>Efeitos complexos sem fallback — nem tudo traduz 1:1 para CSS.</li>
+            <li>Componentes soltos fora de frames — perde contexto de layout.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">09</div>
+        <div>
+          <h2 class="claude-section-title">Prompts que funcionam bem</h2>
+          <p class="claude-section-intro">
+            Prompts reais que voce pode copiar e adaptar para o seu fluxo.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tr>
+            <td>Extrair tokens</td>
+            <td>"Extrai todos os design tokens desse arquivo do Figma e gera um arquivo CSS variables" + URL</td>
+          </tr>
+          <tr>
+            <td>Gerar componente</td>
+            <td>"Implementa esse componente como React + Tailwind, reutilizando o que ja existe no projeto" + URL com node-id</td>
+          </tr>
+          <tr>
+            <td>Tela completa</td>
+            <td>"Implementa essa tela inteira. Use os componentes que ja existem e crie novos so quando necessario" + URL</td>
+          </tr>
+          <tr>
+            <td>Comparar</td>
+            <td>"Compara minha implementacao atual com esse design do Figma e lista as diferencas visuais" + URL</td>
+          </tr>
+          <tr>
+            <td>Code Connect</td>
+            <td>"Analisa meus componentes React e sugere Code Connect mappings para os componentes do Figma" + URL</td>
+          </tr>
+          <tr>
+            <td>Diagrama</td>
+            <td>"Gera um diagrama de arquitetura do meu projeto no FigJam mostrando as dependencias entre modulos"</td>
+          </tr>
+          <tr>
+            <td>Sync reverso</td>
+            <td>"Meu CSS mudou essas variaveis. Atualiza os tokens correspondentes no Figma" + URL</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section fade-in fade-in-d4">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Design system fiel e so o comeco.</h2>
+        <p class="claude-card-copy mt-24">
+          No SINAPSE voce aprende a montar operacao completa com agentes — do design ao deploy, com consistencia e velocidade que nao existe fazendo na mao.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Entrar no SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="guide-footer fade-in fade-in-d4">
+      <p>Criado por <span class="guide-author">Caio Imori</span></p>
+      <p style="margin-top: 8px;">Guia pratico para conectar Figma ao Claude Code, extrair design systems e usar o fluxo bidirecional code-to-canvas.</p>
+    </footer>
+  </article>
+</body>
+</html>
