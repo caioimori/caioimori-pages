@@ -3,338 +3,553 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brand Skills no Claude Code — Gerar documentos on-brand automaticamente</title>
-  <meta name="description" content="Aprenda a criar brand skills no Claude Code para gerar PDFs, apresentações e landing pages que respeitam sua identidade visual automaticamente.">
-  <meta name="keywords" content="Claude Code, brand skills, automação, design system, documentos on-brand">
-  <link rel="stylesheet" href="../assets/css/guide.css">
-  <style>
-    .cta-subtle {
-      display: inline-block;
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      text-decoration: none;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 2px;
-      transition: all 0.2s ease;
-    }
-
-    .cta-subtle:hover {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
-    }
-
-    .cta-primary {
-      display: inline-block;
-      background: var(--text-primary) !important;
-      color: #ffffff !important;
-      border: none !important;
-      padding: 14px 28px !important;
-      font-size: 1rem !important;
-      font-weight: 600 !important;
-      border-radius: 100px !important;
-      text-decoration: none !important;
-      cursor: pointer !important;
-      transition: all 0.2s ease !important;
-      margin-top: 24px !important;
-    }
-
-    .cta-primary:hover {
-      transform: scale(0.97) !important;
-      opacity: 0.9 !important;
-    }
-
-    .cta-primary:active {
-      transform: scale(0.95) !important;
-    }
-
-    .step-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-right: 12px;
-      flex-shrink: 0;
-    }
-
-    .step-item {
-      display: flex;
-      margin-bottom: 24px;
-      gap: 16px;
-    }
-
-    .step-content h4 {
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-    }
-
-    .step-content p {
-      color: var(--text-secondary);
-      margin: 0;
-    }
-
-    .usecase-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 20px;
-    }
-
-    .usecase-card h4 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 12px;
-    }
-
-    .usecase-card p {
-      color: var(--text-secondary);
-      margin: 8px 0;
-      line-height: 1.6;
-    }
-
-    .usecase-card .example {
-      background: var(--bg-tertiary);
-      border-left: 3px solid var(--accent);
-      padding: 12px 16px;
-      margin-top: 16px;
-      border-radius: 4px;
-      font-size: 0.9375rem;
-      color: var(--text-secondary);
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Mono', ui-monospace, monospace;
-    }
-
-    .tip-box {
-      background: #f0f9ff;
-      border-left: 4px solid #0284c7;
-      padding: 16px 20px;
-      border-radius: 8px;
-      margin: 24px 0;
-    }
-
-    .tip-box strong {
-      color: #0284c7;
-      font-weight: 600;
-    }
-
-    .tip-box p {
-      color: var(--text-secondary);
-      margin: 8px 0 0 0;
-      font-size: 0.9375rem;
-    }
-
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin: 48px 0;
-    }
-
-    ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    li {
-      padding-left: 24px;
-      margin-bottom: 12px;
-      position: relative;
-      color: var(--text-secondary);
-    }
-
-    li:before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      font-weight: 600;
-      color: var(--accent);
-    }
-  </style>
+  <title>Brand Skills no Claude Code - Gerar documentos on-brand automaticamente</title>
+  <meta name="description" content="Guia prático sobre como criar brand skills no Claude Code para gerar PDFs, apresentações e landing pages que respeitam sua identidade visual automaticamente.">
+  <link rel="stylesheet" href="../../assets/css/guide.css">
 </head>
-<body>
-  <div class="guide">
-    <!-- Top CTA Subtle -->
-    <div style="margin-bottom: 24px; text-align: center;">
-      <a href="https://sinapse.club" class="cta-subtle">Explore brand skills no sinapse.club</a>
-    </div>
+<body class="guide-theme-claude">
+  <article class="guide claude-shell">
 
-    <!-- Badge -->
-    <span class="guide-badge">Guia Prático</span>
-
-    <!-- Hero Title -->
-    <h1 class="guide-hero-title">Brand Skills no Claude Code</h1>
-
-    <!-- Subtitle -->
-    <p class="guide-subtitle">Gere qualquer documento já seguindo sua identidade visual automaticamente</p>
-
-    <!-- Intro -->
-    <div class="guide-section">
-      <p style="font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.7;">
-        Imagine criar um PDF de relatório, uma apresentação de pitch ou um mockup de landing page, e tudo já sair alinhado com suas cores, fontes e espaçamento. Sem designer revisar. Sem edições manuais de design.
-      </p>
-      <p style="color: var(--text-secondary); margin-top: 12px;">
-        Essa é a promessa das <strong>brand skills no Claude Code</strong>: você empacota suas brand guidelines uma vez, e todo documento gerado pelo Claude Code respeita sua identidade visual automaticamente.
-      </p>
-    </div>
-
-    <!-- What are Brand Skills -->
-    <div class="guide-section">
-      <h2 style="font-size: 1.75rem; font-weight: 600; color: var(--text-primary); margin-bottom: 16px; letter-spacing: -0.02em;">O que é uma Brand Skill?</h2>
-
-      <p style="color: var(--text-secondary); margin-bottom: 16px;">
-        Uma <strong>brand skill</strong> é um pacote de guidelines compilado que você envia para o Claude Code uma vez. Ele contém:
-      </p>
-
-      <ul style="margin-bottom: 16px;">
-        <li><strong>Paleta de cores:</strong> Todos os hexadecimais da marca (primária, secundária, acentos)</li>
-        <li><strong>Tipografia:</strong> Fonts usadas, pesos, tamanhos para cada elemento</li>
-        <li><strong>Spacing:</strong> Margens, paddings, gaps entre elementos</li>
-        <li><strong>Componentes:</strong> Botões, cards, badges, dividers já estilizados</li>
-        <li><strong>Tom de voz:</strong> Instruções sobre como escrever em documentos</li>
-      </ul>
-
-      <p style="color: var(--text-secondary);">
-        Uma vez configurada, a skill funciona como um <em>"estilo padrão"</em> para qualquer geração de documento. PDF fica com suas cores. Apresentação respeita sua tipografia. Landing page sai com seu spacing.
-      </p>
-
-      <div class="tip-box">
-        <strong>Por que isso importa?</strong>
-        <p>Consistência visual é o que separa marcas profissionais de amadoras. Brand skills elimina o trabalho manual de revisar design em cada documento — o agente cria tudo certo de primeira.</p>
+    <header class="guide-section claude-hero fade-in">
+      <div class="claude-kicker-row">
+        <span class="guide-badge">Guia prático</span>
+        <span class="claude-meta-pill">Brand automation em 2026</span>
       </div>
-    </div>
 
-    <div class="divider"></div>
+      <div class="claude-hero-grid">
+        <div>
+          <p class="claude-overline">Claude Code // Design Automation</p>
+          <h1 class="guide-hero-title claude-headline">Brand Skills — Documentos on-brand em segundos</h1>
+          <p class="guide-subtitle claude-subtitle">
+            Crie uma <strong>brand skill</strong> uma vez e deixe o Claude Code gerar PDFs, apresentações e landing pages já alinhados com sua identidade visual. Sem designer revisar design em cada documento.
+          </p>
 
-    <!-- Tutorial -->
-    <div class="guide-section">
-      <h2 style="font-size: 1.75rem; font-weight: 600; color: var(--text-primary); margin-bottom: 24px; letter-spacing: -0.02em;">Tutorial: Crie sua Brand Skill em menos de 10 minutos</h2>
+          <div class="claude-actions">
+            <a href="#what-is" class="guide-cta">O que é brand skill</a>
+            <a href="#tutorial" class="guide-cta-secondary">Tutorial em 4 passos</a>
+          </div>
+        </div>
 
-      <div class="step-item">
-        <span class="step-number">1</span>
-        <div class="step-content">
-          <h4>Levante seus brand guidelines</h4>
-          <p>Abra seu design system (Figma, notion, ou até Google Docs com sua paleta + tipografia) e tenha à mão:</p>
-          <ul style="margin-top: 8px; margin-left: 0;">
-            <li>Cores exatas (hex codes)</li>
-            <li>Fonts que você usa</li>
-            <li>Tamanhos de fonte (hero, heading, body)</li>
-            <li>Espaçamentos padrão</li>
+        <aside class="claude-panel">
+          <div>
+            <span class="claude-meta-pill">TL;DR</span>
+            <h2 class="claude-panel-title" style="margin-top: 18px;">Resumo rápido</h2>
+            <p class="claude-panel-copy">
+              Brand skill é um pacote com suas cores, fontes e spacing que o Claude Code usa automaticamente em qualquer geração de documento.
+            </p>
+          </div>
+
+          <ul class="claude-facts">
+            <li><strong>Tempo:</strong> Configurar leva menos de 10 minutos.</li>
+            <li><strong>Reutilizável:</strong> Uma skill funciona em PDFs, apresentações e mockups.</li>
+            <li><strong>Resultado:</strong> Agente já sai gerando documentos on-brand de primeira.</li>
+            <li><strong>Valor:</strong> Libera designer para criatividade, agente cuida da execução visual.</li>
           </ul>
+        </aside>
+      </div>
+
+      <div class="claude-stats">
+        <div class="claude-stat">
+          <span class="claude-stat-label">Tempo economizado</span>
+          <span class="claude-stat-value">90%</span>
+          <p>Documentos saem sem revisão manual de design.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Casos de uso</span>
+          <span class="claude-stat-value">3+</span>
+          <p>PDFs, apresentações, landing pages, mockups.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Configuração</span>
+          <span class="claude-stat-value">&lt;10 min</span>
+          <p>Levanta guidelines e empacota como skill.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Consistência</span>
+          <span class="claude-stat-value">100%</span>
+          <p>Toda geração respeita sua brand automaticamente.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="guide-section fade-in fade-in-d1">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Quer ir além da automação visual e estruturar operação inteira?</h2>
+        <p class="claude-card-copy mt-24">
+          Brand skills é um começo. O real é quando agentes geram documentos, PDFs, apresentações e estratégia toda automaticamente alinhada com sua marca e operação.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta">Conhecer o SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section claude-section fade-in fade-in-d1" id="what-is">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">00</div>
+        <div>
+          <h2 class="claude-section-title">O que é uma brand skill em 30 segundos</h2>
+          <p class="claude-section-intro">
+            Se você quer o atalho sem ler o guia inteiro, saiba isso.
+          </p>
         </div>
       </div>
 
-      <div class="step-item">
-        <span class="step-number">2</span>
-        <div class="step-content">
-          <h4>Crie um arquivo BRAND.yaml</h4>
-          <p>No Claude Code, crie um novo arquivo na raiz do projeto com este formato:</p>
-          <div class="example">
-name: "Minha Marca"
+      <p style="margin-bottom: 24px;">
+        Uma <strong>brand skill</strong> é um arquivo (YAML ou JSON) que contém suas brand guidelines — cores, fontes, spacing, tom de voz — compilado em um pacote que você envia pro Claude Code.
+      </p>
+
+      <ol class="claude-step-list">
+        <li>
+          <strong class="claude-step-title">Você levanta suas guidelines</strong>
+          <p class="claude-step-copy">
+            Paleta de cores (hex codes), fontes que você usa, tamanhos de texto, spacing padrão, tom de voz.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Empacota em BRAND.yaml</strong>
+          <p class="claude-step-copy">
+            Cria um arquivo estruturado com todas as informações.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Cria uma skill no Claude Code</strong>
+          <p class="claude-step-copy">
+            Comando <span class="claude-inline-code">/skill-create</span> transforma o YAML em uma skill reutilizável.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Pede documentos usando a skill</strong>
+          <p class="claude-step-copy">
+            Diz ao agente: <em>"Gera isso usando minha brand skill"</em>. Tudo sai on-brand.
+          </p>
+        </li>
+      </ol>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Valor real:</strong> Você não precisa mais de designer revisar contraste, cores, tipografia em cada documento. O agente já sabe como desenhar.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d1">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">01</div>
+        <div>
+          <h2 class="claude-section-title">Por que brand skills importam</h2>
+          <p class="claude-section-intro">
+            Três problemas que brand skills resolve.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">❌ Documentos inconsistentes</h3>
+          <p class="claude-card-copy">Agente gera PDF com cores erradas, designer revisa, volta pro agente. Cycle infinito.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">❌ Designer vira gargalo</h3>
+          <p class="claude-card-copy">Toda geração de documento precisa passar por designer para verificar design. Matador de velocidade.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">❌ Tempo perdido em execução</h3>
+          <p class="claude-card-copy">Designer deveria fazer criatividade estratégica. Acaba fazendo revisão tática de botões.</p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid mt-24">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Com brand skill</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Agente já sabe suas cores, fontes, spacing.</li>
+            <li>Documento sai on-brand de primeira.</li>
+            <li>Designer revisa estratégia, não pixel.</li>
+            <li>Velocidade 90% mais rápida.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Sem brand skill</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Agente gera documento com cores aleatórias.</li>
+            <li>Designer revisa e corrige design.</li>
+            <li>Volta pro agente, iteração infinita.</li>
+            <li>2-3 horas por documento.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2" id="tutorial">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">02</div>
+        <div>
+          <h2 class="claude-section-title">Tutorial: Crie sua brand skill em 4 passos</h2>
+          <p class="claude-section-intro">
+            Menos de 10 minutos do zero ao agente gerando documentos com sua marca.
+          </p>
+        </div>
+      </div>
+
+      <ol class="claude-step-list">
+        <li>
+          <strong class="claude-step-title">Levante suas brand guidelines</strong>
+          <p class="claude-step-copy">
+            Abra seu design system (Figma, Notion, Google Docs) e anote:
+          </p>
+          <ul class="claude-checklist mt-24" style="margin-left: 0;">
+            <li>Cores exatas (hex codes): primária, secundária, acentos</li>
+            <li>Fonts que você usa (ex: Inter, SF Pro, Helvetica Neue)</li>
+            <li>Tamanhos de texto: hero (3rem), heading (1.75rem), body (1rem), small (0.875rem)</li>
+            <li>Spacing padrão: margins, paddings, gaps entre elementos</li>
+            <li>Tom de voz: tom formal, casual, técnico?</li>
+          </ul>
+        </li>
+
+        <li>
+          <strong class="claude-step-title">Crie um arquivo BRAND.yaml</strong>
+          <p class="claude-step-copy">
+            Na raiz do seu projeto, crie um arquivo com essa estrutura:
+          </p>
+          <div class="guide-code-block mt-24">
+            <code>name: "Minha Marca"
 colors:
   primary: "#1a1a1a"
   secondary: "#f7f7f7"
   accent: "#2997ff"
+  success: "#16a34a"
+  warning: "#f59e0b"
+  error: "#ef4444"
 typography:
-  heading: "Inter, 700"
-  body: "Inter, 400"
+  heading_font: "Inter"
+  body_font: "Inter"
+  heading_weight: 600
+  body_weight: 400
+  base_size: "1rem"
 spacing:
   unit: "4px"
-  section-gap: "48px"
+  section_gap: "48px"
+  component_gap: "16px"
+voice:
+  tone: "Professional and approachable"
+  style: "Clear, concise, action-oriented"</code>
           </div>
+        </li>
+
+        <li>
+          <strong class="claude-step-title">Crie uma skill no Claude Code</strong>
+          <p class="claude-step-copy">
+            Execute o comando para empacotar seu BRAND.yaml como skill:
+          </p>
+          <div class="guide-code-block mt-24">
+            <code>claude /skill-create --name brand-guidelines --file BRAND.yaml</code>
+          </div>
+          <p class="claude-card-copy" style="margin-top: 12px;">Isso transforma seu arquivo em uma skill reutilizável dentro do Claude Code.</p>
+        </li>
+
+        <li>
+          <strong class="claude-step-title">Teste gerando um documento</strong>
+          <p class="claude-step-copy">
+            Peça ao agente para gerar algo usando sua skill:
+          </p>
+          <div class="guide-code-block mt-24">
+            <code>Gera um PDF de relatório mensal usando minha brand skill (brand-guidelines)</code>
+          </div>
+          <p class="claude-card-copy" style="margin-top: 12px;">O agente vai gerar um PDF já com suas cores, fontes e spacing.</p>
+        </li>
+      </ol>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Dica de ouro:</strong> Se você já tem um design system no Figma, extraia as variáveis diretamente e converta para YAML. Economiza tempo em projetos grandes com 100+ tokens de design.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">03</div>
+        <div>
+          <h2 class="claude-section-title">3 casos de uso práticos</h2>
+          <p class="claude-section-intro">
+            Onde brand skills economizam mais tempo na prática.
+          </p>
         </div>
       </div>
 
-      <div class="step-item">
-        <span class="step-number">3</span>
-        <div class="step-content">
-          <h4>Crie uma skill no Claude Code</h4>
-          <p>No Claude Code, use o comando <code style="background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;">/skill-create</code> para empacotar seu BRAND.yaml como uma skill reutilizável.</p>
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">📄 PDFs de Relatório</h3>
+          <p class="claude-card-copy">Relatório mensal, proposta comercial, documento financeiro. Tudo sai profissional e branded.</p>
+          <ul class="claude-checklist mt-24">
+            <li><strong>Antes:</strong> Designer revisa contraste, alinha cores, 2-3 horas.</li>
+            <li><strong>Depois:</strong> Agente gera PDF on-brand, 5 minutos.</li>
+            <li><strong>Ganho:</strong> 90% de tempo economizado.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">🎬 Apresentações</h3>
+          <p class="claude-card-copy">Deck de pitch para investidores, apresentação interna, workshop. Com sua marca.</p>
+          <ul class="claude-checklist mt-24">
+            <li><strong>Antes:</strong> Montar template, aplicar brand, design de slides. 4-5 horas.</li>
+            <li><strong>Depois:</strong> Agente gera apresentação formatada, 15 minutos.</li>
+            <li><strong>Ganho:</strong> 85% de tempo economizado.</li>
+          </ul>
         </div>
       </div>
 
-      <div class="step-item">
-        <span class="step-number">4</span>
-        <div class="step-content">
-          <h4>Teste gerando um documento</h4>
-          <p>Peça ao Claude Code para gerar um PDF, uma apresentação ou um mockup. Diga: <em>"Gera isso usando minha brand skill"</em>. O agente vai aplicar suas cores e tipografia automaticamente.</p>
+      <div class="claude-surface mt-24">
+        <h3 class="claude-card-title">🌐 Landing Page Mockups</h3>
+        <p class="claude-card-copy">Validar ideia de página rapidamente sem envolver designer.</p>
+        <ul class="claude-checklist mt-24">
+          <li><strong>Antes:</strong> Descrever para designer, esperar mockup, revisar, iterar. 1-2 dias.</li>
+          <li><strong>Depois:</strong> Agente gera mockup HTML on-brand, 10 minutos. Você testa em 30 minutos.</li>
+          <li><strong>Ganho:</strong> 92% de tempo economizado.</li>
+        </ul>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Padrão em todos:</strong> Brand skills eliminam comunicação de design — o agente já sabe como desenhar. Você libera designer para criatividade e deixa execução tática com o agente.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">04</div>
+        <div>
+          <h2 class="claude-section-title">Estrutura de um BRAND.yaml completo</h2>
+          <p class="claude-section-intro">
+            Exemplo real que você pode colar e adaptar.
+          </p>
         </div>
       </div>
 
-      <div class="tip-box">
-        <strong>Dica:</strong>
-        <p>Se você já tem um design system no Figma, extraia as variáveis diretamente e converta para YAML. Economiza tempo — especialmente em projetos grandes com 100+ tokens.</p>
+      <div class="guide-code-block">
+        <code>name: "Sinapse AI"
+version: "1.0"
+
+colors:
+  primary: "#1a1a1a"
+  secondary: "#f7f7f7"
+  accent: "#2997ff"
+  success: "#16a34a"
+  warning: "#f59e0b"
+  error: "#ef4444"
+  neutral:
+    50: "#f9fafb"
+    100: "#f3f4f6"
+    200: "#e5e7eb"
+    300: "#d1d5db"
+    400: "#9ca3af"
+    500: "#6b7280"
+
+typography:
+  heading_font: "Inter"
+  body_font: "Inter"
+  code_font: "SF Mono"
+  sizes:
+    hero: "3rem"
+    h1: "2.25rem"
+    h2: "1.875rem"
+    h3: "1.5rem"
+    body: "1rem"
+    small: "0.875rem"
+  weights:
+    heading: 600
+    body: 400
+    bold: 700
+
+spacing:
+  unit: "4px"
+  page_padding: "24px"
+  section_gap: "48px"
+  component_gap: "16px"
+  component_padding: "24px"
+
+border_radius:
+  small: "4px"
+  medium: "8px"
+  large: "16px"
+  pill: "100px"
+
+voice:
+  tone: "Professional, approachable, action-oriented"
+  style: "Clear, concise, no jargon"
+  audience: "Builders and creators"</code>
       </div>
-    </div>
+    </section>
 
-    <div class="divider"></div>
+    <hr class="guide-divider">
 
-    <!-- Use Cases -->
-    <div class="guide-section">
-      <h2 style="font-size: 1.75rem; font-weight: 600; color: var(--text-primary); margin-bottom: 24px; letter-spacing: -0.02em;">3 Casos de Uso Práticos</h2>
-
-      <!-- PDF Case -->
-      <div class="usecase-card">
-        <h4>📄 PDFs de Relatório & Propostas</h4>
-        <p>Você precisa gerar um relatório mensal, uma proposta comercial ou um documento financeiro que saia profissional e branded.</p>
-        <div class="example">
-Antes: Designer revisa contraste, alinha cores, ajusta fontes. 2-3 horas.
-Depois: Agente gera PDF já com suas cores e tipografia. 5 minutos.
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">05</div>
+        <div>
+          <h2 class="claude-section-title">Como reutilizar a skill em múltiplos projetos</h2>
+          <p class="claude-section-intro">
+            Uma skill pode servir várias marcas e contextos.
+          </p>
         </div>
-        <p style="margin-top: 12px; color: var(--success); font-weight: 500;">✓ Tempo economizado: 90%</p>
       </div>
 
-      <!-- Presentation Case -->
-      <div class="usecase-card">
-        <h4>🎬 Apresentações & Decks</h4>
-        <p>Precisa de um deck de pitch para investidores, apresentação interna ou workshop. Tudo com sua marca.</p>
-        <div class="example">
-Antes: Montar template PowerPoint/Google Slides, aplicar brand, design dos slides. 4-5 horas.
-Depois: Agente gera apresentação com slides já formatados em sua brand. 15 minutos.
-        </div>
-        <p style="margin-top: 12px; color: var(--success); font-weight: 500;">✓ Tempo economizado: 85%</p>
-      </div>
-
-      <!-- Landing Page Case -->
-      <div class="usecase-card">
-        <h4>🌐 Landing Page Mockups</h4>
-        <p>Você quer validar uma ideia de landing page rapidamente, sem envolver designer.</p>
-        <div class="example">
-Antes: Descrever para designer, esperar mockup, revisar, iterar. 1-2 dias.
-Depois: Agente gera mockup HTML já on-brand. 10 minutos. Você testa em 30 min.
-        </div>
-        <p style="margin-top: 12px; color: var(--success); font-weight: 500;">✓ Tempo economizado: 92%</p>
-      </div>
-
-      <div class="tip-box">
-        <strong>Padrão:</strong>
-        <p>Em todos os casos, brand skills <strong>eliminam comunicação de design</strong> — o agente já sabe como desenhar. Você libera designer para trabalho estratégico (criatividade, UX strategy) e deixa execução tática pro agente.</p>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- Final CTA -->
-    <div class="guide-section" style="text-align: center;">
-      <h3 style="font-size: 1.5rem; font-weight: 600; color: var(--text-primary); margin-bottom: 16px;">Pronto para automatizar sua marca?</h3>
-      <p style="color: var(--text-secondary); margin-bottom: 24px;">
-        Explore brand skills e veja como agentes podem gerar documentos on-brand em segundos.
+      <p style="margin-bottom: 24px;">
+        Depois que você cria uma skill, ela fica disponível em qualquer projeto. Aqui está como:
       </p>
-      <a href="https://sinapse.club" class="cta-primary">Criar minha Brand Skill →</a>
-    </div>
-  </div>
 
-  <!-- Simple analytics -->
-  <script>
-    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
-      // Placeholder for future analytics
-    }
-  </script>
+      <ol class="claude-step-list">
+        <li>
+          <strong class="claude-step-title">Listar suas skills</strong>
+          <p class="claude-step-copy">
+            <span class="claude-inline-code">claude /skill-list</span> mostra todas as skills que você criou.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Reutilizar em outro projeto</strong>
+          <p class="claude-step-copy">
+            Vá para outro repo e peça: <em>"Usa minha brand skill (brand-guidelines)"</em>. O agente puxa a skill existente.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Criar variações</strong>
+          <p class="claude-step-copy">
+            Você pode criar múltiplas skills (brand-guidelines-v2, brand-guidelines-2026, etc) para diferentes épocas ou produtos.
+          </p>
+        </li>
+      </ol>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Benefício:</strong> Você levanta suas guidelines UMA VEZ. Daí em diante, qualquer documento gerado respeita sua marca automaticamente em qualquer contexto.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">06</div>
+        <div>
+          <h2 class="claude-section-title">Erros comuns ao criar brand skills</h2>
+          <p class="claude-section-intro">
+            Armadilhas que a maioria cai na primeira vez.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">❌ Guideline incompleta</h3>
+          <p class="claude-card-copy">Você esqueceu de incluir cores neutras ou tamanhos de fonte. Agente não consegue montar documento completo.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">❌ Hex codes errados</h3>
+          <p class="claude-card-copy">Você copiou a cor errada do Figma. Documento sai com cor diferente da marca.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">❌ Font stack incompleto</h3>
+          <p class="claude-card-copy">Você só listou uma fonte. Se ela não existir, agente usa fallback aleatório.</p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid mt-24">
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Solução: Checklist antes de criar</h3>
+          <ul class="claude-checklist mt-24">
+            <li>✅ Todas as cores principais + neutrals</li>
+            <li>✅ Fonts com fallbacks (Inter, SF Pro, -apple-system)</li>
+            <li>✅ Tamanhos de texto para cada nível (hero, h1, h2, body, small)</li>
+            <li>✅ Spacing units claros (base unit, gaps, padding)</li>
+            <li>✅ Tom de voz descrito (1-2 sentenças)</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Se algo der errado</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Agente gera documento com cores estranhas? Verifica hex codes.</li>
+            <li>Tipografia sai fora? Adiciona font-family completa com fallbacks.</li>
+            <li>Spacing desalinhado? Aumenta unit base (de 4px para 8px).</li>
+            <li>Documento muito compacto? Aumenta section_gap.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">07</div>
+        <div>
+          <h2 class="claude-section-title">Próximos passos após criar sua skill</h2>
+          <p class="claude-section-intro">
+            Depois que brand skill está pronta, o que fazer.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td>Passo 1</td>
+              <td>Gere um PDF de teste (relatório, proposta, documento qualquer) usando a skill.</td>
+            </tr>
+            <tr>
+              <td>Passo 2</td>
+              <td>Compare visual com sua marca. Se tiver erros, ajusta BRAND.yaml e recria skill.</td>
+            </tr>
+            <tr>
+              <td>Passo 3</td>
+              <td>Teste em múltiplos formatos (PDF, HTML, apresentação). Valida consistência.</td>
+            </tr>
+            <tr>
+              <td>Passo 4</td>
+              <td>Compartilha skill com seu time. Todos passam a gerar documentos on-brand automaticamente.</td>
+            </tr>
+            <tr>
+              <td>Passo 5</td>
+              <td>Atualize BRAND.yaml sempre que sua marca evolui (novo logo, paleta revisada, etc).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section fade-in fade-in-d4">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Criou sua brand skill? O próximo nível é orquestração.</h2>
+        <p class="claude-card-copy mt-24">
+          Brand skills automatiza design. Mas o ganho REAL vem quando você automatiza todo o workflow — briefing → geração → publicação → metrics — com agentes coordenados.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta">Entrar no SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="guide-footer fade-in fade-in-d4">
+      <p>Criado por <span class="guide-author">Caio Imori</span></p>
+      <p style="margin-top: 8px;">Guia focado em criação, configuração e reutilização de brand skills no Claude Code para automação visual.</p>
+    </footer>
+  </article>
 </body>
 </html>
