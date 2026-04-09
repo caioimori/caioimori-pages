@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Como colocar seu primeiro agente em produção com Claude Managed Agents - Caio Imori</title>
+  <meta
+    name="description"
+    content="Guia prático para configurar, versionar e colocar seu primeiro agente em produção com Claude Managed Agents, do setup ao deploy."
+  >
+  <link rel="stylesheet" href="../assets/css/guide.css">
+  <style>
+    .claude-hero-grid > * {
+      min-width: 0;
+    }
+
+    .claude-hero-grid {
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.82fr);
+    }
+
+    .claude-headline {
+      max-width: 11ch;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      font-size: clamp(2.6rem, 5.6vw, 4.9rem);
+    }
+
+    @media (max-width: 1024px) {
+      .claude-hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="guide-theme-claude">
+  <article class="guide claude-shell">
+
+    <header class="guide-section claude-hero fade-in">
+      <div class="claude-kicker-row">
+        <span class="guide-badge">Guia prático</span>
+        <span class="claude-meta-pill">Status em 9 de abril de 2026</span>
+      </div>
+
+      <div class="claude-hero-grid">
+        <div>
+          <p class="claude-overline">Claude Managed Agents // Production</p>
+          <h1 class="guide-hero-title claude-headline">Como colocar seu primeiro agente em produção com Claude Managed Agents</h1>
+          <p class="guide-subtitle claude-subtitle">
+            A Anthropic transformou o que antes era um projeto de infraestrutura em um fluxo muito mais direto:
+            você define o <strong>agente</strong>, o <strong>ambiente</strong> e a <strong>sessão</strong>,
+            e deixa a plataforma cuidar do loop, do sandbox e da execução de longo prazo.
+          </p>
+
+          <div class="claude-actions">
+            <a href="#setup" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Começar o setup</a>
+            <a href="#deploy" class="guide-cta-secondary">Ver o deploy</a>
+          </div>
+        </div>
+
+        <aside class="claude-panel">
+          <div>
+            <span class="claude-meta-pill">Checklist mínimo</span>
+            <h2 class="claude-panel-title" style="margin-top: 18px;">O que você precisa para sair do zero</h2>
+            <p class="claude-panel-copy">
+              Se estes quatro pontos estiverem prontos, você já consegue publicar um primeiro fluxo funcional hoje.
+            </p>
+          </div>
+
+          <ul class="claude-facts">
+            <li><strong>Conta:</strong> chave da API gerada no Claude Console.</li>
+            <li><strong>CLI:</strong> o <strong>ant</strong> é o caminho mais rápido para prototipar e versionar recursos.</li>
+            <li><strong>Escopo:</strong> escolha um caso de uso pequeno, com entrada clara e saída observável.</li>
+            <li><strong>Destino:</strong> defina antes se o agente vai devolver texto, arquivo, PR ou artefato estruturado.</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="claude-stats">
+        <div class="claude-stat">
+          <span class="claude-stat-label">Infra</span>
+          <span class="claude-stat-value">Hosted</span>
+          <p>O runtime, o sandbox e o loop do agente rodam na infraestrutura gerenciada da Anthropic.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Blocos</span>
+          <span class="claude-stat-value">4 conceitos</span>
+          <p><strong>Agent</strong>, <strong>Environment</strong>, <strong>Session</strong> e <strong>Events</strong> são a base do produto.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Modelo</span>
+          <span class="claude-stat-value">Sonnet 4.6</span>
+          <p>É um ótimo ponto de partida para custo, velocidade e autonomia no primeiro deploy.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Debug</span>
+          <span class="claude-stat-value">Console + events</span>
+          <p>Você acompanha tudo pela timeline do Console ou pela listagem bruta de eventos da sessão.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="guide-section fade-in fade-in-d1">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Quer sair do "agente demo" e montar operação de verdade?</h2>
+        <p class="claude-card-copy mt-24">
+          No SINAPSE a lógica é essa: menos fascínio por ferramenta isolada, mais sistema, contexto, papel claro e execução em produção.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Conhecer o SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section claude-section fade-in fade-in-d1">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">00</div>
+        <div>
+          <h2 class="claude-section-title">O que o Managed Agents resolve na prática</h2>
+          <p class="claude-section-intro">
+            A grande mudança aqui não é "mais um SDK". É a Anthropic assumir o que normalmente trava um projeto de agentes antes de ele virar produto.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-soft">
+          <h3 class="claude-card-title">Antes</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Você precisava montar o loop do agente sozinho.</li>
+            <li>Tinha que decidir como lidar com contexto, retomada, tool use e falhas.</li>
+            <li>Precisava provisionar sandbox, rede, arquivos e observabilidade.</li>
+            <li>Deploy significava costurar aplicação, infraestrutura e segurança ao mesmo tempo.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Agora</h3>
+          <ul class="claude-checklist mt-24">
+            <li>O agente roda em uma harness gerenciada pela Anthropic.</li>
+            <li>A plataforma cuida de sandbox, compaction, caching e execução longa.</li>
+            <li>Você trabalha com interfaces estáveis: agente, ambiente, sessão e eventos.</li>
+            <li>Seu foco vai para caso de uso, ferramentas, entradas, saídas e produto.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Leitura correta:</strong> Managed Agents é melhor quando o trabalho é assíncrono, de maior duração e com cara de "pega esse objetivo e vai até o fim". Para loops super customizados e controle fino, a Anthropic continua posicionando a <strong>Messages API</strong> como a rota certa.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider" id="setup">
+
+    <section class="guide-section claude-section fade-in fade-in-d1">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">01</div>
+        <div>
+          <h2 class="claude-section-title">O setup mínimo para começar hoje</h2>
+          <p class="claude-section-intro">
+            Se você quer sair do conteúdo e chegar na execução, esta é a linha de montagem mais curta.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">1. Gere sua API key</h3>
+          <p class="claude-card-copy">A chave sai no Claude Console. Separe workspaces por caso de uso e não exponha a key no frontend.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">2. Instale o CLI</h3>
+          <p class="claude-card-copy">Para macOS, a própria documentação recomenda começar com o <strong>ant</strong> via Homebrew.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">3. Escolha um job simples</h3>
+          <p class="claude-card-copy">Exemplo bom: benchmark, revisão de conteúdo, análise de docs, triagem de repo ou QA operacional.</p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid mt-24">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Instale e valide o CLI</h3>
+          <div class="guide-code-block mt-24">
+            <code>brew install anthropics/tap/ant
+ant --version</code>
+          </div>
+          <p class="claude-card-copy">Se você não estiver no macOS, use o instalador equivalente da página oficial do CLI da Anthropic.</p>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Configure a variável de ambiente</h3>
+          <div class="guide-code-block mt-24">
+            <code>echo 'export ANTHROPIC_API_KEY=sk-ant-api03-...' &gt;&gt; ~/.zshrc
+source ~/.zshrc</code>
+          </div>
+          <p class="claude-card-copy">O <strong>ant</strong> lê a chave a partir de <strong>ANTHROPIC_API_KEY</strong>. Se preferir SDK, o mesmo nome de variável continua valendo.</p>
+        </div>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Ponto importante:</strong> os recursos de Managed Agents ainda usam beta versionada. No CLI isso já vem resolvido automaticamente; em HTTP cru, você precisa mandar <span class="claude-inline-code">anthropic-beta: managed-agents-2026-04-01</span>.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">02</div>
+        <div>
+          <h2 class="claude-section-title">Defina o agente como código</h2>
+          <p class="claude-section-intro">
+            O jeito mais limpo de não transformar seu agente em gambiarra é tratá-lo como artefato versionado no repositório.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface claude-surface-soft">
+        <h3 class="claude-card-title">Arquivo: <span class="claude-inline-code">first-agent.agent.yaml</span></h3>
+        <div class="guide-code-block mt-24">
+          <code>name: First Production Agent
+model: claude-sonnet-4-6
+system: |
+  Você é um agente operacional. Receba um objetivo claro, execute o trabalho
+  até o fim, use ferramentas quando precisar e salve a entrega final em
+  /mnt/session/outputs/.
+tools:
+  - type: agent_toolset_20260401
+    default_config:
+      enabled: true
+      permission_policy:
+        type: always_allow</code>
+        </div>
+        <p class="claude-card-copy">
+          O <strong>agent_toolset_20260401</strong> habilita o conjunto pronto de ferramentas do Managed Agents: bash, operações de arquivo, web search e outras primitivas de execução. Para um primeiro fluxo automatizado, essa configuração já te coloca em jogo.
+        </p>
+      </div>
+
+      <div class="claude-split-grid mt-24">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Quando usar esse formato</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Quando você quer iterar rápido e versionar tudo em YAML.</li>
+            <li>Quando vai atualizar o agente em CI/CD depois.</li>
+            <li>Quando precisa de uma base reaproveitável em múltiplas sessões.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Cuidado com permissões</h3>
+          <ul class="claude-checklist mt-24">
+            <li><strong>always_allow</strong> faz sentido em sandbox controlado e caso de uso bem delimitado.</li>
+            <li>Se o job tocar sistemas críticos, endureça a política antes do deploy real.</li>
+            <li>Primeiro agente em produção não significa abrir tudo sem critério.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">03</div>
+        <div>
+          <h2 class="claude-section-title">Defina o ambiente onde ele vai trabalhar</h2>
+          <p class="claude-section-intro">
+            O ambiente é o template do container. É aqui que você escolhe rede, runtime e o grau de liberdade do agente.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <h3 class="claude-card-title">Arquivo: <span class="claude-inline-code">first-agent.environment.yaml</span></h3>
+        <div class="guide-code-block mt-24">
+          <code>name: first-production-env
+config:
+  type: cloud
+  networking:
+    type: unrestricted</code>
+        </div>
+        <p class="claude-card-copy">
+          Para o primeiro agente, <strong>cloud</strong> + <strong>unrestricted</strong> deixa o caminho mais simples, especialmente se você quer usar web search e benchmarks externos. Depois você pode travar isso.
+        </p>
+      </div>
+
+      <div class="claude-split-grid mt-24">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Use <span class="claude-inline-code">unrestricted</span> quando</h3>
+          <ul class="claude-checklist mt-24">
+            <li>O agente precisa consultar web, documentação externa ou endpoints públicos.</li>
+            <li>Você está em protótipo ou em um job de pesquisa com baixo risco operacional.</li>
+            <li>O objetivo é reduzir fricção no primeiro deploy.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Migre para <span class="claude-inline-code">limited</span> quando</h3>
+          <ul class="claude-checklist mt-24">
+            <li>O fluxo já estiver maduro e não depender de saída livre para internet.</li>
+            <li>Você quiser reduzir superfície de risco no ambiente.</li>
+            <li>O agente operar só com arquivos, GitHub montado ou ferramentas específicas.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">04</div>
+        <div>
+          <h2 class="claude-section-title">Crie os recursos e rode a primeira sessão</h2>
+          <p class="claude-section-intro">
+            Aqui é onde a teoria vira agente rodando. Você vai criar o agente, o ambiente, abrir uma sessão e mandar o primeiro job.
+          </p>
+        </div>
+      </div>
+
+      <ol class="claude-step-list">
+        <li>
+          <strong class="claude-step-title">Crie o agente</strong>
+          <p class="claude-step-copy">
+            O CLI devolve um <strong>agent.id</strong>. Guarde isso; ele é o identificador que seu backend vai usar depois.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Crie o ambiente</strong>
+          <p class="claude-step-copy">
+            O ambiente também recebe um ID próprio. Essa separação é o que te permite reaproveitar a mesma configuração em várias sessões.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Abra a sessão</strong>
+          <p class="claude-step-copy">
+            A sessão é a run concreta do trabalho. Pense nela como o job que liga agente e ambiente para executar uma tarefa específica.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Envie o objetivo</strong>
+          <p class="claude-step-copy">
+            O segredo aqui é pedir algo delimitado, com saída clara e critério de término explícito.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Acompanhe até ficar idle</strong>
+          <p class="claude-step-copy">
+            O sinal de término é a sessão ir para <strong>idle</strong>. A partir daí, você decide se retorna resultado, armazena artefato ou dispara outro passo.
+          </p>
+        </li>
+      </ol>
+
+      <div class="guide-code-block mt-24">
+        <code>AGENT_ID=$(ant beta:agents create --transform id --format yaml &lt; first-agent.agent.yaml)
+ENV_ID=$(ant beta:environments create --transform id --format yaml &lt; first-agent.environment.yaml)
+SESSION_ID=$(ant beta:sessions create \
+  --agent "$AGENT_ID" \
+  --environment "$ENV_ID" \
+  --title "Primeiro agente em produção" \
+  --transform id --format yaml)</code>
+      </div>
+
+      <div class="guide-code-block">
+        <code>ant beta:sessions:events send \
+  --session-id "$SESSION_ID" \
+  --event '{type: user.message, content: [{type: text, text: "Pesquise três concorrentes de CRM para PMEs no Brasil, escreva um resumo comparativo em Markdown e salve o resultado em /mnt/session/outputs/benchmark.md."}]}'
+
+ant beta:sessions stream --session-id "$SESSION_ID"</code>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Boa prática:</strong> peça sempre uma saída verificável. "Salve em <span class="claude-inline-code">/mnt/session/outputs/...</span>" ou "pare quando o arquivo existir" reduz muito a chance do agente encerrar sem entrega concreta.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">05</div>
+        <div>
+          <h2 class="claude-section-title">Conecte dados reais sem entregar suas credenciais ao agente</h2>
+          <p class="claude-section-intro">
+            O primeiro deploy fica muito melhor quando você liga o agente em inputs de verdade. A boa notícia é que a plataforma já foi desenhada para isso.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Arquivos</h3>
+          <p class="claude-card-copy">PDFs, CSVs, briefings e anexos entram via Files API e podem ser montados na sessão como recurso de trabalho.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">GitHub</h3>
+          <p class="claude-card-copy">Você pode montar um repositório no container da sessão e conectar o GitHub MCP para abrir PRs e trabalhar no repo.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">MCP e sistemas externos</h3>
+          <p class="claude-card-copy">A Anthropic posiciona MCP como a rota certa para integrar ferramentas e manter autenticação fora do sandbox do agente.</p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid mt-24">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Por que isso importa</h3>
+          <p class="claude-card-copy mt-24">
+            No post de engenharia da Anthropic, a ideia central é separar o "cérebro" das "mãos". Isso evita que o sandbox onde o agente executa código tenha acesso direto aos tokens e segredos da sua operação.
+          </p>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Tradução prática</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Não enfie credencial no prompt.</li>
+            <li>Não trate o sandbox como lugar para segredos.</li>
+            <li>Use recursos de sessão, GitHub MCP e vaults externos como desenho padrão.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider" id="deploy">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">06</div>
+        <div>
+          <h2 class="claude-section-title">Como isso vira deploy de verdade</h2>
+          <p class="claude-section-intro">
+            Produção não é "o agente funcionou uma vez". Produção é conseguir atualizar, observar e reaproveitar esse agente sem depender de ritual manual.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-soft">
+          <h3 class="claude-card-title">O que fica com a Anthropic</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Harness do agente</li>
+            <li>Sandbox e runtime gerenciado</li>
+            <li>Timeline de sessão e eventos</li>
+            <li>Abstração de agent, environment e session</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">O que continua sendo seu</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Qual job dispara o agente</li>
+            <li>Quais entradas e saídas viram produto</li>
+            <li>Guardrails, custo, rate limiting e downstream actions</li>
+            <li>Persistência do resultado para o seu app, CRM, dashboard ou fila</li>
+          </ul>
+        </div>
+      </div>
+
+      <ol class="claude-step-list mt-24">
+        <li>
+          <strong class="claude-step-title">Versione os YAMLs no repositório</strong>
+          <p class="claude-step-copy">
+            <span class="claude-inline-code">*.agent.yaml</span> e <span class="claude-inline-code">*.environment.yaml</span> viram parte do seu deploy, não algo escondido no histórico do terminal.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Sincronize esses recursos no CI/CD</strong>
+          <p class="claude-step-copy">
+            A própria documentação do CLI recomenda criar e atualizar agentes e ambientes como arquivos versionados.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Seu backend cria uma sessão por job</strong>
+          <p class="claude-step-copy">
+            Quando um usuário pede algo no produto, seu backend cria a sessão, envia o evento e acompanha o status.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Escolha stream ou polling</strong>
+          <p class="claude-step-copy">
+            Stream é ótimo para UX ao vivo. Polling é melhor para jobs de background e workers mais robustos.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Persista o resultado fora da sessão</strong>
+          <p class="claude-step-copy">
+            O agente conclui o trabalho; seu produto precisa decidir onde isso vive depois: banco, storage, CMS, GitHub, Slack ou CRM.
+          </p>
+        </li>
+      </ol>
+
+      <div class="guide-code-block mt-24">
+        <code>AGENT_VERSION=$(ant beta:agents retrieve \
+  --agent-id "$AGENT_ID" \
+  --transform version --format yaml)
+
+ant beta:agents update \
+  --agent-id "$AGENT_ID" \
+  --version "$AGENT_VERSION" \
+  &lt; first-agent.agent.yaml
+
+ant beta:environments update \
+  --environment-id "$ENV_ID" \
+  &lt; first-agent.environment.yaml</code>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Resumo honesto:</strong> Managed Agents te poupa de construir a infraestrutura do agente, mas não substitui o desenho do produto. O deploy real acontece quando esse agente entra no seu fluxo operacional com gatilho, observabilidade e destino de resultado.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">07</div>
+        <div>
+          <h2 class="claude-section-title">Observabilidade: como saber se o agente travou, terminou ou queimou custo</h2>
+          <p class="claude-section-intro">
+            O erro mais comum em agente "em produção" é rodar sem visibilidade. A Anthropic já te entrega dois pontos fortes aqui.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Claude Console</h3>
+          <p class="claude-card-copy">A timeline mostra lista de sessões, status, eventos cronológicos, uso de tokens e tool execution.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Eventos brutos</h3>
+          <p class="claude-card-copy">Você pode listar eventos da sessão programaticamente para debugar erros, entender tool calls e medir custo.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Stop reason</h3>
+          <p class="claude-card-copy">Para automação séria, trate <strong>idle</strong> e <strong>end_turn</strong> como parte do protocolo do seu worker.</p>
+        </div>
+      </div>
+
+      <div class="guide-code-block mt-24">
+        <code>ant beta:sessions:events list \
+  --session-id "$SESSION_ID" \
+  --format explore</code>
+      </div>
+
+      <div class="claude-surface mt-24">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td>Se a sessão parou cedo</td>
+              <td>Abra os eventos e veja o último <strong>tool_use</strong>, erro de sessão ou status de parada.</td>
+            </tr>
+            <tr>
+              <td>Se o custo subiu</td>
+              <td>Use timeline e eventos para identificar sessões longas, prompts frouxos e loops desnecessários.</td>
+            </tr>
+            <tr>
+              <td>Se o agente "terminou" sem entregar</td>
+              <td>Volte ao prompt e explicite formato de saída, caminho de arquivo e condição de encerramento.</td>
+            </tr>
+            <tr>
+              <td>Se você precisa de auditoria</td>
+              <td>Persista ID de sessão, timestamps e status final junto ao registro do job no seu sistema.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">08</div>
+        <div>
+          <h2 class="claude-section-title">Quando usar Managed Agents e quando não usar</h2>
+          <p class="claude-section-intro">
+            Isso evita a expectativa errada logo no início.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td>Use Managed Agents</td>
+              <td>Quando o trabalho é longo, assíncrono, precisa de ferramentas e você quer a infraestrutura do agente já gerenciada.</td>
+            </tr>
+            <tr>
+              <td>Use Messages API</td>
+              <td>Quando você quer construir sua própria harness, controlar cada passo e operar com loop customizado.</td>
+            </tr>
+            <tr>
+              <td>Primeiro caso de uso ideal</td>
+              <td>Pesquisa operacional, análise de documentos, benchmark, revisão de código, triagem e jobs com começo, meio e fim claros.</td>
+            </tr>
+            <tr>
+              <td>Primeiro caso de uso ruim</td>
+              <td>Algo amplo demais, sem saída definida, com permissões críticas e sem critério objetivo de conclusão.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">09</div>
+        <div>
+          <h2 class="claude-section-title">Fontes oficiais consultadas</h2>
+          <p class="claude-section-intro">
+            Este guia foi montado com base na documentação e no blog de engenharia oficiais da Anthropic.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <ul class="claude-source-list">
+          <li><a href="https://platform.claude.com/docs/en/managed-agents/overview" target="_blank" rel="noopener">Claude Managed Agents overview</a></li>
+          <li><a href="https://platform.claude.com/docs/en/managed-agents/quickstart" target="_blank" rel="noopener">Get started with Claude Managed Agents</a></li>
+          <li><a href="https://platform.claude.com/docs/en/api/sdks/cli" target="_blank" rel="noopener">CLI docs for the ant command</a></li>
+          <li><a href="https://platform.claude.com/docs/en/managed-agents/github" target="_blank" rel="noopener">Accessing GitHub</a></li>
+          <li><a href="https://platform.claude.com/docs/en/managed-agents/observability" target="_blank" rel="noopener">Session tracing</a></li>
+          <li><a href="https://www.anthropic.com/engineering/managed-agents" target="_blank" rel="noopener">Scaling Managed Agents: Decoupling the brain from the hands</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="guide-section fade-in fade-in-d4">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Managed Agents resolve a infra. A vantagem vem da operação.</h2>
+        <p class="claude-card-copy mt-24">
+          Quem sair do "teste curioso" e transformar agente em sistema com contexto, papéis e deploy contínuo vai construir uma vantagem que não nasce de prompt bonito, mas de execução.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Entrar no SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="guide-footer fade-in fade-in-d4">
+      <p>Criado por <span class="guide-author">Caio Imori</span></p>
+      <p style="margin-top: 8px;">Guia prático para sair do setup e colocar seu primeiro agente em produção com Claude Managed Agents.</p>
+    </footer>
+  </article>
+</body>
+</html>
