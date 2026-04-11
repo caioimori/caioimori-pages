@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude + Blender MCP — Modelagem 3D por Texto - Caio Imori</title>
+  <meta
+    name="description"
+    content="Guia completo sobre como conectar Claude ao Blender via MCP e criar modelos 3D complexos usando apenas linguagem natural. Setup em 5 minutos."
+  >
+  <link rel="stylesheet" href="../assets/css/guide.css">
+</head>
+<body class="guide-theme-claude">
+  <article class="guide claude-shell">
+
+    <header class="guide-section claude-hero fade-in">
+      <div class="claude-kicker-row">
+        <span class="guide-badge">Guia prático</span>
+        <span class="claude-meta-pill">Claude + Blender // Abril 2026</span>
+      </div>
+
+      <div class="claude-hero-grid">
+        <div>
+          <p class="claude-overline">MCP // Modelagem 3D por texto</p>
+          <h1 class="guide-hero-title claude-headline">Claude agora controla Blender e cria modelos 3D complexos por texto</h1>
+          <p class="guide-subtitle claude-subtitle">
+            Você digita um prompt. Claude interpreta. E o Blender cria tudo sozinho em tempo real.
+            Dragão, pote de ouro, geometria isométrica, iluminação profissional — tudo automaticamente enquanto você assiste.
+          </p>
+          <div class="claude-actions">
+            <a href="#como-funciona" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Ver como funciona</a>
+            <a href="https://github.com/ahujasid/blender-mcp" target="_blank" rel="noopener" class="guide-cta-secondary">Repositório oficial</a>
+          </div>
+        </div>
+        <aside class="claude-panel">
+          <div>
+            <span class="claude-meta-pill">O que muda</span>
+            <h2 class="claude-panel-title" style="margin-top: 18px;">Qualquer um faz 3D agora</h2>
+            <p class="claude-panel-copy">
+              Não importa se você nunca mexeu com Blender. A IA faz a parte técnica pesada.
+              Você só coordena o que quer criar usando linguagem natural.
+            </p>
+          </div>
+          <ul class="claude-facts">
+            <li><strong>Protocolo:</strong> MCP (Model Context Protocol)</li>
+            <li><strong>Execução:</strong> 100% local na sua máquina</li>
+            <li><strong>Código:</strong> zero — você só descreve</li>
+            <li><strong>Setup:</strong> ~5 minutos se já tem Claude Desktop</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="claude-stats">
+        <div class="claude-stat">
+          <span class="claude-stat-label">Interface</span>
+          <span class="claude-stat-value">Texto → 3D</span>
+          <p>Descreva a cena em linguagem natural e veja o modelo aparecer no Blender.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Execução</span>
+          <span class="claude-stat-value">Local</span>
+          <p>Roda na sua máquina. Sem nuvem, sem API externa, sem latência.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Barreira técnica</span>
+          <span class="claude-stat-value">Zero</span>
+          <p>Não precisa saber modelar, escrever script ou abrir console.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Conexão</span>
+          <span class="claude-stat-value">MCP direto</span>
+          <p>Claude se conecta ao Blender via protocolo MCP sem intermediários.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="guide-section fade-in fade-in-d1">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Quer dominar o ecossistema MCP do Claude?</h2>
+        <p class="claude-card-copy mt-24">
+          No SINAPSE você aprende a conectar Claude em qualquer ferramenta via MCP e montar fluxos de automação que multiplicam sua produtividade criativa.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Acessar sinapse.club</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section claude-section fade-in fade-in-d1" id="como-funciona">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">00</div>
+        <div>
+          <h2 class="claude-section-title">Como funciona na prática</h2>
+          <p class="claude-section-intro">
+            MCP do Claude conectado direto no Blender. Você não escreve código, não abre script nenhum. Só escreve o que quer e pronto.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-step-list">
+        <div class="claude-step">
+          <strong class="claude-step-title">1. Você descreve a cena em texto</strong>
+          <p class="claude-step-copy">Escreve algo como "crie um dragão low-poly com iluminação dramática" no Claude Desktop.</p>
+        </div>
+        <div class="claude-step">
+          <strong class="claude-step-title">2. Claude interpreta e traduz</strong>
+          <p class="claude-step-copy">O modelo entende o contexto e gera os comandos necessários para o Blender via MCP.</p>
+        </div>
+        <div class="claude-step">
+          <strong class="claude-step-title">3. Blender executa em tempo real</strong>
+          <p class="claude-step-copy">Você vê os objetos aparecendo, a geometria sendo construída e a iluminação sendo aplicada ao vivo.</p>
+        </div>
+        <div class="claude-step">
+          <strong class="claude-step-title">4. Você refina conversando</strong>
+          <p class="claude-step-copy">Quer mudar a cor? Adicionar um objeto? Ajustar a câmera? Só pede em linguagem natural.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d1">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">01</div>
+        <div>
+          <h2 class="claude-section-title">O que o sistema entende</h2>
+          <p class="claude-section-intro">
+            Claude não só cria objetos. Ele entende contexto, estilo e composição.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Contexto de cena</h3>
+          <p class="claude-card-copy mt-24">
+            Fala "dungeon" e ele já usa tons de cinza e luz dramática. Fala "praia ao pôr do sol" e entende a paleta de cores. Não precisa dar instrução técnica.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Geometria complexa</h3>
+          <p class="claude-card-copy mt-24">
+            Dragões, potes de ouro, cenários isométricos — o sistema traduz descrições abstratas em geometria real dentro do Blender.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Iluminação profissional</h3>
+          <p class="claude-card-copy mt-24">
+            A IA configura luzes, sombras e materiais automaticamente com base no clima da cena que você descreveu.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Composição iterativa</h3>
+          <p class="claude-card-copy mt-24">
+            Você vai refinando a cena por conversa. Adiciona objetos, muda ângulos, ajusta proporções — tudo sem tocar em menu.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Materiais e texturas</h3>
+          <p class="claude-card-copy mt-24">
+            Descreva o material que quer — metálico, fosco, translúcido, vidro — e o sistema aplica os shaders correspondentes.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Câmera e render</h3>
+          <p class="claude-card-copy mt-24">
+            Posicione a câmera e defina ângulos descrevendo o enquadramento que você imagina para a cena final.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">02</div>
+        <div>
+          <h2 class="claude-section-title">Por que isso muda o jogo</h2>
+          <p class="claude-section-intro">
+            A barreira de entrada para criação 3D profissional basicamente deixou de existir.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Antes</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Meses aprendendo interface do Blender</li>
+            <li>Cursos de modelagem, texturização e iluminação</li>
+            <li>Conhecimento de scripts Python para automação</li>
+            <li>Horas por modelo mesmo para quem já sabe</li>
+          </ul>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Agora</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Descreve o que quer em linguagem natural</li>
+            <li>Claude traduz para comandos do Blender</li>
+            <li>Modelo aparece em tempo real na sua tela</li>
+            <li>Refina conversando até ficar como você quer</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Detalhe importante:</strong> tudo roda local na sua máquina. Não é nenhuma nuvem, nenhuma API externa. É Claude, Blender e você trabalhando junto em tempo real.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">03</div>
+        <div>
+          <h2 class="claude-section-title">Setup rápido</h2>
+          <p class="claude-section-intro">
+            Conectar Claude no Blender leva cerca de 5 minutos se você já tem o Claude Desktop instalado.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td>Pré-requisito 1</td>
+              <td><strong>Claude Desktop</strong> instalado e funcionando na sua máquina.</td>
+            </tr>
+            <tr>
+              <td>Pré-requisito 2</td>
+              <td><strong>Blender</strong> instalado (versão recente recomendada).</td>
+            </tr>
+            <tr>
+              <td>Instalação</td>
+              <td>Clone o repositório <strong>blender-mcp</strong> e siga as instruções do README para configurar o servidor MCP.</td>
+            </tr>
+            <tr>
+              <td>Configuração</td>
+              <td>Adicione o servidor MCP do Blender nas configurações do Claude Desktop.</td>
+            </tr>
+            <tr>
+              <td>Teste</td>
+              <td>Abra o Blender, inicie o Claude Desktop e mande um prompt como "crie um cubo metálico com iluminação suave".</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="guide-code-block mt-24">
+        <pre><code># Clone o repositório
+git clone https://github.com/ahujasid/blender-mcp
+
+# Siga as instruções do README para:
+# 1. Instalar dependências
+# 2. Configurar o MCP server
+# 3. Conectar ao Claude Desktop</code></pre>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">04</div>
+        <div>
+          <h2 class="claude-section-title">Para quem isso é mais útil</h2>
+          <p class="claude-section-intro">
+            Qualquer pessoa que precisa de 3D mas não quer passar meses aprendendo software técnico.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Criadores de conteúdo</h3>
+          <p class="claude-card-copy mt-24">
+            Crie assets 3D para thumbnails, vídeos e posts sem depender de designer externo.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Game designers</h3>
+          <p class="claude-card-copy mt-24">
+            Prototipe cenários e objetos rapidamente descrevendo o que imagina para o jogo.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Arquitetos e designers</h3>
+          <p class="claude-card-copy mt-24">
+            Visualize conceitos em 3D antes de investir tempo em modelagem detalhada.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Educadores</h3>
+          <p class="claude-card-copy mt-24">
+            Crie materiais visuais 3D para aulas e apresentações em minutos.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Prototipagem rápida</h3>
+          <p class="claude-card-copy mt-24">
+            Valide ideias visuais antes de investir em produção profissional completa.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Quem já usa Blender</h3>
+          <p class="claude-card-copy mt-24">
+            Acelere tarefas repetitivas e use Claude como copiloto para cenas complexas.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">05</div>
+        <div>
+          <h2 class="claude-section-title">Resumo rápido</h2>
+          <p class="claude-section-intro">
+            Tudo que você precisa saber em uma tabela.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td>O que é</td>
+              <td>MCP que conecta Claude diretamente ao Blender para modelagem 3D por linguagem natural.</td>
+            </tr>
+            <tr>
+              <td>Como funciona</td>
+              <td>Você descreve a cena em texto, Claude traduz para comandos do Blender e executa em tempo real.</td>
+            </tr>
+            <tr>
+              <td>Onde roda</td>
+              <td><strong>100% local</strong> na sua máquina. Sem nuvem, sem API externa.</td>
+            </tr>
+            <tr>
+              <td>Precisa saber código</td>
+              <td>Não. Zero código. Só linguagem natural.</td>
+            </tr>
+            <tr>
+              <td>Tempo de setup</td>
+              <td>~5 minutos se já tem Claude Desktop e Blender instalados.</td>
+            </tr>
+            <tr>
+              <td>Repositório</td>
+              <td><strong>github.com/ahujasid/blender-mcp</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="guide-section fade-in fade-in-d4">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Aprenda a conectar IA em qualquer ferramenta</h2>
+        <p class="claude-card-copy mt-24">
+          No SINAPSE você aprende MCP, automação com agentes e como montar fluxos que transformam a forma como você trabalha. De Blender a Figma, de código a conteúdo.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Entrar no SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="guide-footer fade-in fade-in-d4">
+      <p>Criado por <span class="guide-author">Caio Imori</span></p>
+      <p style="margin-top: 8px;">Guia sobre como usar Claude + Blender MCP para criar modelos 3D por texto.</p>
+    </footer>
+  </article>
+</body>
+</html>

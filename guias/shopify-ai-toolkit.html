@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopify AI Toolkit — Agentes Gerenciando Sua Loja - Caio Imori</title>
+  <meta
+    name="description"
+    content="Guia completo sobre o Shopify AI Toolkit: como conectar Claude, Cursor ou Codex na sua loja Shopify e gerenciar tudo por linguagem natural."
+  >
+  <link rel="stylesheet" href="../assets/css/guide.css">
+</head>
+<body class="guide-theme-claude">
+  <article class="guide claude-shell">
+
+    <header class="guide-section claude-hero fade-in">
+      <div class="claude-kicker-row">
+        <span class="guide-badge">Guia prático</span>
+        <span class="claude-meta-pill">Shopify AI Toolkit // Abril 2026</span>
+      </div>
+
+      <div class="claude-hero-grid">
+        <div>
+          <p class="claude-overline">E-commerce // Agentes de IA</p>
+          <h1 class="guide-hero-title claude-headline">Shopify AI Toolkit muda o jogo do e-commerce com agentes rodando na sua loja</h1>
+          <p class="guide-subtitle claude-subtitle">
+            Conecte Claude, Cursor ou Codex direto na sua loja Shopify. Atualize produtos, crie descontos,
+            otimize SEO — tudo por linguagem natural, sem código manual.
+          </p>
+          <div class="claude-actions">
+            <a href="#o-que-faz" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Ver o que faz</a>
+            <a href="#como-comecar" class="guide-cta-secondary">Como começar</a>
+          </div>
+        </div>
+        <aside class="claude-panel">
+          <div>
+            <span class="claude-meta-pill">Nova era</span>
+            <h2 class="claude-panel-title" style="margin-top: 18px;">E-commerce gerenciado por agentes</h2>
+            <p class="claude-panel-copy">
+              Tarefas que antes levavam horas e conhecimento técnico agora se resolvem conversando com um agente.
+              A Shopify abriu as portas completamente.
+            </p>
+          </div>
+          <ul class="claude-facts">
+            <li><strong>Integração:</strong> Claude, Cursor, Codex, VS Code</li>
+            <li><strong>Protocolo:</strong> MCP-compatible</li>
+            <li><strong>Código:</strong> zero necessário</li>
+            <li><strong>Fonte:</strong> Javiz (@Javizecom)</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="claude-stats">
+        <div class="claude-stat">
+          <span class="claude-stat-label">APIs expostas</span>
+          <span class="claude-stat-value">Todas</span>
+          <p>Produtos, pedidos, clientes, descontos, inventário e analíticos acessíveis pelo agente.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Ferramentas</span>
+          <span class="claude-stat-value">Claude + Cursor</span>
+          <p>Qualquer ferramenta MCP-compatible se conecta direto à sua loja.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Automação</span>
+          <span class="claude-stat-value">Real</span>
+          <p>Não é IA gerando conteúdo solto. É automação real de processos da loja.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Scale</span>
+          <span class="claude-stat-value">Multi-loja</span>
+          <p>Uma pessoa consegue gerenciar 3, 4 lojas rodando agentes em paralelo.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="guide-section fade-in fade-in-d1">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Quer aprender a automatizar negócios com agentes?</h2>
+        <p class="claude-card-copy mt-24">
+          No SINAPSE você aprende a conectar agentes de IA em ferramentas reais e montar operações que escalam sem aumentar equipe.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Acessar sinapse.club</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section claude-section fade-in fade-in-d1" id="o-que-faz">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">00</div>
+        <div>
+          <h2 class="claude-section-title">O que o AI Toolkit faz</h2>
+          <p class="claude-section-intro">
+            Basicamente, qualquer coisa que você faria no admin da Shopify agora dá para fazer conversando.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Gestão de produtos</h3>
+          <p class="claude-card-copy mt-24">
+            Crie, atualize, destaque ou remova produtos. Manda "coloca esse produto em destaque e aplica 20% de desconto" e pronto.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Descontos e promoções</h3>
+          <p class="claude-card-copy mt-24">
+            Crie cupons, promoções por categoria, descontos progressivos — tudo por linguagem natural.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">SEO automático</h3>
+          <p class="claude-card-copy mt-24">
+            Otimize títulos, descrições e meta tags de produtos sem abrir cada página manualmente.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Gestão de pedidos</h3>
+          <p class="claude-card-copy mt-24">
+            Consulte status de pedidos, histórico de clientes e métricas de vendas conversando.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Inventário</h3>
+          <p class="claude-card-copy mt-24">
+            Controle estoque, configure alertas de reposição e atualize quantidades em lote.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Analíticos</h3>
+          <p class="claude-card-copy mt-24">
+            Pergunte ao agente sobre performance de vendas, produtos mais vendidos, tendências de conversão.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">01</div>
+        <div>
+          <h2 class="claude-section-title">Antes vs. agora</h2>
+          <p class="claude-section-intro">
+            A diferença no fluxo de trabalho é brutal.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Antes do AI Toolkit</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Abrir admin da Shopify para cada operação</li>
+            <li>Navegar entre dezenas de abas e menus</li>
+            <li>Contratar dev para automações custom</li>
+            <li>Especialista em ads para otimização</li>
+            <li>Horas de trabalho manual repetitivo</li>
+          </ul>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Com agentes rodando</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Descreve o que quer em linguagem natural</li>
+            <li>Agente executa direto nas APIs da Shopify</li>
+            <li>Zero código, zero menu, zero navegação</li>
+            <li>Uma pessoa gerencia múltiplas lojas</li>
+            <li>Consistência de dados mantida automaticamente</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2" id="como-comecar">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">02</div>
+        <div>
+          <h2 class="claude-section-title">Como conectar Claude na sua loja</h2>
+          <p class="claude-section-intro">
+            O setup é direto. Sem SDK custom, sem wrapper. Está integrado na plataforma.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-step-list">
+        <div class="claude-step">
+          <strong class="claude-step-title">1. Acesse o AI Toolkit no admin da Shopify</strong>
+          <p class="claude-step-copy">O toolkit está disponível diretamente no painel de administração da sua loja.</p>
+        </div>
+        <div class="claude-step">
+          <strong class="claude-step-title">2. Conecte sua ferramenta de IA preferida</strong>
+          <p class="claude-step-copy">Claude Code, Cursor, VS Code ou qualquer ferramenta MCP-compatible.</p>
+        </div>
+        <div class="claude-step">
+          <strong class="claude-step-title">3. Autorize o acesso às APIs</strong>
+          <p class="claude-step-copy">Defina quais APIs o agente pode acessar: produtos, pedidos, clientes, descontos, inventário.</p>
+        </div>
+        <div class="claude-step">
+          <strong class="claude-step-title">4. Comece a conversar com o agente</strong>
+          <p class="claude-step-copy">Mande comandos em linguagem natural e veja o agente executar na sua loja em tempo real.</p>
+        </div>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Importante:</strong> o toolkit expõe as APIs principais da Shopify direto para o agente. A consistência de dados é mantida — não é IA gerando conteúdo solto. É automação real de processos.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">03</div>
+        <div>
+          <h2 class="claude-section-title">O que muda na economia de quem vende</h2>
+          <p class="claude-section-intro">
+            O modelo de scale muda completamente quando agentes fazem o trabalho operacional.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Multi-loja viável</h3>
+          <p class="claude-card-copy mt-24">
+            Uma pessoa consegue gerenciar 3, 4 lojas rodando agentes em paralelo. O custo operacional despenca.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Menos equipe técnica</h3>
+          <p class="claude-card-copy mt-24">
+            Não precisa contratar dev, especialista em ads ou otimizador. Você precisa de boa ideia e saber falar com a IA.
+          </p>
+        </div>
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Velocidade de iteração</h3>
+          <p class="claude-card-copy mt-24">
+            Teste promoções, atualize catálogos, otimize SEO em minutos em vez de horas.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">04</div>
+        <div>
+          <h2 class="claude-section-title">Resumo rápido</h2>
+          <p class="claude-section-intro">
+            Tudo que você precisa saber em uma tabela.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <tbody>
+            <tr>
+              <td>O que é</td>
+              <td>Integração entre agentes de IA e o painel de gerenciamento de lojas Shopify.</td>
+            </tr>
+            <tr>
+              <td>Como funciona</td>
+              <td>Conecte Claude, Cursor ou Codex e execute ações na loja via linguagem natural.</td>
+            </tr>
+            <tr>
+              <td>APIs disponíveis</td>
+              <td>Produtos, pedidos, clientes, descontos, inventário, analíticos.</td>
+            </tr>
+            <tr>
+              <td>Precisa de código</td>
+              <td>Não. Sem SDK custom, sem wrapper. Integrado na plataforma.</td>
+            </tr>
+            <tr>
+              <td>Diferencial</td>
+              <td>Automação real de processos, não geração de conteúdo solto. Consistência de dados mantida.</td>
+            </tr>
+            <tr>
+              <td>Impacto</td>
+              <td>Uma pessoa gerenciando múltiplas lojas com agentes em paralelo.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="guide-section fade-in fade-in-d4">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Automatize seu negócio com agentes de IA</h2>
+        <p class="claude-card-copy mt-24">
+          No SINAPSE você aprende a conectar agentes em ferramentas reais e montar operações que escalam. De e-commerce a conteúdo, de automação a estratégia.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Entrar no SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="guide-footer fade-in fade-in-d4">
+      <p>Criado por <span class="guide-author">Caio Imori</span></p>
+      <p style="margin-top: 8px;">Guia sobre o Shopify AI Toolkit para gerenciar e-commerce com agentes de IA.</p>
+    </footer>
+  </article>
+</body>
+</html>
