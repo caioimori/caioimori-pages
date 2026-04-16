@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HyperFrames: HTML virou vídeo e o agente virou editor - Caio Imori</title>
+  <meta
+    name="description"
+    content="Guia sobre o HyperFrames da HeyGen: framework open-source agent-native que transforma HTML em MP4, comparativo com Remotion e After Effects, e a leitura estratégica do movimento."
+  >
+  <link rel="stylesheet" href="../assets/css/guide.css">
+  <style>
+    .claude-hero-grid > * {
+      min-width: 0;
+    }
+
+    .claude-hero-grid {
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.82fr);
+    }
+
+    .claude-headline {
+      max-width: 13ch;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      font-size: clamp(2.6rem, 5.6vw, 4.9rem);
+    }
+
+    @media (max-width: 1024px) {
+      .claude-hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="guide-theme-claude">
+  <article class="guide claude-shell">
+
+    <header class="guide-section claude-hero fade-in">
+      <div class="claude-kicker-row">
+        <span class="guide-badge">Leitura estratégica</span>
+        <span class="claude-meta-pill">HyperFrames // Abril 2026</span>
+      </div>
+
+      <div class="claude-hero-grid">
+        <div>
+          <p class="claude-overline">HeyGen // Agent-native video</p>
+          <h1 class="guide-hero-title claude-headline">HTML virou vídeo e o agente virou editor</h1>
+          <p class="guide-subtitle claude-subtitle">
+            A HeyGen lançou o <strong>HyperFrames</strong>, um framework open-source que transforma código
+            <strong>HTML, CSS e JavaScript</strong> em um <strong>MP4</strong> renderizado. O detalhe que muda o jogo
+            está na descrição oficial: <strong>agent-native</strong>. O vídeo deixa de ser artefato de timeline e
+            vira output programável, operado por agente de IA.
+          </p>
+
+          <div class="claude-actions">
+            <a href="#como-funciona" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Entender o framework</a>
+            <a href="#leitura" class="guide-cta-secondary">Ir para a leitura estratégica</a>
+          </div>
+        </div>
+
+        <aside class="claude-panel">
+          <div>
+            <span class="claude-meta-pill">Por que importa</span>
+            <h2 class="claude-panel-title" style="margin-top: 18px;">Quando vídeo vira código</h2>
+            <p class="claude-panel-copy">
+              Ele herda tudo que código tem: versionamento, reprodutibilidade, composição por agente, auditoria linha a linha
+              e custo marginal próximo de zero na iteração.
+            </p>
+          </div>
+
+          <ul class="claude-facts">
+            <li><strong>Stack:</strong> HTML, CSS e JavaScript renderizados em MP4.</li>
+            <li><strong>Licença:</strong> open-source, código do vídeo de lançamento incluído.</li>
+            <li><strong>Modo de uso:</strong> pensado para agente de IA, não para humano em timeline.</li>
+            <li><strong>Exemplo oficial:</strong> o vídeo de lançamento foi gerado dentro do Claude Code.</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="claude-stats">
+        <div class="claude-stat">
+          <span class="claude-stat-label">Formato</span>
+          <span class="claude-stat-value">HTML to MP4</span>
+          <p>A entrada é código web padrão. A saída é um arquivo de vídeo final, pronto para publicar.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Modo</span>
+          <span class="claude-stat-value">Agent-native</span>
+          <p>Desenhado para ser operado por agente de IA, não por humano clicando em interface visual.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Instalação</span>
+          <span class="claude-stat-value">npx skills add</span>
+          <p><span class="claude-inline-code">npx skills add heygen-com/hyperframes</span> e você já tem o framework disponível.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Referência</span>
+          <span class="claude-stat-value">Open-source</span>
+          <p>A HeyGen liberou o código-fonte inteiro do próprio vídeo de lançamento como exemplo prático.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="guide-section fade-in fade-in-d1">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Quer entender como software criativo está sendo redesenhado para agente?</h2>
+        <p class="claude-card-copy mt-24">
+          No SINAPSE a lógica é clara: menos fascínio por ferramenta nova, mais leitura do movimento estrutural
+          que está redesenhando cada categoria de software ao redor de agentes de IA.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Conhecer o SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section claude-section fade-in fade-in-d1">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">00</div>
+        <div>
+          <h2 class="claude-section-title">O que é o HyperFrames, sem romantismo</h2>
+          <p class="claude-section-intro">
+            A proposta é direta. Em vez de abrir After Effects ou Premiere, você escreve uma página web que descreve
+            o vídeo inteiro e deixa o framework renderizar o MP4.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-soft">
+          <h3 class="claude-card-title">Antes</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Vídeo vivia em software de edição proprietário, com interface visual fechada.</li>
+            <li>Iterar significava abrir a timeline, mover clipes e re-renderizar manualmente.</li>
+            <li>Colaboração entre agente de IA e vídeo exigia API intermediária ou automação frágil.</li>
+            <li>Reprodutibilidade era baixa: cada projeto dependia de um arquivo binário específico.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Agora</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Vídeo é descrito em HTML, CSS e JavaScript, com tudo que código permite.</li>
+            <li>Iterar é mudar uma linha, rodar o render e ver o MP4 sair determinístico.</li>
+            <li>Agente de IA gera e edita o vídeo inteiro diretamente no código-fonte.</li>
+            <li>Versionamento, diff, review e auditoria funcionam igual a qualquer repositório web.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Leitura correta:</strong> o HyperFrames não é um editor de vídeo com IA acoplada. É o inverso.
+          É um runtime de vídeo projetado para ter agente como usuário principal, com humano entrando só para revisar o resultado.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider" id="como-funciona">
+
+    <section class="guide-section claude-section fade-in fade-in-d1">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">01</div>
+        <div>
+          <h2 class="claude-section-title">Como o HyperFrames funciona por baixo</h2>
+          <p class="claude-section-intro">
+            Três camadas simples: você escreve o vídeo em web stack, o framework percorre frame a frame e o renderer
+            costura o MP4 final.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">1. Descrição em HTML</h3>
+          <p class="claude-card-copy">Você monta a cena como uma página: marcação para elementos, CSS para visual, JS para animação e timing.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">2. Render determinístico</h3>
+          <p class="claude-card-copy">O framework captura cada frame de forma reprodutível. Mesmo código, mesma entrada, mesmo vídeo.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">3. Saída em MP4</h3>
+          <p class="claude-card-copy">Os frames viram um arquivo de vídeo final, pronto para publicar, enviar por DM ou subir em plataforma.</p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid mt-24">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Instale como skill</h3>
+          <div class="guide-code-block mt-24">
+            <code>npx skills add heygen-com/hyperframes</code>
+          </div>
+          <p class="claude-card-copy">
+            A instalação oficial disponibiliza o framework como <strong>skill</strong>, o que significa que ele já entra
+            num formato que agente de IA consegue invocar direto.
+          </p>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Use o código do lançamento como referência</h3>
+          <p class="claude-card-copy mt-24">
+            A HeyGen liberou o código-fonte inteiro do vídeo de lançamento dentro do próprio projeto open-source.
+            É o exemplo mais honesto possível: o próprio time deles usou Claude Code mais HyperFrames para construir o material.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Por que "determinístico" importa:</strong> em editor tradicional, renderização depende de estado da UI,
+          presets do projeto e configurações locais. Em HyperFrames, o mesmo HTML gera o mesmo MP4 sempre. Isso é pré-requisito para agente operar sozinho sem precisar de humano conferindo cada iteração.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">02</div>
+        <div>
+          <h2 class="claude-section-title">HyperFrames contra Remotion contra After Effects</h2>
+          <p class="claude-section-intro">
+            As comparações com Remotion já apareceram. A diferença não está na stack, está na intenção de uso.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <thead>
+            <tr>
+              <th>Critério</th>
+              <th>After Effects / Premiere</th>
+              <th>Remotion</th>
+              <th>HyperFrames</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Usuário alvo</strong></td>
+              <td>Editor humano em timeline</td>
+              <td>Desenvolvedor em React</td>
+              <td>Agente de IA operando código</td>
+            </tr>
+            <tr>
+              <td><strong>Entrada</strong></td>
+              <td>Interface visual proprietária</td>
+              <td>Componentes React</td>
+              <td>HTML, CSS e JavaScript</td>
+            </tr>
+            <tr>
+              <td><strong>Saída</strong></td>
+              <td>Arquivo do projeto + render final</td>
+              <td>MP4 via renderer</td>
+              <td>MP4 direto do código</td>
+            </tr>
+            <tr>
+              <td><strong>Versionamento</strong></td>
+              <td>Limitado a arquivos binários</td>
+              <td>Git funciona bem</td>
+              <td>Git funciona nativamente</td>
+            </tr>
+            <tr>
+              <td><strong>Reprodutibilidade</strong></td>
+              <td>Baixa, depende do ambiente</td>
+              <td>Alta, com React no meio</td>
+              <td>Alta, stack web pura</td>
+            </tr>
+            <tr>
+              <td><strong>Licença</strong></td>
+              <td>Proprietária</td>
+              <td>Open-source</td>
+              <td>Open-source</td>
+            </tr>
+            <tr>
+              <td><strong>Ponto forte</strong></td>
+              <td>Controle fino manual, efeitos</td>
+              <td>Maturidade, ecossistema React</td>
+              <td>Desenhado para agente desde o zero</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="claude-split-grid mt-24">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Quando o HyperFrames ganha</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Pipeline em que o agente monta e entrega o vídeo sem humano em loop.</li>
+            <li>Explainers, demos de produto e vídeos curtos gerados em escala.</li>
+            <li>Conteúdo que precisa ser versionado, auditado e regenerado ao longo do tempo.</li>
+            <li>Times que já vivem em web stack e não querem aprender ferramenta nova.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Quando o tradicional ainda ganha</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Vídeo com direção visual autoral e motion design artesanal.</li>
+            <li>Projetos que dependem de efeito específico, plugin raro ou composição complexa.</li>
+            <li>Cliente ou time que ainda opera em fluxo 100 por cento humano.</li>
+            <li>Casos em que o custo de iterar manualmente não é problema.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider" id="leitura">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">03</div>
+        <div>
+          <h2 class="claude-section-title">Por que agent-native vira padrão em software criativo</h2>
+          <p class="claude-section-intro">
+            O recado é maior que vídeo. Toda categoria de software criativo que depende de interface gráfica
+            está sendo redesenhada para ter agente como usuário principal.
+          </p>
+        </div>
+      </div>
+
+      <ol class="claude-step-list">
+        <li>
+          <strong class="claude-step-title">A camada de criação migra da ferramenta para o modelo</strong>
+          <p class="claude-step-copy">
+            Quando o output final nasce de código que o agente escreve, quem controla o prompt controla o produto.
+            A ferramenta vira dependência técnica, não mais protagonista do fluxo.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">HTML vira a linguagem franca</strong>
+          <p class="claude-step-copy">
+            Agente de IA já domina web stack porque foi treinado nela em escala gigante. Qualquer categoria que
+            traduzir o próprio produto para HTML e JavaScript destrava operação por agente sem fricção.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Interface visual proprietária vira desvantagem</strong>
+          <p class="claude-step-copy">
+            Editor que só humano opera limita throughput ao tempo do humano. Runtime que agente opera escala na
+            mesma velocidade que a infraestrutura de modelo suporta. O gap só vai crescer.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Custo marginal de iteração tende a zero</strong>
+          <p class="claude-step-copy">
+            Cada render novo é só executar o mesmo pipeline com prompt diferente. Isso muda completamente a
+            economia de produção audiovisual, de design, de deck, de qualquer artefato que antes custava hora humana.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Open-source acelera a adoção</strong>
+          <p class="claude-step-copy">
+            Liberar o código-fonte do vídeo de lançamento não é marketing. É manual de uso. Quem quiser reproduzir
+            o nível de produção da HeyGen tem o blueprint completo na mão, de graça.
+          </p>
+        </li>
+      </ol>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Consequência estrutural:</strong> nos próximos 18 meses, toda ferramenta criativa com interface
+          gráfica vai ter que responder a mesma pergunta: qual é o meu modo agent-native? Quem não tiver resposta vai
+          disputar o que sobrar do mercado humano-em-loop enquanto o volume migra para quem nasceu desenhado para agente.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">04</div>
+        <div>
+          <h2 class="claude-section-title">Onde o HyperFrames entra na sua operação</h2>
+          <p class="claude-section-intro">
+            Não é sobre trocar o editor da equipe. É sobre abrir um segundo pipeline, paralelo, operado por agente,
+            para o volume que hoje não cabe no fluxo humano.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Conteúdo em escala</h3>
+          <p class="claude-card-copy">Vídeos curtos para redes, variações A/B de hook, cortes por idioma e versões por persona, tudo gerado por agente.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Demos de produto</h3>
+          <p class="claude-card-copy">Capturas de tela animadas, explainers de feature e onboarding em vídeo que atualizam junto com o produto.</p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Relatórios e dashboards</h3>
+          <p class="claude-card-copy">Resumos semanais em vídeo gerados direto do dado, sem precisar de editor humano entre a fonte e a entrega.</p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid mt-24">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Como começar sem travar o time atual</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Escolha um formato recorrente de vídeo curto, com template claro e volume alto.</li>
+            <li>Reescreva o template em HTML, CSS e JavaScript usando o exemplo open-source como base.</li>
+            <li>Coloque o agente para gerar variações por prompt, com você revisando amostras.</li>
+            <li>Compare custo, tempo e qualidade com o fluxo humano atual antes de ampliar.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">O que não faz sentido migrar</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Peças autorais com direção visual complexa e time criativo envolvido na execução.</li>
+            <li>Vídeos únicos, com produção alta, onde iteração em escala não é o objetivo.</li>
+            <li>Fluxos que dependem de integração pesada com equipamento físico de captura.</li>
+            <li>Qualquer entrega em que o diferencial está no olhar humano, não na reprodutibilidade.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">05</div>
+        <div>
+          <h2 class="claude-section-title">O que observar nos próximos meses</h2>
+          <p class="claude-section-intro">
+            O HyperFrames é um sinal, não o movimento completo. Olhe para onde essa mesma lógica vai replicar.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <ul class="claude-source-list">
+          <li><strong>Design de marca:</strong> ferramentas que descrevem sistema visual como código vão crescer mais rápido que as baseadas em canvas manual.</li>
+          <li><strong>Deck e apresentação:</strong> slides em HTML, gerados por agente a partir de briefing, tendem a tomar espaço de ferramentas visuais tradicionais.</li>
+          <li><strong>Imagem e ilustração:</strong> combinações entre código, SVG e modelo generativo passam a ser o pipeline padrão em operação de volume.</li>
+          <li><strong>Vídeo:</strong> HyperFrames e competidores vão forçar editores clássicos a abrir runtime programático próprio ou perder o segmento agent-native.</li>
+          <li><strong>Ferramentas proprietárias fechadas:</strong> qualquer categoria que não expor uma camada agent-native nos próximos meses perde relevância no fluxo novo.</li>
+        </ul>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Conclusão honesta:</strong> o HyperFrames por si só não derruba After Effects nem Premiere.
+          O que ele consolida é o padrão mental de que vídeo pode ser output programável. Esse padrão, aplicado em escala em cada categoria criativa, é o que redesenha o mercado.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d4">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">06</div>
+        <div>
+          <h2 class="claude-section-title">Mapa visual das 5 categorias em transição agent-native</h2>
+          <p class="claude-section-intro">
+            O HyperFrames é só uma coluna desse mapa. A mesma lógica — interface visual virando runtime operado por agente — está acontecendo em cinco frentes ao mesmo tempo.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <thead>
+            <tr>
+              <th>Categoria</th>
+              <th>Stack agent-native</th>
+              <th>Frameworks e ferramentas emergentes</th>
+              <th>Sinal de maturidade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Vídeo</strong></td>
+              <td>HTML + CSS + JS renderizados em MP4</td>
+              <td>HyperFrames (HeyGen), Remotion, Revideo</td>
+              <td>Lançamento open-source agent-native explícito</td>
+            </tr>
+            <tr>
+              <td><strong>Design</strong></td>
+              <td>Código de UI gerado por prompt, React + Tailwind</td>
+              <td>v0 (Vercel), Galileo AI, Framer AI, tldraw make-real</td>
+              <td>v0 já virou default em squads frontend novas</td>
+            </tr>
+            <tr>
+              <td><strong>Áudio</strong></td>
+              <td>API de voz, música e efeito como função programável</td>
+              <td>ElevenLabs SDK, Suno API, Cartesia, MusicGen</td>
+              <td>Voice API entrou em pipeline de produto em escala</td>
+            </tr>
+            <tr>
+              <td><strong>3D</strong></td>
+              <td>Cena descrita em código, MCP como ponte para engine</td>
+              <td>Blender MCP, Spline AI, Meshy, Luma Genie</td>
+              <td>MCP de Blender virou referência prática em dev</td>
+            </tr>
+            <tr>
+              <td><strong>Código</strong></td>
+              <td>Agente escreve, revisa e executa código direto no repo</td>
+              <td>Claude Code, Cursor, Aider, Devin, OpenHands</td>
+              <td>Categoria mais madura, já é o padrão para muitos times</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="claude-card-grid mt-24">
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Vídeo</h3>
+          <p class="claude-card-copy">
+            <strong>De:</strong> timeline em After Effects e Premiere.
+            <strong>Para:</strong> HTML descrevendo a cena inteira, agente editando o código-fonte e render determinístico saindo em MP4.
+          </p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Design</h3>
+          <p class="claude-card-copy">
+            <strong>De:</strong> canvas manual em Figma ou Sketch.
+            <strong>Para:</strong> componentes reais gerados direto em código, versionados e reutilizáveis por agente em qualquer projeto.
+          </p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Áudio</h3>
+          <p class="claude-card-copy">
+            <strong>De:</strong> DAW humana com estúdio e operador.
+            <strong>Para:</strong> voz, trilha e efeito como chamada de API, integrados dentro do próprio pipeline de agente.
+          </p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">3D</h3>
+          <p class="claude-card-copy">
+            <strong>De:</strong> Blender, Maya e Cinema 4D operados manualmente.
+            <strong>Para:</strong> cena e render descritos em script, com MCP conectando agente ao engine e devolvendo resultado renderizado.
+          </p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Código</h3>
+          <p class="claude-card-copy">
+            <strong>De:</strong> IDE humana com autocomplete tradicional.
+            <strong>Para:</strong> agente que lê, escreve, revisa e executa no repositório, com humano só validando entrega.
+          </p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">O eixo comum</h3>
+          <p class="claude-card-copy">
+            Em toda coluna, a transição acontece por um único movimento: sair da <strong>interface visual proprietária</strong> e entrar em uma <strong>representação em código</strong> que agente consegue ler, escrever e executar sozinho.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Como ler esse mapa:</strong> a coluna "stack agent-native" é o que você precisa dominar para operar cada categoria no fluxo novo. Se a sua ferramenta atual não tiver representação equivalente em código, ela está do lado errado da transição — independentemente do quão consolidada ela pareça hoje.
+        </p>
+      </div>
+    </section>
+
+    <section class="guide-section fade-in fade-in-d4">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Pare de colecionar lançamento, comece a ler o movimento</h2>
+        <p class="claude-card-copy mt-24">
+          HyperFrames é um sinal forte de para onde software criativo está indo. No SINAPSE a gente trabalha exatamente
+          nisso: entender o movimento estrutural, decidir onde entrar e montar operação que roda com agente no centro,
+          não na periferia.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Entrar no SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="guide-footer fade-in fade-in-d4">
+      <p>Criado por <span class="guide-author">Caio Imori</span></p>
+      <p style="margin-top: 8px;">Guia sobre o HyperFrames da HeyGen, comparativo com Remotion e After Effects, e leitura estratégica do movimento agent-native em software criativo.</p>
+    </footer>
+
+  </article>
+</body>
+</html>
