@@ -5,7 +5,7 @@
 ## Estética Geral
 
 - **Modo:** Light mode exclusivamente (nunca dark)
-- **Inspiração:** Apple + sinapse.club — clean, espaçado, tipografia tight
+- **Inspiração:** Apple + sinapse.space — clean, espaçado, tipografia tight
 - **Fonte:** System font stack (`-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif`)
 - **CSS:** Sempre `<link rel="stylesheet" href="../assets/css/guide.css">` — nunca CSS inline completo, apenas overrides pontuais via `<style>`
 
@@ -110,7 +110,7 @@
   <h2 class="claude-card-title" style="margin-top: 12px;">Headline do CTA</h2>
   <p class="claude-card-copy mt-24">Texto de suporte.</p>
   <div class="claude-actions mt-24">
-    <a href="https://sinapse.club" target="_blank" rel="noopener" class="guide-cta"
+    <a href="https://sinapse.space" target="_blank" rel="noopener" class="guide-cta"
        style="background: #1a1a1a; color: #ffffff !important;">Label do botão</a>
   </div>
 </div>
@@ -118,7 +118,7 @@
 
 - **CTA topo:** sutil, antes da primeira seção de conteúdo
 - **CTA final:** forte, após a última seção — com `Entrar no SINAPSE` como label
-- Ambos linkam para `https://sinapse.club`
+- Ambos linkam para `https://sinapse.space`
 
 ## Classes CSS — Referência Rápida
 
