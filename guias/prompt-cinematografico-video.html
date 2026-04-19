@@ -9,6 +9,83 @@
     content="Como estruturar prompts cinematográficos para Higgsfield, Seedance 2.0 e Nano Banana Pro. Direção de arte virou documento executável pelo modelo — o valor migra para quem domina a linguagem de direção."
   >
   <link rel="stylesheet" href="../assets/css/guide.css">
+  <style>
+    /* overrides pontuais — sizing responsivo do hero + spacing */
+    .claude-headline {
+      max-width: 18ch;
+      font-size: clamp(2rem, 5.2vw, 4.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+    }
+    .claude-subtitle {
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      line-height: 1.6;
+      max-width: 42rem;
+    }
+    .claude-hero-grid {
+      gap: 32px;
+    }
+    .claude-panel {
+      padding: 24px;
+    }
+    .claude-panel-title {
+      font-size: 1.15rem;
+    }
+    .claude-stats {
+      margin-top: 32px;
+    }
+    .claude-stat {
+      padding: 20px;
+    }
+    .claude-stat-value {
+      font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+    }
+    @media (max-width: 1024px) {
+      .claude-headline {
+        max-width: 22ch;
+        font-size: clamp(1.85rem, 5vw, 2.6rem);
+      }
+      .claude-subtitle {
+        font-size: 1rem;
+      }
+    }
+    @media (max-width: 640px) {
+      .claude-headline {
+        font-size: clamp(1.6rem, 7.5vw, 2rem);
+        letter-spacing: -0.025em;
+        max-width: 100%;
+      }
+      .claude-subtitle {
+        font-size: 0.95rem;
+        line-height: 1.55;
+      }
+      .claude-hero-grid {
+        gap: 24px;
+      }
+      .claude-kicker-row {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .claude-panel {
+        padding: 20px;
+      }
+      .claude-section-title {
+        font-size: 1.35rem !important;
+        line-height: 1.2;
+      }
+      .claude-section-intro {
+        font-size: 0.95rem;
+      }
+      .claude-card-title {
+        font-size: 1.05rem;
+      }
+      .claude-card-copy,
+      .claude-panel-copy,
+      .claude-step-copy {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
 </head>
 <body class="guide-theme-claude">
   <article class="guide claude-shell">
@@ -22,10 +99,10 @@
       <div class="claude-hero-grid">
         <div>
           <p class="claude-overline">Vídeo generativo // Direção de arte</p>
-          <h1 class="guide-hero-title claude-headline">Direção cinematográfica virou prompt de texto. Quem entende isso captura a camada de valor que está abrindo.</h1>
+          <h1 class="guide-hero-title claude-headline">Direção virou prompt. E o valor migrou.</h1>
           <p class="guide-subtitle claude-subtitle">
-            Um teste com Nano Banana Pro e Seedance 2.0 rodando na Higgsfield: 15 segundos, 145 BPM, 14 cortes.
-            Cada plano descrito em linguagem estruturada de roteiro. O que muda não é o output — é a forma do prompt.
+            Nano Banana Pro e Seedance 2.0 rodando na Higgsfield: 15 segundos, 145 BPM, 14 cortes. Cada plano descrito em blocos estruturados de roteiro.
+            O que muda não é o output — é a forma do prompt.
           </p>
           <div class="claude-actions">
             <a href="#estrutura" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Ver a estrutura do prompt</a>
