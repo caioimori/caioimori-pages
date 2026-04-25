@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Shot e o diretor de IA — Caio Imori</title>
+  <meta
+    name="description"
+    content="Leitura estrutural do Smart Shot da OpenArt: por que vídeo com IA acabou de ganhar um diretor, como o trabalho migra do operador de prompt para o diretor de cena e onde o valor é redistribuído na cadeia de produção audiovisual."
+  >
+  <link rel="stylesheet" href="../assets/css/guide.css">
+  <style>
+    .claude-hero-grid > * {
+      min-width: 0;
+    }
+
+    .claude-hero-grid {
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.82fr);
+    }
+
+    .claude-headline {
+      max-width: 18ch;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      font-size: clamp(2.5rem, 5.4vw, 4.7rem);
+    }
+
+    @media (max-width: 1024px) {
+      .claude-hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="guide-theme-claude">
+  <article class="guide claude-shell">
+
+    <header class="guide-section claude-hero fade-in">
+      <div class="claude-kicker-row">
+        <span class="guide-badge">Mercado // TOFU</span>
+        <span class="claude-meta-pill">OpenArt Smart Shot // Abril 2026</span>
+      </div>
+
+      <div class="claude-hero-grid">
+        <div>
+          <p class="claude-overline">Vídeo com IA // O diretor entrou na cadeia</p>
+          <h1 class="guide-hero-title claude-headline">Vídeo com IA acabou de ganhar um diretor</h1>
+          <p class="guide-subtitle claude-subtitle">
+            A <strong>OpenArt lançou o Smart Shot</strong>. Você descreve a cena em uma frase e ele entrega
+            plano completo de produção: personagens, ambiente, storyboard e câmera, antes de renderizar
+            o vídeo multi-corte de até 20 segundos. O que muda não é a qualidade do frame, é a etapa
+            onde o valor passa a ser criado.
+          </p>
+
+          <div class="claude-actions">
+            <a href="#padrao" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Ver o padrão estrutural</a>
+            <a href="#leitura" class="guide-cta-secondary">Ir para a leitura de cadeia</a>
+          </div>
+        </div>
+
+        <aside class="claude-panel">
+          <div>
+            <span class="claude-meta-pill">A inversão central</span>
+            <h2 class="claude-panel-title" style="margin-top: 18px;">Treatment cinematográfico antes do render</h2>
+            <p class="claude-panel-copy">
+              A maioria das ferramentas gera frames bonitos e quebra na consistência entre cortes.
+              Smart Shot inverte a ordem: primeiro constrói o plano de cena com personagem, ambiente
+              e câmera, depois executa o render com o motor por trás.
+            </p>
+          </div>
+
+          <ul class="claude-facts">
+            <li><strong>Lançamento:</strong> Smart Shot (OpenArt), pré-produção integrada ao render.</li>
+            <li><strong>Motor:</strong> Seedance 2.0 rodando por trás como engine de render.</li>
+            <li><strong>Output:</strong> vídeo multi-corte de até 20 segundos com personagem consistente.</li>
+            <li><strong>Mudança:</strong> trabalho desloca do operador de prompt para o diretor de cena.</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="claude-stats">
+        <div class="claude-stat">
+          <span class="claude-stat-label">Antes</span>
+          <span class="claude-stat-value">Prompt isolado</span>
+          <p>Frame bonito por geração, sem amarração entre cortes. Personagem trocava de rosto e figurino entre planos.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Agora</span>
+          <span class="claude-stat-value">Plano de cena</span>
+          <p>Treatment cinematográfico antes do render. Personagem mantém rosto, figurino e intenção em wide, close e cutaway.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Stack</span>
+          <span class="claude-stat-value">Pipeline integrado</span>
+          <p>O que era ferramenta fragmentada virou pipeline da pré-produção até o render final dentro do mesmo ambiente.</p>
+        </div>
+        <div class="claude-stat">
+          <span class="claude-stat-label">Valor</span>
+          <span class="claude-stat-value">Linguagem de direção</span>
+          <p>Gargalo nunca foi modelo. É gramática cinematográfica. Quem domina captura o valor que está sendo redistribuído.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="guide-section fade-in fade-in-d1">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Quer ler cada lançamento de vídeo IA pelo deslocamento de valor que ele confirma?</h2>
+        <p class="claude-card-copy mt-24">
+          No SINAPSE a gente para de colecionar ferramenta de geração e passa a mapear onde o valor
+          está sendo redistribuído na cadeia: modelo, direção, pipeline ou distribuição. Decide onde
+          entrar antes do mercado se ajustar.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.space" target="_blank" rel="noopener" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Entrar no SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section claude-section fade-in fade-in-d1">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">00</div>
+        <div>
+          <h2 class="claude-section-title">O que o Smart Shot confirma, sem hype</h2>
+          <p class="claude-section-intro">
+            Não é frame mais bonito. É inversão da ordem de produção: o cinematográfico entra antes
+            do render, e o operador de prompt isolado perde lugar para o diretor que pensa cena inteira.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-soft">
+          <h3 class="claude-card-title">Como vídeo com IA operava antes</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Prompt longo descrevendo um único frame de cada vez, sem pensar a cena inteira.</li>
+            <li>Personagem trocava de rosto e figurino entre cortes, sem amarração visual.</li>
+            <li>Storyboard improvisado fora da ferramenta, depois colado em prompts separados.</li>
+            <li>Pipeline fragmentado: gerar frame em A, montar em B, ajustar consistência em C.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Como vídeo com IA opera agora</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Treatment cinematográfico construído antes do render: personagem, ambiente, câmera, ritmo.</li>
+            <li>Personagem mantém rosto, figurino e intenção narrativa em wide, close e cutaway.</li>
+            <li>Storyboard nasce dentro da ferramenta e amarra os cortes com consistência real.</li>
+            <li>Pipeline integrado da pré-produção até o render final no mesmo ambiente.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Leitura honesta:</strong> Smart Shot não substitui set, equipe e direção real em produção
+          de alto orçamento. O que ele faz é tornar evidente que a etapa onde o vídeo com IA é vencido ou
+          perdido é a direção pré-render. Esse é o padrão que importa, não o lançamento isolado.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider" id="padrao">
+
+    <section class="guide-section claude-section fade-in fade-in-d1">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">01</div>
+        <div>
+          <h2 class="claude-section-title">A cadeia do vídeo com IA está sendo reorganizada por camada</h2>
+          <p class="claude-section-intro">
+            O salto não está no modelo. Está em qual camada da cadeia captura o valor a partir de agora.
+            Smart Shot, Higgsfield e Seedance estão empurrando peso para a etapa de direção e linguagem
+            cinematográfica, antes de qualquer pixel ser renderizado.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <table class="claude-compact-table">
+          <thead>
+            <tr>
+              <th>Camada</th>
+              <th>O que entra</th>
+              <th>Quem domina hoje</th>
+              <th>Para onde o valor migra</th>
+              <th>Direção do movimento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Modelo de render</strong></td>
+              <td>Geração de frame e movimento</td>
+              <td>Seedance, Veo, Kling, Runway, Sora</td>
+              <td>Vira commodity de motor por trás de produto</td>
+              <td>Comoditização rápida em curso</td>
+            </tr>
+            <tr>
+              <td><strong>Controle de câmera</strong></td>
+              <td>Lente, ângulo, movimento, profundidade</td>
+              <td>Higgsfield, Runway, motion controls</td>
+              <td>Vira feature default de qualquer ferramenta séria</td>
+              <td>Saindo de diferencial e virando padrão</td>
+            </tr>
+            <tr>
+              <td><strong>Direção de cena</strong></td>
+              <td>Plano completo, storyboard, treatment</td>
+              <td>Smart Shot (OpenArt) puxando a frente</td>
+              <td>Camada onde o valor está sendo capturado agora</td>
+              <td>Movimento estrutural acontecendo</td>
+            </tr>
+            <tr>
+              <td><strong>Linguagem cinematográfica</strong></td>
+              <td>Gramática de prompt, ritmo, intenção</td>
+              <td>Diretores e roteiristas que entram na IA</td>
+              <td>Skill humana que multiplica saída de qualquer ferramenta</td>
+              <td>Vantagem assimétrica crescendo</td>
+            </tr>
+            <tr>
+              <td><strong>Distribuição</strong></td>
+              <td>Curadoria, formato, plataforma</td>
+              <td>Marcas, criadores, agências</td>
+              <td>Quem sabe usar bem a cadeia inteira no canal certo</td>
+              <td>Próxima fronteira depois da estabilização técnica</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="claude-card-grid mt-24">
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Modelo de render</h3>
+          <p class="claude-card-copy">
+            <strong>De:</strong> diferencial vendido como produto final.
+            <strong>Para:</strong> motor por trás, trocável, com Seedance rodando dentro do Smart Shot
+            como exemplo claro do padrão.
+          </p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Controle de câmera</h3>
+          <p class="claude-card-copy">
+            <strong>De:</strong> diferencial nichado de Higgsfield e similares.
+            <strong>Para:</strong> feature esperada em qualquer ferramenta de vídeo com IA séria
+            nos próximos meses.
+          </p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Direção de cena</h3>
+          <p class="claude-card-copy">
+            <strong>De:</strong> trabalho manual fora da ferramenta, com prompts soltos por frame.
+            <strong>Para:</strong> camada nativa do produto, com treatment construído antes do render.
+          </p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Linguagem cinematográfica</h3>
+          <p class="claude-card-copy">
+            <strong>De:</strong> skill secundária para quem operava prompt isolado.
+            <strong>Para:</strong> vantagem real de quem entende plano, ritmo, eixo, raccord, intenção.
+          </p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Distribuição</h3>
+          <p class="claude-card-copy">
+            <strong>De:</strong> postagem genérica de output bonito em qualquer canal.
+            <strong>Para:</strong> formato pensado por canal, com cadeia inteira otimizada para o uso final.
+          </p>
+        </div>
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">O eixo comum</h3>
+          <p class="claude-card-copy">
+            Em todas as camadas, o valor sai do output isolado e vai para a <strong>estrutura de cena
+            pensada antes da geração</strong>. O modelo é parte do pipeline, não o produto.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Como ler a cadeia:</strong> as camadas não competem entre si, elas se empilham. Modelo
+          forte sem direção entrega frame solto. Direção forte com modelo médio entrega narrativa que
+          segura. A próxima onda de valor está na camada de direção e linguagem, não no benchmark de modelo.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider" id="leitura">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">02</div>
+        <div>
+          <h2 class="claude-section-title">Onde o valor está sendo redistribuído</h2>
+          <p class="claude-section-intro">
+            O ponto não é qual ferramenta vence. É para onde a margem migra quando a etapa de direção
+            é absorvida pelo produto e a linguagem cinematográfica vira a vantagem real do operador.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-card-grid">
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Operador de prompt</h3>
+          <p class="claude-card-copy mt-24">
+            Valor sai da execução técnica e vai para quem pensa a cena inteira antes do render.
+          </p>
+          <ul class="claude-checklist mt-24">
+            <li>Prompt isolado sem visão de cena perde para diretor que pensa em treatment.</li>
+            <li>Velocidade pura de gerar frame deixa de ser diferencial competitivo.</li>
+            <li>Quem opera ferramenta sem ler linguagem cinematográfica vira commodity.</li>
+          </ul>
+        </div>
+
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Diretor cinematográfico</h3>
+          <p class="claude-card-copy mt-24">
+            Valor migra da técnica de execução para a leitura de plano, eixo, ritmo e intenção.
+          </p>
+          <ul class="claude-checklist mt-24">
+            <li>Diretor que entra na IA carrega vocabulário que multiplica qualquer ferramenta.</li>
+            <li>Wide, close e cutaway viram peças de gramática que o operador comum não domina.</li>
+            <li>Quem fala a linguagem do cinema dirige a IA, não negocia com prompt.</li>
+          </ul>
+        </div>
+
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Stack de ferramentas</h3>
+          <p class="claude-card-copy mt-24">
+            Valor sai da combinação manual de várias ferramentas e vai para o pipeline integrado.
+          </p>
+          <ul class="claude-checklist mt-24">
+            <li>Higgsfield abriu controle de câmera, Smart Shot abriu pré-produção integrada.</li>
+            <li>Seedance roda por trás como engine, deixando de ser produto final visível.</li>
+            <li>O que era stack fragmentada vira pipeline único da ideia até o vídeo entregue.</li>
+          </ul>
+        </div>
+
+        <div class="claude-check-item">
+          <h3 class="claude-card-title">Marca e criador</h3>
+          <p class="claude-card-copy mt-24">
+            Valor migra do output bonito isolado para narrativa que carrega marca em série.
+          </p>
+          <ul class="claude-checklist mt-24">
+            <li>Personagem consistente em vários cortes vira ativo de marca, não frame único.</li>
+            <li>Quem entende continuidade narrativa cria série de conteúdo, não post solto.</li>
+            <li>Distribuição na cadência certa amplifica vantagem de quem dirige bem a IA.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Como priorizar:</strong> se você opera vídeo com IA hoje, a próxima skill com maior
+          retorno não é aprender a próxima ferramenta. É aprender linguagem cinematográfica básica:
+          plano, ângulo, eixo, ritmo, raccord, intenção. Essa camada é onde o valor está sendo
+          redistribuído agora.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d2">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">03</div>
+        <div>
+          <h2 class="claude-section-title">Por que isso é mais que um lançamento de feature</h2>
+          <p class="claude-section-intro">
+            Smart Shot é só um sinal. Por baixo dele tem cinco mudanças estruturais que valem mais
+            que o anúncio.
+          </p>
+        </div>
+      </div>
+
+      <ol class="claude-step-list">
+        <li>
+          <strong class="claude-step-title">Da geração de frame para a construção de cena</strong>
+          <p class="claude-step-copy">
+            O produto deixa de ser uma máquina de frame bonito e vira ambiente onde personagem,
+            ambiente, storyboard e câmera são pensados juntos antes do render. Render é consequência,
+            não centro.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Do operador de prompt para o diretor de cena</strong>
+          <p class="claude-step-copy">
+            O perfil que captura valor muda. Operador que escreve prompt longo perde para diretor
+            que pensa a sequência, lê continuidade e amarra cortes com intenção narrativa.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Do modelo como produto para o modelo como motor</strong>
+          <p class="claude-step-copy">
+            Seedance rodando por trás do Smart Shot mostra o caminho. O modelo de render entra na
+            categoria de motor de pipeline, não de produto final. Quem vende modelo isolado disputa
+            commodity.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Do stack fragmentado para o pipeline integrado</strong>
+          <p class="claude-step-copy">
+            Pré-produção, render e amarração de continuidade que viviam em ferramentas separadas
+            estão sendo consolidados em pipeline único. Quem desenhar produto fora dessa lógica vira nicho.
+          </p>
+        </li>
+        <li>
+          <strong class="claude-step-title">Da skill técnica para a skill de linguagem</strong>
+          <p class="claude-step-copy">
+            A vantagem competitiva de quem opera vídeo com IA passa do domínio de prompt e parâmetros
+            para o domínio da gramática cinematográfica. Quem fala plano, eixo, ritmo, raccord captura
+            margem de quem ainda fala em prompt.
+          </p>
+        </li>
+      </ol>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Consequência prática:</strong> agência, criador e marca que continuarem otimizando
+          prompt isolado vão competir com quem aprendeu a dirigir cena. A diferença não é velocidade
+          de geração, é qualidade narrativa que segura atenção e marca.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">04</div>
+        <div>
+          <h2 class="claude-section-title">Como ler o próximo lançamento de vídeo IA sem cair em hype</h2>
+          <p class="claude-section-intro">
+            Toda semana sai modelo novo com benchmark melhor. Esse é um framework simples para separar
+            movimento estrutural de barulho de ciclo, usando Smart Shot como referência.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-split-grid">
+        <div class="claude-surface claude-surface-accent">
+          <h3 class="claude-card-title">Sinais de movimento estrutural</h3>
+          <ul class="claude-checklist mt-24">
+            <li><strong>Etapa absorvida:</strong> uma fase inteira de produção (pré, direção, montagem) entra dentro da ferramenta.</li>
+            <li><strong>Consistência entre cortes:</strong> personagem mantém rosto, figurino e intenção em planos diferentes.</li>
+            <li><strong>Pipeline integrado:</strong> da ideia ao vídeo final no mesmo ambiente, sem trocar ferramenta.</li>
+            <li><strong>Modelo como motor:</strong> render vira engine por trás, não produto vendido isolado.</li>
+            <li><strong>Skill humana valorizada:</strong> linguagem cinematográfica passa a multiplicar saída de quem domina.</li>
+          </ul>
+        </div>
+
+        <div class="claude-surface">
+          <h3 class="claude-card-title">Sinais de barulho de ciclo</h3>
+          <ul class="claude-checklist mt-24">
+            <li>Modelo novo com benchmark melhor mas sem mudar a etapa onde o trabalho é feito.</li>
+            <li>Demo de frame único bonito que não sobrevive em sequência multi-corte.</li>
+            <li>Plugin que continua tratando vídeo IA como output isolado de prompt.</li>
+            <li>Lançamento que depende de cena curada e quebra em uso real de produção.</li>
+            <li>Anúncio que não muda nenhuma etapa do pipeline já existente.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Regra prática:</strong> antes de adotar uma ferramenta nova de vídeo com IA, pergunte
+          qual etapa do pipeline ela absorve. Se a resposta for nenhuma, é barulho. Se ela puxa
+          pré-produção, direção ou continuidade para dentro do produto, é movimento estrutural e vale
+          redesenhar processo ao redor dela.
+        </p>
+      </div>
+    </section>
+
+    <hr class="guide-divider">
+
+    <section class="guide-section claude-section fade-in fade-in-d3">
+      <div class="claude-section-title-wrap">
+        <div class="claude-section-index">05</div>
+        <div>
+          <h2 class="claude-section-title">O que observar nos próximos meses</h2>
+          <p class="claude-section-intro">
+            Smart Shot é o gatilho da camada de direção. Olhe para onde a mesma lógica continua se
+            replicando em vídeo, áudio e produção audiovisual completa, e quem reage primeiro.
+          </p>
+        </div>
+      </div>
+
+      <div class="claude-surface">
+        <ul class="claude-source-list">
+          <li><strong>Runway, Pika, Kling, Sora:</strong> resposta dos incumbentes nos próximos 6 meses define se eles absorvem direção como camada nativa ou seguem competindo no benchmark de modelo.</li>
+          <li><strong>Higgsfield e camada de câmera:</strong> controle de câmera vira default em qualquer player sério; quem tinha como diferencial precisa subir para a camada de direção para manter vantagem.</li>
+          <li><strong>Seedance e modelos como motor:</strong> mais modelos vão aparecer rodando por trás de produtos de pipeline, deixando o consumidor final invisível ao engine que está gerando o frame.</li>
+          <li><strong>Adobe, CapCut e editores tradicionais:</strong> caminho natural é absorver pré-produção e direção com IA dentro do timeline, transformando o editor em ambiente integrado de cena.</li>
+          <li><strong>Diretores e roteiristas humanos:</strong> profissionais com gramática cinematográfica forte entram em vantagem real sobre operadores de prompt; novas funções de direção de IA aparecem em equipes de marca, agência e criador.</li>
+        </ul>
+      </div>
+
+      <div class="claude-note mt-24">
+        <p class="mb-0">
+          <strong>Conclusão honesta:</strong> Smart Shot sozinho não fecha a categoria de vídeo com IA.
+          O que ele faz é tornar evidente que o gargalo nunca foi capacidade técnica, é linguagem de
+          direção. Quem desenhar produto, equipe e processo ao redor dessa premissa captura o valor
+          que está sendo redistribuído. Quem continuar otimizando prompt isolado perde margem ciclo a ciclo.
+        </p>
+      </div>
+    </section>
+
+    <section class="guide-section fade-in fade-in-d4">
+      <div class="claude-cta-block">
+        <span class="guide-badge">SINAPSE</span>
+        <h2 class="claude-card-title" style="margin-top: 12px;">Comente DIRETOR e receba o framework de prompt cinematográfico</h2>
+        <p class="claude-card-copy mt-24">
+          O gargalo do vídeo com IA é gramática de direção. No SINAPSE a gente mapeia onde o valor
+          está sendo redistribuído na cadeia, monta processo com diretor no centro e entrega framework
+          de prompt cinematográfico organizado por camadas (personagem, ambiente, plano de câmera,
+          ritmo de corte) com exemplos prontos para Smart Shot, Higgsfield e Seedance.
+        </p>
+        <div class="claude-actions mt-24">
+          <a href="https://sinapse.space" target="_blank" rel="noopener" class="guide-cta" style="background: #1a1a1a; color: #ffffff !important;">Entrar no SINAPSE</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="guide-footer fade-in fade-in-d4">
+      <p>Criado por <span class="guide-author">Caio Imori</span></p>
+      <p style="margin-top: 8px;">Leitura estrutural do Smart Shot da OpenArt: por que vídeo com IA acabou de ganhar um diretor, como o trabalho migra do operador de prompt para o diretor de cena e onde o valor é redistribuído na cadeia.</p>
+    </footer>
+
+  </article>
+</body>
+</html>
